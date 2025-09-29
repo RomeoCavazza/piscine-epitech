@@ -4,7 +4,7 @@ Ce dépôt regroupe les travaux réalisés par la promo durant la **Piscine Epit
 
 Il est structuré en deux séminaires:
 - **Séminaire Préparation (Days 01–10)** — bases Linux, Python et algorithmique. Voir le README dédié: [seminar-preparation/README.md](seminar-preparation/README.md)
-- **Séminaire Web (Days 11–15)** — Linux/Bash utilitaire, HTML5/CSS (CodingPedia), pages sémantiques avancées et mini-projets. Voir le README dédié: [seminar-web/README.md](seminar-web/README.md)
+- **Séminaire Web (Days 11–16)** — Linux/Bash utilitaire, HTML5/CSS (CodingPedia), pages sémantiques avancées, mini-projets et JavaScript bases. Voir le README dédié: [seminar-web/README.md](seminar-web/README.md)
 
 Chaque journée contient:
 - 📄 `consignes_dayXX.pdf` — énoncé des exercices
@@ -20,7 +20,7 @@ Chaque journée contient:
 │   ├── Day_01/ ... Day_10/
 │   └── README.md
 ├── seminar-web/
-│   ├── Day_11/ Day_12/ Day_13/ Day_14_15/
+│   ├── Day_11/ Day_12/ Day_13/ Day_14_15/ Day_16/
 │   └── README.md
 ├── .gitignore
 ├── LICENSE
@@ -43,11 +43,12 @@ Chaque journée contient:
 - **Day 09** — [Consignes](seminar-preparation/Day_09/consignes_day09.pdf) · [README](seminar-preparation/Day_09/README.md) · [Solutions](seminar-preparation/Day_09/)
 - **Day 10** — [Consignes](seminar-preparation/Day_10/consignes_day10.pdf) · [README](seminar-preparation/Day_10/README.md)
 
-### Séminaire Web (Days 11–15)
+### Séminaire Web (Days 11–16)
 - **Day 11** — [Consignes](seminar-web/Day_11/consignes_day11.pdf) · [README](seminar-web/Day_11/README.md) · [Solutions](seminar-web/Day_11/solutions_day11/)
 - **Day 12** — [Consignes](seminar-web/Day_12/consignes_day12.pdf) · [README](seminar-web/Day_12/README.md) · [Solutions](seminar-web/Day_12/solutions_day12/)
 - **Day 13** — [Consignes](seminar-web/Day_13/Consignes_day13.pdf) · [README](seminar-web/Day_13/README.md) · [Solutions](seminar-web/Day_13/solutions_day13/)
 - **Days 14–15** — [Consignes](seminar-web/Day_14_15/Consignes_day14-15.pdf) · [README](seminar-web/Day_14_15/README.md)
+- **Day 16** — [Consignes](seminar-web/Day_16/consignes_day16.pdf) · [README](seminar-web/Day_16/README.md) · [Solutions](seminar-web/Day_16/solutions_day16/)
 
 ---
 
