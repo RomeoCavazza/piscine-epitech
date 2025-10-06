@@ -1,0 +1,1 @@
+curl -s "http://localhost/day20/task05/task05.php?type=shoes&brand=geox&price=>1000&number=1"
