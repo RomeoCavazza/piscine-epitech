@@ -20,7 +20,7 @@ Chaque journée contient:
 │   ├── Day_01/ ... Day_10/
 │   └── README.md
 ├── seminar-web/
-│   ├── Day_11/ Day_12/ Day_13/ Day_14_15/ Day_16/ Day_17/ Day_18/ Day_19/ Day_20/
+│   ├── Day_11/ ... Day_20/
 │   └── README.md
 ├── .gitignore
 ├── LICENSE
