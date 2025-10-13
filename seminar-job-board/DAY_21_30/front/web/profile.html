@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profil - Job Board</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+
+<div id="notification-container" class="notification-container"></div>
+
+<header>
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">Job Board</div>
+    <nav></nav>
+</header>
+
+<div class="profile-container">
+    <div id="loading-profile" class="loading">Chargement...</div>
+    
+    <div id="profile-content" style="display: none;">
+        <div class="profile-header">
+            <h1 id="profile-name">Nom Utilisateur</h1>
+            <p id="profile-role">Rôle</p>
+        </div>
+        
+        <div class="profile-content">
+            <div class="profile-info" id="profile-info">
+                <h2>Informations personnelles</h2>
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <strong>Email</strong>
+                        <span id="profile-email"></span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Rôle</strong>
+                        <span id="profile-role-display"></span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Adresse</strong>
+                        <span id="profile-address"></span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Études</strong>
+                        <span id="profile-education"></span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>Téléphone</strong>
+                        <span id="profile-phone"></span>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button onclick="editProfile()" class="btn-primary">Modifier le profil</button>
+                </div>
+            </div>
+
+            <form id="profile-form" style="display: none;" onsubmit="return updateProfile(event)">
+                <h2>Modifier le profil</h2>
+                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+                <input type="text" id="nom" name="nom" placeholder="Nom" required>
+                <input type="text" id="adresse" name="adresse" placeholder="Adresse">
+                <input type="text" id="etudes" name="etudes" placeholder="Études">
+                <input type="tel" id="telephone" name="telephone" placeholder="Téléphone">
+                <div class="profile-actions">
+                    <button type="submit" class="btn-primary">Enregistrer</button>
+                    <button type="button" onclick="cancelEdit()" class="btn-secondary">Annuler</button>
+                </div>
+            </form>
+
+            <div id="company-section" style="display: none;">
+                <div class="profile-info" id="company-info"></div>
+                
+                <form id="company-form" style="display: none;" onsubmit="return updateCompany(event)">
+                    <h2>Modifier l'entreprise</h2>
+                    <input type="text" id="nom_entreprise" name="nom_entreprise" placeholder="Nom entreprise" required>
+                    <input type="text" id="secteur" name="secteur" placeholder="Secteur">
+                    <input type="text" id="adresse_entreprise" name="adresse_entreprise" placeholder="Adresse">
+                    <input type="email" id="email_entreprise" name="email_entreprise" placeholder="Email">
+                    <div class="profile-actions">
+                        <button type="submit" class="btn-primary">Enregistrer</button>
+                        <button type="button" onclick="cancelCompanyEdit()" class="btn-secondary">Annuler</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="logout-section">
+                <button onclick="logout()" class="btn-secondary">Déconnexion</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Projet T-WEB-501 — Groupe : Jason · Philippe · Roméo</p>
+</footer>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/profile.js"></script>
+
+</body>
+</html>
+

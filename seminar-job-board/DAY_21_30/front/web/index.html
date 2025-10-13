@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Job Board</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+
+<div id="notification-container" class="notification-container"></div>
+
+<header>
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">Job Board</div>
+    <nav></nav>
+</header>
+
+<div class="searchbar">
+    <input type="text" id="search-titre" placeholder="Rechercher par titre ou entreprise">
+    <input type="text" id="search-lieu" placeholder="Lieu">
+    <button type="button" onclick="rechercher()">Rechercher</button>
+</div>
+
+<main>
+    <section class="offres"></section>
+    <aside class="detail"></aside>
+</main>
+
+<footer>
+    <p>Projet T-WEB-501 — Groupe : Jason · Philippe · Roméo</p>
+</footer>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/jobs.js"></script>
+
+</body>
+</html>
