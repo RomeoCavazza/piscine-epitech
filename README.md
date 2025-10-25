@@ -1,4 +1,4 @@
-﻿﻿﻿# Piscine Epitech – Septembre-Décembre 2025
+**﻿﻿Piscine Epitech – Septembre-Décembre 2025**
 
 ![Epitech](https://img.shields.io/badge/Epitech-0066CC?logo=epitech&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
