@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Recruteur - Poster une annonce</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Accueil</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <form id="annonceForm">
+        <h1>Poster une annonce</h1>
+
+        <input name="titre" placeholder="Titre" list="titres" autocomplete="off" required>
+        <datalist id="titres">
+            <option value="Développeur">
+            <option value="Développeur PHP">
+            <option value="Développeur Javascript">
+            <option value="Développeur Java">
+            <option value="Développeur 3D">
+            <option value="Designer">
+            <option value="Designer 3D">
+            <option value="Chef de projet">
+        </datalist>
+
+        <textarea class="message"name="description" placeholder="Description" required></textarea>
+
+        <input name="salaire" type="number" step="0.01" placeholder="Salaire" required />
+
+        <select name="type_contrat" required>
+          <option value="" disabled selected>Type de contrat</option>
+          <option value="CDI">CDI</option>
+          <option value="CDD">CDD</option>
+          <option value="ALTERNANCE">Alternance</option>
+          <option value="STAGE">Stage</option>
+        </select>
+
+        <input name="competence" type="text" placeholder="Compétences" required />
+
+        <h3>Informations Entreprise (Modifiables)</h3>
+        
+        <input name="nom" type="text" placeholder="Nom Entreprise" required />
+        <input name="secteur" type="text" placeholder="Secteur" required />
+        <input name="adresse" type="text" placeholder="Adresse" required />
+        <input name="email" type="email" placeholder="Email entreprise" required />
+        <input name="lieu" type="text" placeholder="Lieu du poste" required />
+
+        <button type="submit">Poster</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    async function chargerInfosEntreprise() {
+      try {
+        const res = await fetch('/back/api/recruteur.php', { credentials: 'include' });
+        if (!res.ok) throw new Error('Erreur lors du chargement des infos entreprise');
+        const data = await res.json();
+
+        if (data && Object.keys(data).length > 0) {
+          document.querySelector('input[name="secteur"]').value = data.secteur || '';
+          document.querySelector('input[name="adresse"]').value = data.adresse || '';
+          document.querySelector('input[name="email"]').value = data.email || '';
+        }
+      } catch (e) {
+        console.error('Erreur lors du chargement des infos entreprise:', e);
+      }
+    }
+
+    document.getElementById('annonceForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+
+      const data = {
+        nom: form.nom.value.trim(),
+        titre: form.titre.value.trim(),
+        description: form.description.value.trim(),
+        salaire: form.salaire.value ? parseFloat(form.salaire.value) : 0,
+        type_contrat: form.type_contrat.value,
+        competence: form.competence.value.trim(),
+        secteur: form.secteur.value.trim(),
+        adresse: form.adresse.value.trim(),
+        email: form.email.value.trim(),
+        lieu: form.lieu.value.trim()
+      };
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Envoi...";
+
+      try {
+        const response = await fetch('/back/api/recruteur.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        if (response.ok && result.success) {
+          alert(result.message);
+          form.reset();
+          await chargerInfosEntreprise();
+        } else {
+          alert(result.message || 'Erreur lors de la soumission.');
+        }
+      } catch (error) {
+        alert('Erreur réseau : ' + error.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Poster";
+      }
+    });
+
+    window.onload = () => {
+      chargerInfosEntreprise();
+    };
+  </script>
+
+</body>
+</html>

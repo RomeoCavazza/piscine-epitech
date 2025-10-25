@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Job Board</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Job Board</div>
+    <nav>
+        <a href="index.html" class="active">Offres</a>
+        <a href="my-profile.html" id="profile-link" style="display: none;">Mon Profil</a>
+        <a href="admin.html" id="admin-link" style="display: none;">Administration</a>
+        <a href="signup.html" id="signup-link">S'inscrire</a>
+        <a href="login.html" id="login-link">Connexion</a>
+    </nav>
+</header>
+
+<div class="searchbar">
+    <input type="text" id="search-titre" placeholder="Rechercher par titre ou entreprise">
+    <input type="text" id="search-lieu" placeholder="Lieu">
+    <button type="button" onclick="rechercher()">Rechercher</button>
+</div>
+
+<main>
+    <section class="offres"></section>
+    <aside class="detail"></aside>
+</main>
+
+
+
+<div class="detail" id="formulaire-container" style="display: none;">
+  <h2>Formulaire candidature</h2>
+<form id="candidature-formulaire" enctype="multipart/form-data" method="POST">
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="prenom">Prénom</label>
+    <input type="text" id="prenom" name="prenom" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message</label>
+    <textarea class="message" id="message" name="message" rows="4"></textarea>
+
+    <label for="cv">CV</label>
+    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+
+    <label for="Lettre-motiv">Lettre de motivation</label>
+    <input type="file" id="Lettre-motiv" name="Lettre-motiv" accept=".pdf,.doc,.docx">
+
+    <button type="submit">Envoyer ma candidature</button>
+  </form>
+</div>
+
+<script src="../assets/js/app.js"></script>
+
+</body>
+</html>

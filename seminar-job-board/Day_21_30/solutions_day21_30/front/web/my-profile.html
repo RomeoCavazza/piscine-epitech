@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profil - Job Board</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+</head>
+<body>
+
+<div id="notification-container" class="notification-container"></div>
+
+<header>
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">Job Board</div>
+    <nav>
+        <a href="index.html">← Retour aux offres</a>
+        <button onclick="toggleEdit()" class="btn-primary">Modifier</button>
+        <button onclick="logout()" class="btn-secondary">Déconnexion</button>
+    </nav>
+</header>
+
+<div class="profile-container">
+    <div id="loading-profile" class="loading">Chargement...</div>
+    
+    <div id="profile-content" style="display: none;">
+        <div class="profile-layout">
+            <div class="profile-sidebar">
+                <div class="section-card">
+                    <div class="profile-photo-section">
+                        <div class="profile-photo-container">
+                            <div class="profile-photo" id="profile-photo">
+                                <div class="profile-photo-placeholder">
+                                    <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <button class="action-btn" onclick="editPhoto()" title="Changer la photo">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="profile-info">
+                            <h1 id="profile-name" class="profile-name">Nom Utilisateur</h1>
+                            <p id="profile-role" class="profile-role">Rôle</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-line">
+                            <span class="contact-label">Email</span>
+                            <span id="profile-email" class="contact-value"></span>
+                        </div>
+                        <div class="contact-line">
+                            <span class="contact-label">Téléphone</span>
+                            <span id="profile-phone" class="contact-value"></span>
+                        </div>
+                        <div class="contact-line">
+                            <span class="contact-label">Adresse</span>
+                            <span id="profile-address" class="contact-value"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-sections">
+                <div class="section-card">
+                    <h2 class="section-title">Expériences</h2>
+                    <div id="experiences-list">
+                        <div class="experience-bubble">
+                            <div class="experience-fields">
+                                <input type="text" class="experience-title" placeholder="Titre du poste" value="">
+                                <div class="experience-details">
+                                    <input type="text" class="experience-date" placeholder="Date" value="">
+                                    <input type="text" class="experience-location" placeholder="Lieu" value="">
+                                </div>
+                                <textarea class="experience-description" placeholder="Description" rows="2"></textarea>
+                            </div>
+                            <div class="bubble-actions">
+                                <button class="bubble-delete" onclick="removeBubble(this)">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3,6 5,6 21,6"></polyline>
+                                        <path d="M19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-btn" onclick="addBubble('experiences-list')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    
+                    <h2 class="section-title">Formations</h2>
+                    <div id="formations-list">
+                        <div class="formation-bubble">
+                            <div class="formation-fields">
+                                <input type="text" class="formation-title" placeholder="Titre de la formation" value="">
+                                <div class="formation-details">
+                                    <input type="text" class="formation-date" placeholder="Date" value="">
+                                    <input type="text" class="formation-location" placeholder="Lieu" value="">
+                                </div>
+                                <textarea class="formation-description" placeholder="Description" rows="2"></textarea>
+                            </div>
+                            <div class="bubble-actions">
+                                <button class="bubble-delete" onclick="removeBubble(this)">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3,6 5,6 21,6"></polyline>
+                                        <path d="M19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-btn" onclick="addBubble('formations-list')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    
+                    <h2 class="section-title">Compétences</h2>
+                    <div id="competences-list">
+                        <div class="competence-bubble">
+                            <div class="bubble-content">À renseigner</div>
+                            <div class="bubble-actions">
+                                <button class="bubble-delete" onclick="removeBubble(this)">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3,6 5,6 21,6"></polyline>
+                                        <path d="M19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-btn" onclick="addBubble('competences-list')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Projet T-WEB-501 — Groupe : Jason · Philippe · Roméo</p>
+</footer>
+
+<script src="../assets/js/profile.js"></script>
+
+</body>
+</html>

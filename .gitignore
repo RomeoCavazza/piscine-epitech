@@ -1,0 +1,29 @@
+﻿﻿# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# === Java ===
+*.class
+
+# === Environnements ===
+.venv/
+venv/
+.env
+
+# === Notebooks ===
+.ipynb_checkpoints/
+
+# === VS Code / Editors ===
+.vscode/
+.history/
+*.code-workspace
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+
+# === Logs / Misc ===
+*.log

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Job Board</div>
+    <nav>
+        <a href="index.html">Offres</a>
+        <a href="signup.html" class="active">S'inscrire</a>
+        <a href="login.html">Connexion</a>
+    </nav>
+</header>
+
+<div class="form-container">
+    <form class="form-container" id="formulaire">
+        <h1>Inscription</h1>
+
+        <select name="role" id="roles" required>
+            <option value="">Choisir un rôle</option>
+            <option value="candidat">Candidat</option>
+            <option value="recruteur">Recruteur</option>
+            <option value="admin">Administrateur</option>
+        </select>
+
+        <input type="text" name="nom_entreprise" id="nom_entreprise" placeholder="Nom de l'entreprise" style="display:none; margin-top: 10px;">
+
+        <input type="text" name="prenom" placeholder="Prénom" required>
+        <input type="text" name="nom" placeholder="Nom" required>
+        <input type="text" name="adresse" placeholder="Adresse" required>
+        <input type="text" name="etudes" placeholder="Niveau d'études" required>
+        <input type="text" name="telephone" placeholder="Téléphone" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
+
+        <button type="submit" class="btn-primary">S'inscrire</button>
+    </form>
+</div>
+
+<script>
+const formEl = document.getElementById('formulaire');
+const rolesSelect = document.getElementById('roles');
+const entrepriseInput = document.getElementById('nom_entreprise');
+
+rolesSelect.addEventListener('change', function() {
+    if (this.value === 'recruteur') {
+        entrepriseInput.style.display = 'block';
+        entrepriseInput.required = true;
+    } else {
+        entrepriseInput.style.display = 'none';
+        entrepriseInput.required = false;
+        entrepriseInput.value = '';
+    }
+});
+
+formEl.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const dataEntries = Object.fromEntries(formData);
+
+    fetch('/back/api/users.php', {
+        method: 'POST',
+        body: JSON.stringify(dataEntries),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "ok" || data.status === "exists") {
+            if (data.redirect) {
+                window.location.href = data.redirect;
+                return;
+            }
+
+            const role = dataEntries.role;
+            if (role === "recruteur") {
+                window.location.href = '/front/web/recruteur.html';
+            } else if (role === "admin") {
+                window.location.href = '/front/web/admin.html';
+            } else {
+                window.location.href = '/front/web/index.html';
+            }
+        } else {
+            alert("Erreur lors de l'inscription : " + (data.message || "Erreur inconnue"));
+        }
+    })
+    .catch(error => {
+        console.error('Erreur réseau:', error);
+        alert("Erreur de connexion. Vérifiez votre connexion internet et réessayez.");
+    });
+});
+</script>
+
+</body>
+</html>

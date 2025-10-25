@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion - Job Board</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">Job Board</div>
+  <nav>
+    <a href="index.html">Offres</a>
+    <a href="signup.html">S'inscrire</a>
+    <a href="login.html" class="active">Connexion</a>
+  </nav>
+</header>
+
+<div class="form-container">
+  <form class="form-container" id="login">
+    <h1>Connexion</h1>
+
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="mot_de_passe" placeholder="Mot de passe" required>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="modifier" name="modifier" value="1">
+        <label for="modifier">Modifier mon compte</label>
+      </div>
+
+    <div id="user-info" style="display: none; margin-top: 20px;">
+        <label>Prénom</label>
+        <input type="text" id="prenom" name="prenom">
+
+        <label>Nom</label>
+        <input type="text" id="nom" name="nom">
+
+        <label>Email</label>
+        <input type="email" id="email-modif" name="email-modif">
+
+        <label>Adresse</label>
+        <input type="text" id="adresse" name="adresse">
+
+        <label>Études</label>
+        <input type="text" id="etudes" name="etudes">
+
+        <label>Téléphone</label>
+        <input type="tel" id="telephone" name="telephone">
+
+        <label>Nouveau mot de passe</label>
+        <input type="password" id="mot_de_passe_modif" name="mot_de_passe_modif">
+
+    <button type="button" id="btn-modifier" class="btn-primary">Enregistrer les modifications</button>
+</div>
+
+    <button type="submit" class="btn-primary">Se connecter</button>
+    <p id="login-message" style=" margin-top: 10px;"></p>
+  </form>
+</div>
+
+<script>
+const formEl = document.getElementById('login');
+const messageEl = document.getElementById('login-message');
+const modifierCheckbox = document.getElementById('modifier');
+const userInfoBox = document.getElementById('user-info');
+const btnModifier = document.getElementById('btn-modifier');
+
+
+formEl.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(formEl);
+  const dataEntries = Object.fromEntries(formData.entries());
+
+  fetch('../../../back/api/auth.php', {
+    method: 'POST',
+    body: JSON.stringify(dataEntries),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === "ok") {
+      messageEl.textContent = "";
+
+      if (modifierCheckbox.checked) {
+        userInfoBox.style.display = 'block';
+
+        document.getElementById('prenom').value = data.user.prenom || '';
+        document.getElementById('nom').value = data.user.nom || '';
+        document.getElementById('email-modif').value = data.user.email || '';
+        document.getElementById('adresse').value = data.user.adresse || '';
+        document.getElementById('etudes').value = data.user.etudes || '';
+        document.getElementById('telephone').value = data.user.telephone || '';
+      } 
+      else {
+        if (data.user.role === 'recruteur') {
+            window.location.href = 'recruteur.html';
+        } else {
+            window.location.href = 'index.html';
+        }
+      }
+
+    } 
+    else {
+      messageEl.textContent = data.message || "Tu t'es trompé d'email ou de mot de passe.";
+    }
+  })
+  .catch(error => {
+    console.error('Erreur réseau:', error);
+    messageEl.textContent = "Erreur réseau : " + error.message;
+  });
+});
+
+btnModifier.addEventListener('click', function () {
+  const updatedData = {
+    prenom: document.getElementById('prenom').value,
+    nom: document.getElementById('nom').value,
+    email: document.getElementById('email-modif').value,
+    adresse: document.getElementById('adresse').value,
+    etudes: document.getElementById('etudes').value,
+    telephone: document.getElementById('telephone').value,
+    mot_de_passe: document.getElementById('mot_de_passe_modif').value
+  };
+
+  fetch('../../../back/api/auth.php', {
+    method: 'PUT',
+    body: JSON.stringify(updatedData),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("Modifications enregistrées !");
+      window.location.href = 'index.html';
+    } else {
+      alert("Erreur : " + data.message);
+    }
+  })
+  .catch(err => {
+    console.error('Erreur lors de la modification:', err);
+    alert("Erreur réseau : " + err.message);
+  });
+});
+</script>
+</body>
+</html>
