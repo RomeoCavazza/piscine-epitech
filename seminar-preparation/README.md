@@ -7,51 +7,27 @@
 ![Vim](https://img.shields.io/badge/Vim-019733?logo=vim&logoColor=white)
 ![VSCode](https://img.shields.io/badge/VSCode-007ACC?logo=visualstudiocode&logoColor=white)
 
-Ce séminaire couvre les fondamentaux Linux, Python et algorithmique. Chaque jour comprend des consignes, un README récapitulatif et des solutions.
+Fondamentaux Linux, Python et algorithmique.
 
-## Contenu par jour
-- **Day 01** → Introduction Linux, choix distribution, éditeurs, Bandit. ([README](Day_01/README.md))
-- **Day 02** → Bases Python : divisions, modulo, suites numériques, approximation de π. ([README](Day_02/README.md))
-- **Day 03** → Chaînes, slicing, acronymes, comptage lettres, challenge. ([README](Day_03/README.md))
-- **Day 04** → Conditions, boucles, FizzBuzz, cryptographie (César, Vigenère). ([README](Day_04/README.md))
-- **Day 05** → Listes, comprehensions, dictionnaires, recherche imbriquée. ([README](Day_05/README.md))
-- **Day 06** → Fonctions, récursion, exceptions, validation, perf. ([README](Day_06/README.md))
-- **Day 07** → Hangman (console), décomposition en briques, variantes. ([README](Day_07/README.md))
-- **Day 08** → Packages Python, turtle, pygame (bases). ([README](Day_08/README.md))
-- **Day 09** → Intégration back/front Hangman (pygame, HUD, persistance). ([README](Day_09/README.md))
-- **Day 10** → Récap, best practices, auto-évaluations. ([README](Day_10/README.md))
+## Contenu
+- Day 01 → Linux, distribution, éditeurs, Bandit
+- Day 02 → Python : divisions, modulo, suites, π
+- Day 03 → Chaînes, slicing, acronymes, comptage
+- Day 04 → Conditions, boucles, FizzBuzz, cryptographie
+- Day 05 → Listes, comprehensions, dictionnaires
+- Day 06 → Fonctions, récursion, exceptions
+- Day 07 → Hangman console, décomposition modulaire
+- Day 08 → Packages Python, turtle, pygame
+- Day 09 → Hangman graphique, intégration back/front
+- Day 10 → Récap, best practices, auto-évaluations
 
-## Notions abordées
+## Notions
+- Linux & Terminal : navigation, fichiers, permissions, scripts
+- Python : syntaxe, structures, fonctions, exceptions, modules
+- Algorithmique : complexité, structures données, récursion
 
-### Linux & Terminal
-- **Environnement** : distributions, éditeurs, terminal
-- **Commandes de base** : navigation, manipulation de fichiers
-- **Scripts bash** : automatisation, permissions
-- **Sécurité** : Bandit, bonnes pratiques
+## Technologies
+Python 3.x, Linux, Bash, Vim/VSCode, Git, Turtle, Pygame
 
-### Python fondamental
-- **Syntaxe** : variables, types, opérateurs
-- **Structures de contrôle** : conditions, boucles
-- **Fonctions** : définition, paramètres, récursion
-- **Collections** : listes, dictionnaires, comprehensions
-
-### Algorithmique
-- **Logique** : résolution de problèmes, décomposition
-- **Cryptographie** : chiffrement César, Vigenère
-- **Jeux** : Hangman avec interface graphique
-- **Performance** : optimisation, complexité
-
-## Technologies utilisées
-
-- **Système** : Linux (NixOS, Fedora), terminal bash
-- **Langage** : Python 3.8+
-- **Libraries** : turtle, pygame pour les projets graphiques
-- **Outils** : éditeurs (Vim, Emacs, VSCode), Git
-
-## Compétences développées
-
-- **Environnement Linux** : maîtrise du terminal et des outils
-- **Programmation Python** : syntaxe, structures, bonnes pratiques
-- **Résolution de problèmes** : approche algorithmique
-- **Projets complets** : du concept à l'implémentation
-- **Autonomie** : recherche documentaire, débogage
+## Compétences
+Environnement Linux, programmation Python, applications console, gestion projet, débogage
