@@ -10,16 +10,16 @@
 Fondamentaux Linux, Python et algorithmique.
 
 ## Contenu
-- Day 01 → Linux, distribution, éditeurs, Bandit
-- Day 02 → Python : divisions, modulo, suites, π
-- Day 03 → Chaînes, slicing, acronymes, comptage
-- Day 04 → Conditions, boucles, FizzBuzz, cryptographie
-- Day 05 → Listes, comprehensions, dictionnaires
-- Day 06 → Fonctions, récursion, exceptions
-- Day 07 → Hangman console, décomposition modulaire
-- Day 08 → Packages Python, turtle, pygame
-- Day 09 → Hangman graphique, intégration back/front
-- Day 10 → Récap, best practices, auto-évaluations
+- Day 01 → Linux, distribution, éditeurs, Bandit ([README](Day_01/README.md))
+- Day 02 → Python : divisions, modulo, suites, π ([README](Day_02/README.md))
+- Day 03 → Chaînes, slicing, acronymes, comptage ([README](Day_03/README.md))
+- Day 04 → Conditions, boucles, FizzBuzz, cryptographie ([README](Day_04/README.md))
+- Day 05 → Listes, comprehensions, dictionnaires ([README](Day_05/README.md))
+- Day 06 → Fonctions, récursion, exceptions ([README](Day_06/README.md))
+- Day 07 → Hangman console, décomposition modulaire ([README](Day_07/README.md))
+- Day 08 → Packages Python, turtle, pygame ([README](Day_08/README.md))
+- Day 09 → Hangman graphique, intégration back/front ([README](Day_09/README.md))
+- Day 10 → Récap, best practices, auto-évaluations ([README](Day_10/README.md))
 
 ## Notions
 - Linux & Terminal : navigation, fichiers, permissions, scripts

@@ -11,11 +11,11 @@
 Introduction à la programmation orientée objet avec Java.
 
 ## Contenu
-- Day 31 → Java : syntaxe, classes, objets, constructeurs
-- Day 32 → Classes avancées : héritage, polymorphisme, Gecko
-- Day 33 → Packages : organisation, Mars chocolat vs planète
-- Day 34 → Héritage : classes abstraites, enum, Animal/Cat
-- Day 35 → Projet final : Space Arena, application complète
+- Day 31 → Java : syntaxe, classes, objets, constructeurs ([README](Day_31/README.md))
+- Day 32 → Classes avancées : héritage, polymorphisme, Gecko ([README](Day_32/README.md))
+- Day 33 → Packages : organisation, Mars chocolat vs planète ([README](Day_33/README.md))
+- Day 34 → Héritage : classes abstraites, enum, Animal/Cat ([README](Day_34/README.md))
+- Day 35 → Projet final : Space Arena, application complète ([README](Day_35/README.md))
 
 ## Notions
 - POO : classes, objets, encapsulation, héritage, polymorphisme

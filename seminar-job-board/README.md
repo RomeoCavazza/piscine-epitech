@@ -12,7 +12,7 @@
 Plateforme de recrutement complète avec base de données, API REST et interface utilisateur.
 
 ## Contenu
-- Days 21–30 → Projet intégré : plateforme de recrutement complète
+- Days 21–30 → Projet intégré : plateforme de recrutement complète ([README](Day_21_30/README.md))
 
 ## Fonctionnalités
 - Backend PHP : authentification, gestion utilisateurs/offres, API REST

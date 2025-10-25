@@ -11,15 +11,15 @@
 Linux/Bash utilitaires, HTML5/CSS sémantique, JavaScript côté client et intégration PHP.
 
 ## Contenu
-- Day 11 → Scripts bash utilitaires, archivage/compression
-- Day 12 → HTML5/CSS sémantique, CodingPedia, formulaires
-- Day 13 → HTML avancé, portfolio responsive, Materialize
-- Days 14–15 → Mini-projet web guidé, structure cohérente
-- Day 16 → JavaScript bases, fonctions, tableaux/chaînes
-- Day 17 → DOM & événements, sélecteurs, manipulation
-- Day 18 → PHP fondamentaux, fonctions, tableaux
-- Day 19 → PHP formulaires, validation, gabarits
-- Day 20 → JS ↔ PHP, fetch, JSON, validation live
+- Day 11 → Scripts bash utilitaires, archivage/compression ([README](Day_11/README.md))
+- Day 12 → HTML5/CSS sémantique, CodingPedia, formulaires ([README](Day_12/README.md))
+- Day 13 → HTML avancé, portfolio responsive, Materialize ([README](Day_13/README.md))
+- Days 14–15 → Mini-projet web guidé, structure cohérente ([README](Day_14_15/README.md))
+- Day 16 → JavaScript bases, fonctions, tableaux/chaînes ([README](Day_16/README.md))
+- Day 17 → DOM & événements, sélecteurs, manipulation ([README](Day_17/README.md))
+- Day 18 → PHP fondamentaux, fonctions, tableaux ([README](Day_18/README.md))
+- Day 19 → PHP formulaires, validation, gabarits ([README](Day_19/README.md))
+- Day 20 → JS ↔ PHP, fetch, JSON, validation live ([README](Day_20/README.md))
 
 ## Notions
 - Linux/Bash : scripts utilitaires, commandes système, Git workflow
