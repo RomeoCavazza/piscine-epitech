@@ -1,6 +1,6 @@
 ﻿﻿﻿# Piscine Epitech – Septembre-Décembre 2025
 
-![Epitech](https://img.shields.io/badge/Epitech-000000?logo=epitech&logoColor=white)
+![Epitech](https://img.shields.io/badge/Epitech-0066CC?logo=epitech&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
