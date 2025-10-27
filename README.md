@@ -1,4 +1,4 @@
-﻿﻿﻿# Piscine Epitech – Septembre-Décembre 2025
+# PISCINE EPITECH
 
 ![Epitech](https://img.shields.io/badge/Epitech-0066CC?logo=epitech&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
@@ -11,7 +11,7 @@
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
 
-Ce dépôt regroupe les travaux réalisés par la promo durant la **Piscine Epitech**.
+Ce dépôt regroupe les travaux réalisés par la promo durant la **Piscine Epitech** de Septembre à Décembre 2025.
 
 Il est structuré en quatre séminaires:
 - **Séminaire Préparation (Days 01–10)** — bases Linux, Python et algorithmique. Voir le README dédié: [seminar-preparation/README.md](seminar-preparation/README.md)
