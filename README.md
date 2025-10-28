@@ -91,13 +91,13 @@ Pré‑requis: `git` installé.
 
 Option HTTPS:
 ```bash
-git clone https://github.com/Namtar-afk/piscine-epitech.git
+git clone https://github.com/RomeoCavazza/piscine-epitech.git
 cd piscine-epitech
 ```
 
 Option SSH:
 ```bash
-git clone git@github.com:Namtar-afk/piscine-epitech.git
+git clone git@github.com:RomeoCavazza/piscine-epitech.git
 cd piscine-epitech
 ```
 
