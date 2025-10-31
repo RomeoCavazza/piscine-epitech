@@ -44,7 +44,6 @@ public class CustomerOrder {
     }
 
     public boolean addMenu(Menu<?, ?> menu) throws NoSuchFoodException {
-        // Retirer les items du menu du stock
         stock.remove(menu.getDrink().getClass());
         stock.remove(menu.getMeal().getClass());
         menuItems.add(menu);
@@ -57,7 +56,6 @@ public class CustomerOrder {
         }
         try {
             menuItems.remove(menu);
-            // Remettre les items du menu dans le stock
             stock.add(menu.getDrink().getClass());
             stock.add(menu.getMeal().getClass());
             return true;
@@ -69,7 +67,6 @@ public class CustomerOrder {
     public void printOrder() {
         System.out.println("Your order is composed of:");
         
-        // Afficher les menus d'abord
         for (Menu<?, ?> menu : menuItems) {
             String menuType = menu.getClass().getSimpleName();
             System.out.println("- " + menuType + " menu (" + String.format(Locale.US, "%.2f", menu.getPrice()) + " euros)");
@@ -77,11 +74,9 @@ public class CustomerOrder {
             System.out.println("  -> meal: " + menu.getMeal().getClass().getSimpleName());
         }
         
-        // Afficher les items individuels
         for (Food item : foodItems) {
             float price = item.getPrice();
             String priceStr = String.format(Locale.US, "%.2f", price);
-            // Enlever les zéros inutiles : "0.90" -> "0.9"
             if (priceStr.endsWith("0")) {
                 priceStr = priceStr.substring(0, priceStr.length() - 1);
             }
