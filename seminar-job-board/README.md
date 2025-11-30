@@ -14,6 +14,13 @@ Plateforme de recrutement complète avec base de données, API REST et interface
 ## Contenu
 - Days 21–30 → Projet intégré : plateforme de recrutement complète ([README](Day_21_30/README.md))
 
+## Notions
+- Backend PHP : architecture MVC, authentification, gestion de sessions
+- Base de données : schéma relationnel, requêtes SQL, PDO
+- API REST : endpoints, méthodes HTTP, format JSON
+- Frontend : interface utilisateur, formulaires, validation
+- Sécurité : protection CSRF, validation des données, sanitization
+
 ## Fonctionnalités
 - Backend PHP : authentification, gestion utilisateurs/offres, API REST
 - Frontend : interface utilisateur, profils, administration

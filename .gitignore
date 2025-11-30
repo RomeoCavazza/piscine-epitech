@@ -1,2 +1,13 @@
 # Compiled class files
 *.class
+
+# Logo Epitech
+epitech_logo.png
+
+# VirtualBox files
+*.vbox
+*.vbox-prev
+*.vdi
+*.sav
+**/Logs/
+**/Snapshots/

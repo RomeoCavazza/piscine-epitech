@@ -1,0 +1,11 @@
+{
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "java.autobuild.enabled": false,
+    "files.exclude": {
+        "**/build/**": false
+    },
+    "java.test.config": {
+        "workingDirectory": "${workspaceFolder}/MyFirstGame"
+    }
+}

@@ -17,10 +17,10 @@ Introduction à la programmation orientée objet avec Java et les concepts avanc
 - Day 34 → Héritage : classes abstraites, enum, Animal/Cat ([README](Day_34/README.md))
 - Day 35 → Projet final : Space Arena, application complète ([README](Day_35/README.md))
 - Day 36 → Interfaces : Movable, classes abstraites, exceptions ([README](Day_36/README.md))
-- Day 37 → Génériques : Solo, Pair, Duet, Battalion ([README](Day_37/solutions_day37/README.md))
+- Day 37 → Génériques : Solo, Pair, Duet, Battalion ([README](Day_37/README.md))
 - Day 38 → Design Patterns : Factory, Composite, Observer, Decorator ([README](Day_38/README.md))
-- Day 39 → Reflection : Inspector, annotations, Javadoc ([README](Day_39/solutions_day39/README.md))
-- Day 40 → Application complète : Boulangerie avec génériques et patterns ([README](Day_40/solutions_day40/README.md))
+- Day 39 → Reflection : Inspector, annotations, Javadoc ([README](Day_39/README.md))
+- Day 40 → Application complète : Boulangerie avec génériques et patterns ([README](Day_40/README.md))
 
 ## Notions
 - POO : classes, objets, encapsulation, héritage, polymorphisme
