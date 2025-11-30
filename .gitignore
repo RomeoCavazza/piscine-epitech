@@ -11,3 +11,6 @@ epitech_logo.png
 *.sav
 **/Logs/
 **/Snapshots/
+
+# ISO files (too large for Git)
+*.iso
