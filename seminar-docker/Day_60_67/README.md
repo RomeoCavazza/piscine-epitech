@@ -1,6 +1,7 @@
 # Days 60–67 — Notes
 
-- Consignes: [consignes_day60_67.pdf](consignes_day60_67.pdf)
+- Consignes Bootstrap: [consignes_day60_67_bootstrap.pdf](consignes_day60_67_bootstrap.pdf)
+- Consignes Projet: [consignes_day60_67_project.pdf](consignes_day60_67_project.pdf)
 - Solutions: [solutions_day60_67/](solutions_day60_67/)
 
 ## Objectifs
