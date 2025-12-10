@@ -1,5 +1,3 @@
-# Piscine EPITECH
-
 ![Epitech Logo](assets/epitech_logo.png)
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)
