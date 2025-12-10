@@ -1,5 +1,3 @@
-# Piscine EPITECH
-
 <!-- markdownlint-disable MD033 -->
 <div align="center">
   <img src="assets/epitech_logo.png" alt="Epitech Logo" width="150"/>
