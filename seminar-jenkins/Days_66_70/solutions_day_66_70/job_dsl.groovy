@@ -1,38 +1,5 @@
-def githubName = binding.variables['GITHUB_NAME']
-def displayName = binding.variables['DISPLAY_NAME']
-
-folder('Tools') {
-    description('Folder for miscellaneous tools.')
-}
-
-job('Tools/clone-repository') {
-    description('Clone a Git repository into the workspace.')
-
-    parameters {
-        stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
-    }
-
-    wrappers {
-        preBuildCleanup()
-    }
-
-    steps {
-        shell('git clone "$GIT_REPOSITORY_URL" .')
-    }
-}
-
-job('Tools/SEED') {
-    description('Seed job that creates CI jobs from a GitHub repository description.')
-
-    parameters {
-        stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name (e.g.: EpitechIT31000/chocola)')
-        stringParam('DISPLAY_NAME', '', 'Display name for the job')
-    }
-
-    wrappers {
-        preBuildCleanup()
-    }
-}
+def githubName = build.buildVariableResolver.resolve('GITHUB_NAME')
+def displayName = build.buildVariableResolver.resolve('DISPLAY_NAME')
 
 if (githubName && displayName) {
     job(displayName) {
@@ -46,7 +13,6 @@ if (githubName && displayName) {
             git {
                 remote {
                     url("https://github.com/${githubName}.git")
-                    credentials('github-token')
                 }
                 branches('*/main')
             }
