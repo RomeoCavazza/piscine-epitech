@@ -63,34 +63,4 @@ jenkins:
               - user: "nasso"
 
 jobs:
-  - script: >
-      folder('Tools') {
-          description('Folder for miscellaneous tools.')
-          job('clone-repository') {
-              description('Clone a Git repository into the workspace.')
-              parameters {
-                  stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
-              }
-              wrappers {
-                  preBuildCleanup()
-              }
-              steps {
-                  shell('git clone "$GIT_REPOSITORY_URL" .')
-              }
-          }
-          job('SEED') {
-              description('Seed job that creates CI jobs from a GitHub repository description.')
-              parameters {
-                  stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name (e.g.: EpitechIT31000/chocola)')
-                  stringParam('DISPLAY_NAME', '', 'Display name for the job')
-              }
-              wrappers {
-                  preBuildCleanup()
-              }
-              steps {
-                  dsl {
-                      file('/var/jenkins_home/jcasc/job_dsl.groovy')
-                  }
-              }
-          }
-      }
+  - file: '/var/jenkins_home/jcasc/job_dsl.groovy'
