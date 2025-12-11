@@ -2,7 +2,7 @@
 <div align="center">
   <img src="assets/epitech_logo.png" alt="Epitech Logo" width="500"/>
 </div>
-<!-- markdownlint-enable MD033 -->>
+<!-- markdownlint-enable MD033 -->
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
