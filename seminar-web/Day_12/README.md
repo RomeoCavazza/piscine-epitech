@@ -1,6 +1,6 @@
 # Day 12 — Notes
 
-- Consignes: [consignes_day12.pdf](consignes_day12.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day12/](solutions_day12/)
 
 ## Objectifs

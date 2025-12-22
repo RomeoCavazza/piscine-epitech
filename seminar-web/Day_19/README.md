@@ -1,6 +1,6 @@
 # Day 19 — Notes
 
-- Consignes: [consignes_day19.pdf](consignes_day19.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day19/](solutions_day19/)
 
 ## Objectifs

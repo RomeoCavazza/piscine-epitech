@@ -1,6 +1,6 @@
 # Day 10 — Notes
 
-- Consignes: [consignes_day10.pdf](consignes_day10.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: N/A
 
 ## Objectifs

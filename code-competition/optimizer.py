@@ -232,6 +232,231 @@ def solve_optimized_greedy(dataset: Dict) -> Dict:
     return {'antennas': antennas}
 
 
+def check_capacity(cluster: List[Dict], capacity: int) -> bool:
+    """
+    Vérifie que le cluster respecte la capacité pour toutes les périodes.
+    """
+    total_peak = sum(b['populationPeakHours'] for b in cluster)
+    total_off_peak = sum(b['populationOffPeakHours'] for b in cluster)
+    total_night = sum(b['populationNight'] for b in cluster)
+    max_load = max(total_peak, total_off_peak, total_night)
+    return max_load <= capacity
+
+
+def find_optimal_cluster(building: Dict, remaining: List[Dict], antenna_type: str, building_positions: Set[Tuple[int, int]]) -> Tuple[List[Dict], Tuple[int, int], float]:
+    """
+    Trouve le cluster optimal pour un bâtiment avec un type d'antenne donné.
+    Retourne (cluster, position_optimale, coût_par_bâtiment)
+    """
+    spec = ANTENNA_TYPES[antenna_type]
+    range_limit = spec['range']
+    capacity = spec['capacity']
+    
+    # Commencer avec le bâtiment seul
+    best_cluster = [building]
+    best_pos = (building['x'], building['y'])
+    best_cost_per_building = float('inf')
+    
+    # Essayer différentes positions : sur le bâtiment et autour
+    positions_to_try = [(building['x'], building['y'])]
+    
+    # Ajouter des positions proches (dans un rayon de 50)
+    for dx in range(-50, 51, 10):
+        for dy in range(-50, 51, 10):
+            if dx == 0 and dy == 0:
+                continue
+            new_x = building['x'] + dx
+            new_y = building['y'] + dy
+            if new_x >= 0 and new_y >= 0:
+                positions_to_try.append((new_x, new_y))
+    
+    for pos_x, pos_y in positions_to_try:
+        # Vérifier que le bâtiment de départ est dans la portée
+        dist_to_building = euclidean_distance(pos_x, pos_y, building['x'], building['y'])
+        if dist_to_building > range_limit:
+            continue
+        
+        cluster = [building]
+        
+        # Chercher tous les bâtiments dans la portée
+        candidates = []
+        for other in remaining:
+            if other['id'] == building['id']:
+                continue
+            
+            distance = euclidean_distance(pos_x, pos_y, other['x'], other['y'])
+            if distance <= range_limit:
+                candidates.append((other, distance))
+        
+        # Trier par distance
+        candidates.sort(key=lambda x: x[1])
+        
+        # Ajouter les bâtiments jusqu'à la capacité (vérifier toutes les périodes)
+        for other, dist in candidates:
+            test_cluster = cluster + [other]
+            if check_capacity(test_cluster, capacity):
+                cluster = test_cluster
+        
+        # Vérifier que tous les bâtiments du cluster sont dans la portée
+        all_in_range = all(
+            euclidean_distance(pos_x, pos_y, b['x'], b['y']) <= range_limit
+            for b in cluster
+        )
+        
+        if not all_in_range:
+            continue
+        
+        # Vérifier la capacité finale
+        if not check_capacity(cluster, capacity):
+            continue
+        
+        # Calculer le coût
+        cost = get_antenna_cost(antenna_type, pos_x, pos_y, building_positions)
+        cost_per_building = cost / len(cluster)
+        
+        # Garder le meilleur cluster (plus de bâtiments ou coût par bâtiment plus bas)
+        if len(cluster) > len(best_cluster) or (len(cluster) == len(best_cluster) and cost_per_building < best_cost_per_building):
+            best_cluster = cluster
+            best_pos = (pos_x, pos_y)
+            best_cost_per_building = cost_per_building
+    
+    return best_cluster, best_pos, best_cost_per_building
+
+
+def solve_suburbia_optimized(dataset: Dict) -> Dict:
+    """
+    Optimisation spéciale pour Suburbia (fichier 3) - Objectif: 28 431 000€
+    Stratégie multi-phase agressive avec clustering optimal :
+    1. Density pour bâtiments nécessitant pop > 3500
+    2. MaxRange agressif avec optimisation de position
+    3. Spot pour petits groupes
+    4. Nano pour très petits groupes
+    """
+    buildings = dataset['buildings'].copy()
+    building_map = {b['id']: b for b in buildings}
+    building_positions = {(b['x'], b['y']) for b in buildings}
+    
+    # Calculer pop max pour chaque bâtiment
+    for building in buildings:
+        building['max_pop'] = get_max_population(building)
+    
+    antennas = []
+    covered = set()
+    
+    # Trier par population décroissante
+    buildings.sort(key=lambda b: b['max_pop'], reverse=True)
+    
+    # Phase 1: Traiter les bâtiments nécessitant Density (pop > 3500)
+    for building in buildings:
+        if building['id'] in covered:
+            continue
+        
+        if building['max_pop'] > 3500:
+            antennas.append({
+                'type': 'Density',
+                'x': building['x'],
+                'y': building['y'],
+                'buildings': [building['id']]
+            })
+            covered.add(building['id'])
+    
+    # Phase 2: MaxRange agressif avec optimisation de position
+    remaining = [b for b in buildings if b['id'] not in covered]
+    remaining.sort(key=lambda b: b['max_pop'], reverse=True)
+    
+    for building in remaining:
+        if building['id'] in covered:
+            continue
+        
+        # Essayer MaxRange avec optimisation de position
+        cluster, pos, cost_per_building = find_optimal_cluster(
+            building, [b for b in remaining if b['id'] not in covered],
+            'MaxRange', building_positions
+        )
+        
+        # Utiliser MaxRange si rentable (au moins 2 bâtiments ou coût par bâtiment < 25k)
+        if len(cluster) >= 2 or cost_per_building < 25000:
+            antennas.append({
+                'type': 'MaxRange',
+                'x': pos[0],
+                'y': pos[1],
+                'buildings': [b['id'] for b in cluster]
+            })
+            covered.update(b['id'] for b in cluster)
+            continue
+        
+        # Phase 3: Essayer de connecter à une antenne existante
+        connected = False
+        for antenna in antennas:
+            antenna_spec = ANTENNA_TYPES[antenna['type']]
+            
+            dist = euclidean_distance(
+                antenna['x'], antenna['y'],
+                building['x'], building['y']
+            )
+            if dist > antenna_spec['range']:
+                continue
+            
+            # Vérifier la capacité pour toutes les périodes
+            cluster_buildings = [building_map[bid] for bid in antenna['buildings']] + [building]
+            if check_capacity(cluster_buildings, antenna_spec['capacity']):
+                antenna['buildings'].append(building['id'])
+                covered.add(building['id'])
+                connected = True
+                break
+        
+        # Phase 4: Essayer Spot avec optimisation
+        if not connected:
+            cluster, pos, cost_per_building = find_optimal_cluster(
+                building, [b for b in remaining if b['id'] not in covered],
+                'Spot', building_positions
+            )
+            
+            if len(cluster) >= 2 or cost_per_building < 20000:
+                antennas.append({
+                    'type': 'Spot',
+                    'x': pos[0],
+                    'y': pos[1],
+                    'buildings': [b['id'] for b in cluster]
+                })
+                covered.update(b['id'] for b in cluster)
+                continue
+        
+        # Phase 5: Essayer Nano avec optimisation
+        if not connected:
+            cluster, pos, cost_per_building = find_optimal_cluster(
+                building, [b for b in remaining if b['id'] not in covered],
+                'Nano', building_positions
+            )
+            
+            if len(cluster) >= 2:
+                antennas.append({
+                    'type': 'Nano',
+                    'x': pos[0],
+                    'y': pos[1],
+                    'buildings': [b['id'] for b in cluster]
+                })
+                covered.update(b['id'] for b in cluster)
+                continue
+        
+        # Phase 6: Fallback - utiliser le type minimal nécessaire
+        if not connected:
+            for antenna_type in ['Nano', 'Spot', 'Density']:
+                spec = ANTENNA_TYPES[antenna_type]
+                if building['max_pop'] <= spec['capacity']:
+                    cost = get_antenna_cost(antenna_type, building['x'], building['y'], building_positions)
+                    antennas.append({
+                        'type': antenna_type,
+                        'x': building['x'],
+                        'y': building['y'],
+                        'buildings': [building['id']]
+                    })
+                    covered.add(building['id'])
+                    break
+    
+    return {'antennas': antennas}
+
+
 def solve_manhattan_optimized(dataset: Dict) -> Dict:
     """
     Optimisation spéciale pour Manhattan (fichier 6).
@@ -352,6 +577,8 @@ def solve(dataset: Dict, dataset_name: str) -> Dict:
         return solve_file1_optimal(dataset)
     elif dataset_name == "2_small_town":
         return solve_file2_optimized(dataset)
+    elif dataset_name == "3_suburbia":
+        return solve_suburbia_optimized(dataset)
     elif dataset_name == "6_manhattan":
         return solve_manhattan_optimized(dataset)
     else:
@@ -363,7 +590,7 @@ def optimize_all():
     datasets = [
         ("1_peaceful_village", 21000),
         ("2_small_town", 45000),
-        ("3_suburbia", 29350000),
+        ("3_suburbia", 28431000),
         ("4_epitech", 33515000),
         ("5_isogrid", 173915000),
         ("6_manhattan", 26725000),

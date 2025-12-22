@@ -1,6 +1,6 @@
 # Day 01 — Notes
 
-- Consignes: [consignes_day01.pdf](consignes_day01.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day01/](solutions_day01/)
 
 ## Objectifs

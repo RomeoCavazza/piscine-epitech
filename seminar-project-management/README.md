@@ -6,17 +6,16 @@ Objectif : cadrer le projet (planning, budget, ressources, risques, communicatio
 ## Contenu
 
 - **Ressources officielles** (`ressources/`)  
-  - `T-CEN-500_project.pdf` : sujet officiel SmartFridge.  
-  - `T-CEN-500_bootstrap.pdf` et `T-CEN-500_bootstrap-faulty_gantt_chart.xlsx` : exercice bootstrap / Gantt à corriger.  
-  - `T-CEN-500_presentation.pdf` : support de cours.
+  > ⚠️ Les PDFs officiels ne sont pas versionnés pour des raisons de propriété intellectuelle.  
+  > Consultez les fichiers `OBJECTIVES.md` dans chaque répertoire pour les objectifs et enseignements.
 
 - **Livrables PAR-15** (`livrables/`)  
   - `Par-15_budget.xlsx` : budget consolidé et hypothèses.  
   - `PAR-15_gantt.xlsx` : planning projet (jalons, dépendances).  
   - `PAR-15_resources.xlsx` : ressources humaines/matérielles et charges.  
-  - `PAR-15_risks.pdf` : risques, impacts et plans de mitigation.  
-  - `PAR-15_skills.pdf` : personas RH et compétences clés.  
-  - `PAR-15_communication1.pdf` / `PAR-15_communication2.pdf` : kits de communication (équipe, board).
+  - `PAR-15_risks.pdf` : risques, impacts et plans de mitigation (non versionné).  
+  - `PAR-15_skills.pdf` : personas RH et compétences clés (non versionné).  
+  - `PAR-15_communication1.pdf` / `PAR-15_communication2.pdf` : kits de communication (non versionnés).
 
 ## Notions clés
 

@@ -1,6 +1,6 @@
 # Day 20 — Notes
 
-- Consignes: [consignes_day20.pdf](consignes_day20.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day20/](solutions_day20/)
 
 ## Objectifs

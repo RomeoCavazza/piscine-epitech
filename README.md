@@ -168,7 +168,7 @@ seminar-xxx/
 ├── README.md                    # Main seminar README
 └── Day_XX/
     ├── README.md                # Day explanatory README
-    └── consignes_dayXX.pdf      # Instructions PDF
+    └── OBJECTIVES.md            # Objectives and learnings (PDFs excluded for IP)
 ```
 
 ## Technologies Covered

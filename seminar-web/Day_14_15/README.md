@@ -1,6 +1,6 @@
 # Days 14–15 — Notes
 
-- Consignes: [consignes_day14_15.pdf](consignes_day14_15.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: `solutions_day14_15/` (à ajouter si fourni)
 
 ## Objectifs

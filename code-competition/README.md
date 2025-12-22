@@ -101,3 +101,7 @@ Score = 1 000 000 × (score_meilleur / score_joueur)
 - **Python 3** : Algorithmes d'optimisation, manipulation JSON
 - **Algorithmes** : Glouton, clustering, recherche de solutions optimales
 
+
+
+
+

@@ -1,8 +1,8 @@
 # Days 66–70 — Notes
 
-- Consignes Bootstrap : [consignes_bootstrap_day_66_70.pdf](consignes_bootstrap_day_66_70.pdf)  
-- Consignes Projet : [consignes_project_day_66_70.pdf](consignes_project_day_66_70.pdf)  
-- Consignes Présentation : [consignes_presentation_day_66_70.pdf](consignes_presentation_day_66_70.pdf)  
+- Consignes Bootstrap : [OBJECTIVES.md](OBJECTIVES.md)  
+- Consignes Projet : [OBJECTIVES.md](OBJECTIVES.md)  
+- Consignes Présentation : [OBJECTIVES.md](OBJECTIVES.md)  
 - Solutions : [solutions_day_66_70/](solutions_day_66_70/)
 
 ## Objectifs
@@ -16,10 +16,10 @@
 - `PAR-15_gantt.xlsx` : planning projet (jalons, dépendances, phases POC / Prototype / Industrialisation).  
 - `PAR-15_budget.xlsx` : budget consolidé (salaires, charges, matériel, cloud, autres coûts).  
 - `PAR-15_resources.xlsx` : ressources humaines et matérielles, charges associées.  
-- `PAR-15_risks.pdf` : principaux risques, probabilité/impact, plans de mitigation et impacts sur planning/budget.  
-- `PAR-15_skills.pdf` : personas RH et compétences nécessaires au projet.  
-- `PAR-15_communication1.pdf` : communication vers l’équipe projet.  
-- `PAR-15_communication2.pdf` : communication vers le board (demande et justification du budget).
+- `PAR-15_risks.pdf` : principaux risques, probabilité/impact, plans de mitigation et impacts sur planning/budget (non versionné).  
+- `PAR-15_skills.pdf` : personas RH et compétences nécessaires au projet (non versionné).  
+- `PAR-15_communication1.pdf` : communication vers l'équipe projet (non versionné).  
+- `PAR-15_communication2.pdf` : communication vers le board (demande et justification du budget) (non versionné).
 
 ## Leçons
 

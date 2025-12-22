@@ -1,6 +1,6 @@
 # Day 35 — Notes
 
-- Consignes: [consignes_day35.pdf](consignes_day35.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day35/](solutions_day35/)
 
 ## Objectifs

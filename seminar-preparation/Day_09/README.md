@@ -1,6 +1,6 @@
 # Day 09 — Notes
 
-- Consignes: [consignes_day09.pdf](consignes_day09.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [hangman_game/](hangman_game/)
 
 ## Objectifs
