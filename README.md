@@ -141,7 +141,7 @@ Upfront project management around the SmartFridge product: Gantt planning, budge
 
 Algorithmic optimization competition: optimal deployment of a 5G antenna network to cover a city while minimizing installation costs.  
 
-→ [View the competition](code-competition/README.md)
+→ [View the competition](competition/README.md)
 
 ## Structure
 
@@ -156,7 +156,7 @@ piscine/
 ├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
 ├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
 ├── seminar-project-management/ # T-CEN-500 : Project management, Gantt, budget, risks, communications
-└── code-competition/         # 5G antenna optimization competition
+└── competition/              # 5G antenna optimization competition
 ```
 
 ## Standardized Organization
