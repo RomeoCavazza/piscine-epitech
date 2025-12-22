@@ -1,7 +1,7 @@
 # Days 61–65 — Notes
 
-- Consignes Bootstrap: [consignes_bootstrap_day_61_65.pdf](consignes_bootstrap_day_61_65.pdf)
-- Consignes Projet: [consignes_project_day_61_65.pdf](consignes_project_day_61_65.pdf)
+- Objectifs Bootstrap: [OBJECTIVES.md](OBJECTIVES.md)
+- Objectifs Projet: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day61_65/](solutions_day61_65/)
 
 ## Objectifs

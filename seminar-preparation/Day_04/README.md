@@ -1,6 +1,6 @@
 # Day 04 — Notes
 
-- Consignes: [consignes_day04.pdf](consignes_day04.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day04/](solutions_day04/)
 
 ## Objectifs

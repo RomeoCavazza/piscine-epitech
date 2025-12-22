@@ -1,6 +1,6 @@
 ﻿# Day 38 — Solutions
 
-- Consignes: [consignes_day38.pdf](../consignes_day38.pdf)
+- Objectifs: [../OBJECTIVES.md](../OBJECTIVES.md)
 - Solutions: [solutions_day38/](./)
 
 ## Structure des solutions

@@ -1,6 +1,6 @@
 # Day 57 — Notes
 
-- Consignes: [consignes_day57.pdf](consignes_day57.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: (à compléter si nécessaire)
 
 ## Objectifs

@@ -1,6 +1,6 @@
 # Days 41–55 — Notes
 
-- Consignes: [consignes_day41_55.pdf](consignes_day41_55.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [MyFirstGame/](MyFirstGame/)
 
 ## Objectifs

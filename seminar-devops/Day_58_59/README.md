@@ -1,7 +1,7 @@
 # Days 58–59 — Notes
 
-- Consignes Day 58: [consignes_day58.pdf](consignes_day58.pdf)
-- Consignes Day 59: [consignes_day59.pdf](consignes_day59.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: (à compléter si nécessaire)
 
 ## Objectifs

@@ -1,6 +1,6 @@
 # Days 21–30 — Notes
 
-- Consignes: [consignes_day21_30.pdf](consignes_day21_30.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day21_30/](solutions_day21_30/)
 
 ## Objectifs

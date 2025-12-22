@@ -63,4 +63,4 @@ jenkins:
               - user: "nasso"
 
 jobs:
-  - file: '/var/jenkins_home/jcasc/job_dsl.groovy'
+  - file: /var/jenkins_home/jcasc/job_dsl.groovy

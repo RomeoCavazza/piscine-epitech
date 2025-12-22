@@ -1,6 +1,6 @@
 # Day 56 — Notes
 
-- Consignes: [consignes_day56.pdf](consignes_day56.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: (à compléter si nécessaire)
 
 ## Objectifs

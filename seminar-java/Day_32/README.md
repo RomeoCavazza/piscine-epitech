@@ -1,6 +1,6 @@
 # Day 32 — Notes
 
-- Consignes: [consignes_day32.pdf](consignes_day32.pdf)
+- Objectifs: [OBJECTIVES.md](OBJECTIVES.md)
 - Solutions: [solutions_day32/](solutions_day32/)
 
 ## Objectifs

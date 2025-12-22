@@ -1,6 +1,6 @@
 # Day 39 — Notes
 
-- Consignes: [consignes_day39.pdf](../consignes_day39.pdf)
+- Objectifs: [../OBJECTIVES.md](../OBJECTIVES.md)
 - Solutions: [solutions_day39/](./)
 
 ## Objectifs
