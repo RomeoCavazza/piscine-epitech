@@ -1,8 +1,10 @@
-<!-- markdownlint-enable MD033 -->
+<!-- markdownlint-disable MD033 MD041 -->
 <div align="center">
   <img src="assets/epitech_logo.png" alt="Epitech Logo" width="500"/>
 </div>
-<!-- markdownlint-enable MD033 -->
+<!-- markdownlint-enable MD033 MD041 -->
+
+# Piscine Epitech
 
 Repository of practical work and projects from technical seminars (Days 01-67).
 
