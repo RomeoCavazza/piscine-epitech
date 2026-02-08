@@ -25,6 +25,11 @@ uploads/
 # PDF files (intellectual property - replaced by OBJECTIVES.md)
 *.pdf
 
+# Rust build artifacts
+**/target/
+**/*.rs.bk
+Cargo.lock
+
 # Python virtual environments
 .venv/
 venv/
