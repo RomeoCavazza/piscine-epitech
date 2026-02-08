@@ -6,7 +6,7 @@
 
 # Piscine Epitech
 
-Repository of practical work and projects from technical seminars (Days 01-67).
+Repository of practical work and projects from technical seminars (Days 01-80).
 
 ## Quick Clone
 
@@ -146,6 +146,18 @@ Continuous Integration & Delivery with Jenkins, Configuration as Code (JCasC), a
 
 → [View the seminar](seminar-jenkins/README.md)
 
+### 🦀 Rust Seminar (Days 71-80)
+
+Introduction to systems programming with Rust: memory safety, ownership, and modern web development.
+
+![Rust](https://img.shields.io/badge/Rust-000000?logo=rust&logoColor=white)
+![Cargo](https://img.shields.io/badge/Cargo-000000?logo=rust&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+![WASM](https://img.shields.io/badge/WebAssembly-654FF0?logo=webassembly&logoColor=white)
+
+→ [View the seminar](seminar-rust/README.md)
+
 ### 📊 Project Management Seminar – SmartFridge (T‑CEN‑500)
 
 Upfront project management around the SmartFridge product: Gantt planning, budget, resources, risks, communications, and final presentation.  
@@ -174,6 +186,7 @@ piscine/
 ├── seminar-devops/          # Days 56-60 : Administration, virtualization, automation
 ├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
 ├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
+├── seminar-rust/            # Days 71-80 : Rust, ownership, full-stack web, WASM
 ├── seminar-project-management/ # T-CEN-500 : Project management, Gantt, budget, risks, communications
 └── competition/              # 5G antenna optimization competition
 ```
@@ -187,8 +200,12 @@ seminar-xxx/
 ├── README.md                    # Main seminar README
 └── Day_XX/
     ├── README.md                # Day explanatory README
-    └── OBJECTIVES.md            # Objectives and learnings (PDFs excluded for IP)
+    ├── OBJECTIVES.md            # Objectives and learnings
+    ├── consignes_dayXX.pdf      # Subject PDFs (excluded from Git for IP)
+    └── solutions_dayXX/         # Solutions and implementations
 ```
+
+> ⚠️ **Note on PDFs**: All `.pdf` files (subject documents, consignes) are excluded from version control per Epitech's intellectual property policy. Refer to `OBJECTIVES.md` files in each day folder for learning objectives and concepts covered.
 
 ## Technologies Covered
 
@@ -197,11 +214,13 @@ seminar-xxx/
 - **Python**: Scripts, algorithms, console applications
 - **Java**: OOP, generics, design patterns, libGDX
 - **PHP**: Web backend, REST API, database integration
+- **Rust**: Systems programming, ownership, memory safety, web frameworks
 
 ### Frontend
 
 - **HTML5/CSS3**: Semantic, responsive, Materialize
 - **JavaScript ES6+**: DOM, events, fetch API, validation
+- **WebAssembly**: Rust compilation to WASM, modern web frameworks
 
 ### Databases
 
@@ -225,6 +244,7 @@ seminar-xxx/
 
 - **Git**: Versioning, collaboration
 - **Gradle**: Build automation (Java)
+- **Cargo**: Rust package manager and build system
 - **JUnit**: Unit testing
 - **JaCoCo**: Code coverage
 - **PlantUML**: UML documentation
@@ -241,7 +261,8 @@ seminar-xxx/
 
 - **Full-stack development**: Frontend, backend, databases
 - **Object-oriented programming**: Java, design patterns, modular architecture
-- **Web development**: HTML5, CSS3, JavaScript, PHP, REST API
+- **Systems programming**: Rust, memory safety, ownership model
+- **Web development**: HTML5, CSS3, JavaScript, PHP, REST API, WebAssembly
 - **System administration**: Linux, virtualization, network services
 - **DevOps**: Automation, Infrastructure as Code, deployment
 - **Project management**: Documentation, testing, versioning, best practices
