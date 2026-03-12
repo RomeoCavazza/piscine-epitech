@@ -74,7 +74,7 @@ export default function Home() {
   );
 
   const { messages, sendMessage, loading: messagesLoading, error: messagesError } = useMessages(selectedChannel?.id ?? null);
-  const { members } = useMembers(selectedServer?.id ?? null);
+  const { members, kickMember } = useMembers(selectedServer?.id ?? null);
 
   const [showCreateServer, setShowCreateServer] = useState(false);
   const [newServerName, setNewServerName] = useState("");
@@ -513,28 +513,46 @@ export default function Home() {
                     <p className="text-[10px] text-white/50 font-bold mb-2 px-2 tracking-wider uppercase">
                       MEMBRES
                     </p>
-                    {members
-                      .filter((m) => m.role !== "Owner")
-                      .map((member) => {
-                        return (
-                          <div
-                            key={member.user_id}
-                            className="flex items-center gap-2 py-1.5 px-2 rounded hover:bg-white/5 cursor-pointer transition-colors"
-                          >
-                            <div className="relative">
-                              <img 
-                                src={getMemberAvatar(member)} 
-                                alt="Member"
-                                className="w-8 h-8 rounded-full object-cover border border-[#4fdfff]/30"
-                              />
-                              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-gray-500 border-2 border-[rgba(5,10,15,0.95)] rounded-full" />
+                    {(() => {
+                      const myRole = members.find((m) => m.user_id === (user?.id))?.role;
+                      const canKick = myRole === "Owner" || myRole === "Admin";
+                      return members
+                        .filter((m) => m.role !== "Owner")
+                        .map((member) => {
+                          const isMe = member.user_id === user?.id;
+                          const kickable = canKick && !isMe && !(myRole === "Admin" && member.role === "Admin");
+                          return (
+                            <div
+                              key={member.user_id}
+                              className="group flex items-center gap-2 py-1.5 px-2 rounded hover:bg-white/5 transition-colors"
+                            >
+                              <div className="relative flex-shrink-0">
+                                <img
+                                  src={getMemberAvatar(member)}
+                                  alt="Member"
+                                  className="w-8 h-8 rounded-full object-cover border border-[#4fdfff]/30"
+                                />
+                                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-gray-500 border-2 border-[rgba(5,10,15,0.95)] rounded-full" />
+                              </div>
+                              <span className="text-sm text-white/70 truncate flex-1">
+                                {member.username}
+                              </span>
+                              {kickable && (
+                                <button
+                                  type="button"
+                                  onClick={() => kickMember(member.user_id)}
+                                  className="opacity-0 group-hover:opacity-100 text-white/30 hover:text-[#ff3333] transition-all flex-shrink-0"
+                                  title={`Expulser ${member.username}`}
+                                >
+                                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6m3-3l3 3-3 3" />
+                                  </svg>
+                                </button>
+                              )}
                             </div>
-                            <span className="text-sm text-white/70 truncate">
-                              {member.username}
-                            </span>
-                          </div>
-                        );
-                      })}
+                          );
+                        });
+                    })()}
                   </div>
                 )}
               </>
