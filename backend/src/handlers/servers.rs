@@ -111,6 +111,15 @@ pub async fn list_members(
     Ok(Json(members_with_user))
 }
 
+pub async fn kick_member(
+    State(state): State<AppState>,
+    ctx: Ctx,
+    Path((server_id, user_id)): Path<(Uuid, Uuid)>,
+) -> Result<StatusCode> {
+    services::kick_member(&state.server_repo, server_id, user_id, ctx.user_id()).await?;
+    Ok(StatusCode::NO_CONTENT)
+}
+
 pub async fn update_member_role(
     State(state): State<AppState>,
     ctx: Ctx,

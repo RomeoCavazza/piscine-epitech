@@ -23,6 +23,6 @@ pub fn routes() -> Router<AppState> {
         .route("/:id/join", post(servers::join_server))
         .route("/:id/leave", delete(servers::leave_server))
         .route("/:id/members", get(servers::list_members))
-        .route("/:id/members/:userId", put(servers::update_member_role))
+        .route("/:id/members/:userId", put(servers::update_member_role).delete(servers::kick_member))
         .route("/:id/transfer", put(servers::transfer_ownership))
 }
