@@ -67,7 +67,9 @@ async function fetchApi<T>(
     return await res.json();
   } catch (err) {
     if (err instanceof Error && err.message.includes("fetch failed")) {
-      throw new Error("Unable to connect to server. Please check if the backend is running.");
+      throw new Error(
+        `Unable to connect to server at ${API_URL}. Please check that the backend is running (e.g. \`cd backend && cargo run\`).`
+      );
     }
     throw err;
   }
