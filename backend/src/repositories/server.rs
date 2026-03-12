@@ -1,7 +1,7 @@
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::models::{MemberRole, Server, ServerMember};
+use crate::models::{MemberRole, Server, ServerBan, ServerMember};
 
 #[derive(Clone)]
 pub struct ServerRepository {
@@ -173,6 +173,73 @@ impl ServerRepository {
         .bind(server_id)
         .bind(user_id)
         .fetch_optional(&self.pool)
+        .await
+    }
+
+    pub async fn find_ban(
+        &self,
+        server_id: Uuid,
+        user_id: Uuid,
+    ) -> sqlx::Result<Option<ServerBan>> {
+        sqlx::query_as::<_, ServerBan>(
+            r#"
+            SELECT server_id, user_id, banned_by, reason, expires_at, banned_at
+            FROM server_bans
+            WHERE server_id = $1 AND user_id = $2
+              AND (expires_at IS NULL OR expires_at > NOW())
+            "#,
+        )
+        .bind(server_id)
+        .bind(user_id)
+        .fetch_optional(&self.pool)
+        .await
+    }
+
+    pub async fn add_ban(
+        &self,
+        server_id: Uuid,
+        user_id: Uuid,
+        banned_by: Uuid,
+        reason: Option<String>,
+        expires_at: Option<chrono::DateTime<chrono::Utc>>,
+    ) -> sqlx::Result<ServerBan> {
+        sqlx::query_as::<_, ServerBan>(
+            r#"
+            INSERT INTO server_bans (server_id, user_id, banned_by, reason, expires_at, banned_at)
+            VALUES ($1, $2, $3, $4, $5, NOW())
+            RETURNING server_id, user_id, banned_by, reason, expires_at, banned_at
+            "#,
+        )
+        .bind(server_id)
+        .bind(user_id)
+        .bind(banned_by)
+        .bind(reason)
+        .bind(expires_at)
+        .fetch_one(&self.pool)
+        .await
+    }
+
+    pub async fn remove_ban(&self, server_id: Uuid, user_id: Uuid) -> sqlx::Result<()> {
+        sqlx::query("DELETE FROM server_bans WHERE server_id = $1 AND user_id = $2")
+            .bind(server_id)
+            .bind(user_id)
+            .execute(&self.pool)
+            .await?;
+        Ok(())
+    }
+
+    pub async fn list_bans(&self, server_id: Uuid) -> sqlx::Result<Vec<ServerBan>> {
+        sqlx::query_as::<_, ServerBan>(
+            r#"
+            SELECT server_id, user_id, banned_by, reason, expires_at, banned_at
+            FROM server_bans
+            WHERE server_id = $1
+              AND (expires_at IS NULL OR expires_at > NOW())
+            ORDER BY banned_at DESC
+            "#,
+        )
+        .bind(server_id)
+        .fetch_all(&self.pool)
         .await
     }
 }

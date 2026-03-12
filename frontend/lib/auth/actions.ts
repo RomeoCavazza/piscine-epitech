@@ -4,19 +4,37 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { API_URL } from "../config";
 
-export async function login(email: string, password: string) {
-  const res = await fetch(`${API_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
+async function safeJson<T>(res: Response): Promise<T | null> {
+  const contentType = res.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) {
+    return null;
+  }
+  try {
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
 
-  if (!res.ok) {
-    const data = await res.json();
-    return { error: data.error || "Invalid credentials" };
+export async function login(email: string, password: string) {
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+  } catch {
+    return { error: "Erreur de connexion. Vérifiez que le backend tourne (port 3001)." };
   }
 
-  const data = await res.json();
+  const data = await safeJson<{ error?: string; token?: string; user?: unknown }>(res);
+  if (!res.ok) {
+    return { error: data?.error || "Identifiants invalides" };
+  }
+  if (!data?.token) {
+    return { error: "Erreur de connexion. Le serveur API n'a pas renvoyé de token (backend sur port 3001 ?)." };
+  }
 
   const cookieStore = await cookies();
   cookieStore.set("token", data.token, {
@@ -31,18 +49,24 @@ export async function login(email: string, password: string) {
 }
 
 export async function signup(username: string, email: string, password: string) {
-  const res = await fetch(`${API_URL}/auth/signup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, email, password }),
-  });
-
-  if (!res.ok) {
-    const data = await res.json();
-    return { error: data.error || "Registration failed" };
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}/auth/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+    });
+  } catch {
+    return { error: "Erreur de connexion. Vérifiez que le backend tourne (port 3001)." };
   }
 
-  const data = await res.json();
+  const data = await safeJson<{ error?: string; token?: string; user?: unknown }>(res);
+  if (!res.ok) {
+    return { error: data?.error || "Échec de l'inscription" };
+  }
+  if (!data?.token) {
+    return { error: "Erreur de connexion. Le serveur API n'a pas renvoyé de token (backend sur port 3001 ?)." };
+  }
 
   const cookieStore = await cookies();
   cookieStore.set("token", data.token, {

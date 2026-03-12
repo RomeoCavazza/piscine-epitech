@@ -2,8 +2,8 @@ use uuid::Uuid;
 
 use crate::error::{Error, Result};
 use crate::models::{
-    CreateServerPayload, MemberRole, Server, ServerMember, TransferOwnershipPayload,
-    UpdateServerPayload,
+    BanMemberPayload, CreateServerPayload, MemberRole, Server, ServerBan, ServerMember,
+    TransferOwnershipPayload, UpdateServerPayload,
 };
 use crate::repositories::{ServerRepository, UserRepository};
 
@@ -123,6 +123,10 @@ pub async fn join_server(
         .find_by_id(server_id)
         .await?
         .ok_or(Error::ServerNotFound)?;
+
+    if server_repo.find_ban(server_id, user_id).await?.is_some() {
+        return Err(Error::UserBanned);
+    }
 
     if server_repo.find_member(server_id, user_id).await?.is_some() {
         return Err(Error::ServerAlreadyMember);
@@ -244,6 +248,78 @@ pub async fn update_member_role(
         .ok_or(Error::UserNotFound)?;
 
     Ok(updated_member)
+}
+
+pub async fn ban_member(
+    server_repo: &ServerRepository,
+    server_id: Uuid,
+    target_user_id: Uuid,
+    requester_id: Uuid,
+    payload: BanMemberPayload,
+) -> Result<ServerBan> {
+    // Vérifier que le serveur existe
+    let server = server_repo
+        .find_by_id(server_id)
+        .await?
+        .ok_or(Error::ServerNotFound)?;
+
+    // Vérifier que le requester est membre et a le droit de bannir (Owner ou Admin)
+    let requester = server_repo
+        .find_member(server_id, requester_id)
+        .await?
+        .ok_or(Error::ServerForbidden)?;
+
+    if requester.role == MemberRole::Member {
+        return Err(Error::ServerForbidden);
+    }
+
+    // On ne peut pas bannir l'Owner
+    if target_user_id == server.owner_id {
+        return Err(Error::ServerForbidden);
+    }
+
+    // Un Admin ne peut pas bannir un autre Admin
+    if let Some(target) = server_repo.find_member(server_id, target_user_id).await? {
+        if requester.role == MemberRole::Admin && target.role == MemberRole::Admin {
+            return Err(Error::ServerForbidden);
+        }
+    }
+
+    // Vérifier que l'utilisateur n'est pas déjà banni
+    if server_repo.find_ban(server_id, target_user_id).await?.is_some() {
+        return Err(Error::UserAlreadyBanned);
+    }
+
+    // Retirer le membre du serveur s'il y est encore
+    if server_repo.find_member(server_id, target_user_id).await?.is_some() {
+        server_repo.remove_member(server_id, target_user_id).await?;
+    }
+
+    // Créer le ban
+    let ban = server_repo
+        .add_ban(server_id, target_user_id, requester_id, payload.reason, payload.expires_at)
+        .await?;
+
+    Ok(ban)
+}
+
+pub async fn list_bans(
+    server_repo: &ServerRepository,
+    server_id: Uuid,
+    requester_id: Uuid,
+) -> Result<Vec<ServerBan>> {
+    // Seul Owner ou Admin peut voir la liste des bans
+    let requester = server_repo
+        .find_member(server_id, requester_id)
+        .await?
+        .ok_or(Error::ServerForbidden)?;
+
+    if requester.role == MemberRole::Member {
+        return Err(Error::ServerForbidden);
+    }
+
+    let bans = server_repo.list_bans(server_id).await?;
+    Ok(bans)
 }
 
 pub async fn transfer_ownership(

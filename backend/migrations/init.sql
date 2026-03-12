@@ -78,4 +78,18 @@ CREATE INDEX IF NOT EXISTS idx_channels_server ON channels(server_id);
 CREATE INDEX IF NOT EXISTS idx_invites_code ON invites(code);
 CREATE INDEX IF NOT EXISTS idx_invites_server ON invites(server_id);
 
+-- SERVER BANS
+CREATE TABLE IF NOT EXISTS server_bans (
+    server_id UUID NOT NULL REFERENCES servers(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    banned_by UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    reason VARCHAR(500),
+    expires_at TIMESTAMPTZ,
+    banned_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    PRIMARY KEY (server_id, user_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_server_bans_user ON server_bans(user_id);
+CREATE INDEX IF NOT EXISTS idx_server_bans_server ON server_bans(server_id);
+
 -- NOTE: Messages are stored in MongoDB, not PostgreSQL

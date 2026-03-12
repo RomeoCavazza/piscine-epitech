@@ -39,6 +39,22 @@ pub struct ServerMemberWithUser {
     pub avatar_url: Option<String>,
 }
 
+#[derive(Debug, Clone, Serialize, FromRow)]
+pub struct ServerBan {
+    pub server_id: Uuid,
+    pub user_id: Uuid,
+    pub banned_by: Uuid,
+    pub reason: Option<String>,
+    pub expires_at: Option<DateTime<Utc>>,
+    pub banned_at: DateTime<Utc>,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct BanMemberPayload {
+    pub reason: Option<String>,
+    pub expires_at: Option<DateTime<Utc>>,
+}
+
 #[derive(Debug, Deserialize)]
 pub struct CreateServerPayload {
     pub name: String,
