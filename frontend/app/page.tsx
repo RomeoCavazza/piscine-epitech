@@ -74,7 +74,7 @@ export default function Home() {
   );
 
   const { messages, sendMessage, loading: messagesLoading, error: messagesError, typingUsers, typingStart, typingStop } = useMessages(selectedChannel?.id ?? null);
-  const { members, kickMember } = useMembers(selectedServer?.id ?? null);
+  const { members, kickMember, banMember } = useMembers(selectedServer?.id ?? null);
 
   const [showCreateServer, setShowCreateServer] = useState(false);
   const [newServerName, setNewServerName] = useState("");
@@ -87,6 +87,9 @@ export default function Home() {
   const [showServerMenu, setShowServerMenu] = useState(false);
   const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [banTarget, setBanTarget] = useState<{ userId: string; username: string } | null>(null);
+  const [banDuration, setBanDuration] = useState("permanent");
+  const [banReason, setBanReason] = useState("");
   const typingStopTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const TYPING_STOP_DELAY_MS = 2000;
   if (user && !currentUser) {
@@ -603,16 +606,28 @@ export default function Home() {
                                 </div>
                               )}
                               {kickable && (
-                                <button
-                                  type="button"
-                                  onClick={() => kickMember(member.user_id)}
-                                  className="opacity-0 group-hover:opacity-100 text-white/30 hover:text-[#ff3333] transition-all flex-shrink-0"
-                                  title={`Expulser ${member.username}`}
-                                >
-                                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6m3-3l3 3-3 3" />
-                                  </svg>
-                                </button>
+                                <div className="opacity-0 group-hover:opacity-100 flex gap-1 flex-shrink-0">
+                                  <button
+                                    type="button"
+                                    onClick={() => kickMember(member.user_id)}
+                                    className="text-white/30 hover:text-[#ff3333] transition-all"
+                                    title={`Expulser ${member.username}`}
+                                  >
+                                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6m3-3l3 3-3 3" />
+                                    </svg>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => { setBanTarget({ userId: member.user_id, username: member.username }); setBanDuration("permanent"); setBanReason(""); }}
+                                    className="text-white/30 hover:text-[#ff6600] transition-all"
+                                    title={`Bannir ${member.username}`}
+                                  >
+                                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                                    </svg>
+                                  </button>
+                                </div>
                               )}
                             </div>
                           );
@@ -628,6 +643,89 @@ export default function Home() {
         <aside className="w-60 bg-[rgba(5,10,15,0.95)] border-l border-[#4fdfff]/20 flex flex-col items-center justify-center">
           <p className="text-white/40 text-sm text-center px-4">Sélectionnez un serveur</p>
         </aside>
+      )}
+
+      {/* ========== MODAL BAN MEMBER ========== */}
+      {banTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setBanTarget(null)} />
+          <div className="relative bg-[rgba(20,20,20,0.98)] border-2 border-[#ff6600] rounded-xl p-6 w-full max-w-md shadow-[0_0_40px_rgba(255,102,0,0.3)]">
+            <h2 className="text-xl font-bold text-center text-white mb-1">BANNIR UN MEMBRE</h2>
+            <p className="text-center text-white/50 text-sm mb-6">
+              Bannir <span className="text-[#ff6600] font-semibold">{banTarget.username}</span> l&apos;empêchera de rejoindre ce serveur.
+            </p>
+
+            <label className="block text-[10px] font-bold text-[#ff6600] tracking-widest uppercase mb-2">
+              DURÉE DU BAN
+            </label>
+            <div className="grid grid-cols-3 gap-2 mb-4">
+              {[
+                { label: "1 heure", value: "1h" },
+                { label: "24 heures", value: "24h" },
+                { label: "7 jours", value: "7d" },
+                { label: "30 jours", value: "30d" },
+                { label: "90 jours", value: "90d" },
+                { label: "Permanent", value: "permanent" },
+              ].map(({ label, value }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setBanDuration(value)}
+                  className={`px-3 py-2 rounded-lg text-xs font-bold border transition-all ${
+                    banDuration === value
+                      ? "bg-[#ff6600] border-[#ff6600] text-white"
+                      : "bg-black/50 border-white/20 text-white/60 hover:border-[#ff6600]/50 hover:text-white/90"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            <label className="block text-[10px] font-bold text-[#ff6600] tracking-widest uppercase mb-2">
+              RAISON (optionnel)
+            </label>
+            <input
+              type="text"
+              value={banReason}
+              onChange={(e) => setBanReason(e.target.value)}
+              placeholder="Raison du ban..."
+              maxLength={500}
+              className="w-full px-4 py-3 bg-black/50 border-2 border-[#ff6600]/50 rounded-lg text-white placeholder:text-white/40 focus:outline-none focus:border-[#ff6600] focus:shadow-[0_0_10px_rgba(255,102,0,0.3)] mb-6 transition-all"
+            />
+
+            <div className="flex gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                size="md"
+                onClick={() => setBanTarget(null)}
+                className="flex-1"
+              >
+                Annuler
+              </Button>
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!banTarget) return;
+                  let expiresAt: string | null = null;
+                  if (banDuration !== "permanent") {
+                    const durations: Record<string, number> = { "1h": 3600, "24h": 86400, "7d": 604800, "30d": 2592000, "90d": 7776000 };
+                    const seconds = durations[banDuration];
+                    if (seconds) expiresAt = new Date(Date.now() + seconds * 1000).toISOString();
+                  }
+                  await banMember(banTarget.userId, banReason || undefined, expiresAt);
+                  setBanTarget(null);
+                  setBanReason("");
+                  setBanDuration("permanent");
+                }}
+                className="flex-1 px-4 py-2 bg-[#ff6600] hover:bg-[#ff6600]/80 text-white font-bold rounded-lg transition-all"
+              >
+                Bannir
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ========== MODAL CREATE SERVER ========== */}

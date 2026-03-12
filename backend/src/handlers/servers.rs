@@ -8,8 +8,8 @@ use uuid::Uuid;
 use crate::ctx::Ctx;
 use crate::error::Result;
 use crate::models::{
-    CreateServerPayload, Server, ServerMember, TransferOwnershipPayload, UpdateMemberRolePayload,
-    UpdateServerPayload,
+    BanMemberPayload, CreateServerPayload, Server, ServerBan, ServerMember,
+    TransferOwnershipPayload, UpdateMemberRolePayload, UpdateServerPayload,
 };
 use crate::services;
 use crate::AppState;
@@ -135,6 +135,27 @@ pub async fn update_member_role(
     )
     .await?;
     Ok(Json(member))
+}
+
+pub async fn ban_member(
+    State(state): State<AppState>,
+    ctx: Ctx,
+    Path((server_id, user_id)): Path<(Uuid, Uuid)>,
+    Json(payload): Json<BanMemberPayload>,
+) -> Result<Json<ServerBan>> {
+    let ban =
+        services::ban_member(&state.server_repo, server_id, user_id, ctx.user_id(), payload)
+            .await?;
+    Ok(Json(ban))
+}
+
+pub async fn list_bans(
+    State(state): State<AppState>,
+    ctx: Ctx,
+    Path(id): Path<Uuid>,
+) -> Result<Json<Vec<ServerBan>>> {
+    let bans = services::list_bans(&state.server_repo, id, ctx.user_id()).await?;
+    Ok(Json(bans))
 }
 
 pub async fn transfer_ownership(

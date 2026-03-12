@@ -67,7 +67,9 @@ async function fetchApi<T>(
     return await res.json();
   } catch (err) {
     if (err instanceof Error && err.message.includes("fetch failed")) {
-      throw new Error("Unable to connect to server. Please check if the backend is running.");
+      throw new Error(
+        `Unable to connect to server at ${API_URL}. Please check that the backend is running (e.g. \`cd backend && cargo run\`).`
+      );
     }
     throw err;
   }
@@ -198,6 +200,27 @@ export async function listMembers(serverId: string): Promise<ServerMember[]> {
 export async function kickMember(serverId: string, userId: string): Promise<void> {
   return fetchApi<void>(`/servers/${serverId}/members/${userId}`, {
     method: "DELETE",
+  });
+}
+
+export interface ServerBan {
+  server_id: string;
+  user_id: string;
+  banned_by: string;
+  reason?: string;
+  expires_at?: string;
+  banned_at: string;
+}
+
+export async function banMember(
+  serverId: string,
+  userId: string,
+  reason?: string,
+  expiresAt?: string | null
+): Promise<ServerBan> {
+  return fetchApi<ServerBan>(`/servers/${serverId}/members/${userId}/ban`, {
+    method: "POST",
+    body: JSON.stringify({ reason: reason ?? null, expires_at: expiresAt ?? null }),
   });
 }
 

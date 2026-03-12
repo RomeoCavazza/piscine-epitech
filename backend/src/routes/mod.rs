@@ -10,7 +10,7 @@ use crate::AppState;
 
 pub fn create_router() -> Router<AppState> {
     Router::new()
-        .merge(servers::routes())
+        .nest("/servers", servers::routes())
         .merge(channels::routes())
         .merge(messages::routes())
         .merge(invites::routes())
