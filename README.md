@@ -279,6 +279,76 @@ sequenceDiagram
 
 ### Base de données
 
+**Schéma des tables et relations (PostgreSQL + MongoDB) :**
+
+```mermaid
+erDiagram
+    users ||--o{ servers : "owns"
+    users ||--o{ server_members : "member"
+    servers ||--o{ server_members : "has"
+    servers ||--o{ channels : "contains"
+    servers ||--o{ invites : "has"
+    users ||--o{ invites : "creates"
+    channels ||--o{ channel_messages : "contains"
+
+    users {
+        uuid id PK
+        string email
+        string password_hash
+        string username
+        string avatar_url
+        string status
+        timestamptz created_at
+    }
+
+    servers {
+        uuid id PK
+        uuid owner_id FK
+        string name
+        timestamptz created_at
+        timestamptz updated_at
+    }
+
+    server_members {
+        uuid server_id PK
+        uuid user_id PK
+        string role
+        timestamptz joined_at
+    }
+
+    channels {
+        uuid id PK
+        uuid server_id FK
+        string name
+        int position
+        timestamptz created_at
+        timestamptz updated_at
+    }
+
+    invites {
+        uuid id PK
+        uuid server_id FK
+        uuid created_by FK
+        string code
+        int max_uses
+        int uses
+        timestamptz expires_at
+        boolean revoked
+        timestamptz created_at
+    }
+
+    channel_messages {
+        objectid _id PK
+        uuid channel_id
+        uuid server_id
+        uuid author_id
+        string content
+        timestamptz created_at
+        timestamptz edited_at
+        timestamptz deleted_at
+    }
+```
+
 **PostgreSQL** (schéma dans `backend/migrations/init.sql`) :
 
 - **users** — id, email, password_hash, username, avatar_url, status, created_at
