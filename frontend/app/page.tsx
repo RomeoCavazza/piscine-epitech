@@ -56,6 +56,25 @@ function getMemberAvatar(member: { user_id: string; avatar_url?: string }): stri
  * Page principale - Design Moderne Cyberpunk
  * Layout: SERVER SIDEBAR (72px) | CHANNEL SIDEBAR (240px) | CHAT CENTER | MEMBERS SIDEBAR (240px)
  */
+const handleDeleteServer = async (serverId: string) => {
+  if (!confirm("Supprimer définitivement ce serveur ?")) return;
+  
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servers/${serverId}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+
+    if (response.ok) {
+      window.location.reload(); 
+    }
+  } catch (err) {
+    console.error("Erreur:", err);
+  }
+};
+
 export default function Home() {
   const { user } = useAuth();
   const {
@@ -195,99 +214,111 @@ export default function Home() {
           </svg>
         </button>
       </aside>
-
-      {/* ========== CHANNEL SIDEBAR (240px) ========== */}
-      {selectedServer ? (
-        <aside className="w-60 bg-[rgba(5,10,15,0.95)] border-r border-[#4fdfff]/20 flex flex-col">
-          {/* Server header */}
-          <div className="h-12 px-4 flex items-center border-b border-[#4fdfff]/30 shadow-lg bg-[rgba(0,0,0,0.3)]">
-            <h2 className="font-bold text-white truncate flex-1">{selectedServer.name}</h2>
-            <span className="text-[#4fdfff] text-xs font-mono">▼</span>
-          </div>
-
-          {/* Channels */}
-          <div className="flex-1 overflow-y-auto p-2">
-            <div className="flex items-center justify-between px-2 mb-2">
-              <span className="text-[10px] font-bold text-white/50 tracking-widest uppercase">
-                CHANNELS TEXTUELS
-              </span>
-              <button
-                onClick={() => setShowCreateChannel(true)}
-                className="text-white/50 hover:text-[#4fdfff] transition-colors text-lg font-bold"
-                title="Créer un channel"
+{/* ========== CHANNEL SIDEBAR (240px) ========== */}
+      <aside className="w-60 bg-[rgba(5,10,15,0.95)] border-r border-[#4fdfff]/20 flex flex-col">
+        {selectedServer ? (
+          <>
+            {/* Server header avec bouton de suppression */}
+            <div className="h-12 px-4 flex items-center border-b border-[#4fdfff]/30 shadow-lg bg-[rgba(0,0,0,0.3)] group">
+              <h2 className="font-bold text-white truncate flex-1">{selectedServer.name}</h2>
+              
+              {/* BOUTON SUPPRIMER LE SERVEUR (Visible au survol du header) */}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteServer(selectedServer.id);
+                }}
+                className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-500 text-[#4fdfff]"
+                title="Supprimer ce serveur"
               >
-                +
+                <span className="text-xs font-mono">▼</span>
               </button>
             </div>
 
-            <div className="space-y-[2px]">
-              {channelsLoading ? (
-                <div className="px-2 py-2 text-white/40 text-sm">Chargement...</div>
-              ) : channelsError ? (
-                <div className="px-2 py-2 text-[#ff3333] text-sm">{channelsError}</div>
-              ) : channels.length === 0 ? (
-                <div className="px-2 py-2 text-white/40 text-sm italic">Aucun channel</div>
-              ) : (
-                channels.map((channel) => (
-                  <button
-                    key={channel.id}
-                    onClick={() => selectChannel(channel)}
-                    className={`w-full text-left px-2 py-1.5 rounded flex items-center gap-2 transition-colors ${
-                      selectedChannel?.id === channel.id
-                        ? "bg-[#4fdfff]/15 text-white"
-                        : "text-white/60 hover:bg-white/5 hover:text-white"
-                    }`}
-                  >
-                    <span className="text-white/40">#</span>
-                    <span className="truncate text-sm">{channel.name}</span>
-                  </button>
-                ))
-              )}
-            </div>
-          </div>
+            {/* Channels */}
+            <div className="flex-1 overflow-y-auto p-2">
+              <div className="flex items-center justify-between px-2 mb-2">
+                <span className="text-[10px] font-bold text-white/50 tracking-widest uppercase">
+                  CHANNELS TEXTUELS
+                </span>
+                <button
+                  onClick={() => setShowCreateChannel(true)}
+                  className="text-white/50 hover:text-[#4fdfff] transition-colors text-lg font-bold"
+                  title="Créer un channel"
+                >
+                  +
+                </button>
+              </div>
 
-          {/* User info footer */}
-          <div className="h-14 px-2 flex items-center gap-2 bg-[rgba(0,0,0,0.5)] border-t border-[#4fdfff]/20">
-            <button
-              onClick={() => setShowProfile(true)}
-              className="flex items-center gap-2 flex-1 min-w-0 hover:bg-white/5 rounded p-1 transition-colors"
-            >
-              <div className="relative flex-shrink-0">
-                {(currentUser || user)?.avatar_url ? (
-                  <img 
-                    src={normalizeAvatarUrl((currentUser || user)?.avatar_url) || ''} 
-                    alt="Avatar" 
-                    className="w-8 h-8 rounded-full object-cover border border-[#4fdfff]/50"
-                  />
+              <div className="space-y-[2px]">
+                {channelsLoading ? (
+                  <div className="px-2 py-2 text-white/40 text-sm">Chargement...</div>
+                ) : channelsError ? (
+                  <div className="px-2 py-2 text-[#ff3333] text-sm">{channelsError}</div>
+                ) : channels.length === 0 ? (
+                  <div className="px-2 py-2 text-white/40 text-sm italic">Aucun channel</div>
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-[#4fdfff]/20 border border-[#4fdfff]/50 flex items-center justify-center">
-                    <span className="text-[#4fdfff] text-xs font-bold">
-                      {(currentUser || user)?.username?.charAt(0).toUpperCase() || "?"}
-                    </span>
-                  </div>
+                  channels.map((channel) => (
+                    <button
+                      key={channel.id}
+                      onClick={() => selectChannel(channel)}
+                      className={`w-full text-left px-2 py-1.5 rounded flex items-center gap-2 transition-colors ${
+                        selectedChannel?.id === channel.id
+                          ? "bg-[#4fdfff]/15 text-white"
+                          : "text-white/60 hover:bg-white/5 hover:text-white"
+                      }`}
+                    >
+                      <span className="text-white/40">#</span>
+                      <span className="truncate text-sm">{channel.name}</span>
+                    </button>
+                  ))
                 )}
-                {/* Status indicator */}
-                <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[rgba(5,10,15,0.95)] rounded-full ${
-                  (currentUser || user)?.status?.toLowerCase() === "online" ? "bg-green-500" :
-                  (currentUser || user)?.status?.toLowerCase() === "dnd" ? "bg-red-500" :
-                  (currentUser || user)?.status?.toLowerCase() === "invisible" ? "bg-gray-400" :
-                  "bg-gray-500"
-                }`} />
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">{(currentUser || user)?.username || "Guest"}</p>
-                <p className="text-[10px] text-[#4fdfff] font-mono uppercase">
-                  {(currentUser || user)?.status || "CONNECTED"}
-                </p>
-              </div>
-            </button>
+            </div>
+          </>
+        ) : (
+          <div className="flex-1 flex flex-col items-center justify-center">
+            <p className="text-white/20 text-xs text-center px-4 italic">
+              Sélectionnez un serveur pour voir les canaux
+            </p>
           </div>
-        </aside>
-      ) : (
-        <aside className="w-60 bg-[rgba(5,10,15,0.95)] border-r border-[#4fdfff]/20 flex flex-col items-center justify-center">
-          <p className="text-white/40 text-sm text-center px-4">Sélectionnez un serveur</p>
-        </aside>
-      )}
+        )}
+
+        {/* User info footer (Toujours visible) */}
+        <div className="h-14 px-2 flex items-center gap-2 bg-[rgba(0,0,0,0.5)] border-t border-[#4fdfff]/20">
+          <button
+            onClick={() => setShowProfile(true)}
+            className="flex items-center gap-2 flex-1 min-w-0 hover:bg-white/5 rounded p-1 transition-colors"
+          >
+            <div className="relative flex-shrink-0">
+              {(currentUser || user)?.avatar_url ? (
+                <img 
+                  src={normalizeAvatarUrl((currentUser || user)?.avatar_url) || ''} 
+                  alt="Avatar" 
+                  className="w-8 h-8 rounded-full object-cover border border-[#4fdfff]/50"
+                />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-[#4fdfff]/20 border border-[#4fdfff]/50 flex items-center justify-center">
+                  <span className="text-[#4fdfff] text-xs font-bold">
+                    {(currentUser || user)?.username?.charAt(0).toUpperCase() || "?"}
+                  </span>
+                </div>
+              )}
+              <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[rgba(5,10,15,0.95)] rounded-full ${
+                (currentUser || user)?.status?.toLowerCase() === "online" ? "bg-green-500" :
+                (currentUser || user)?.status?.toLowerCase() === "dnd" ? "bg-red-500" :
+                "bg-gray-500"
+              }`} />
+            </div>
+            <div className="flex-1 min-w-0 text-left">
+              <p className="text-sm font-medium text-white truncate">{(currentUser || user)?.username || "Guest"}</p>
+              <p className="text-[10px] text-[#4fdfff] font-mono uppercase">
+                {(currentUser || user)?.status || "CONNECTED"}
+              </p>
+            </div>
+          </button>
+        </div>
+      </aside>
 
       {/* ========== CHAT CENTER ========== */}
       <div className="flex-1 flex flex-col bg-[rgba(10,15,20,0.98)]">

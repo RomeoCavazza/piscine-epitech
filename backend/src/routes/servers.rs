@@ -24,3 +24,11 @@ pub fn routes() -> Router<AppState> {
         )
         .route("/servers/{id}/transfer", put(servers::transfer_ownership))
 }
+
+// Dans src/routes/servers.rs
+pub fn router() -> Router {
+    Router::new()
+        .route("/", post(create_server).get(list_servers))
+        // Ajoute cette ligne ici :
+        .route("/:id", delete(delete_server)) 
+}
