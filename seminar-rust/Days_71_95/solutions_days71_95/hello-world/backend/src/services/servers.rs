@@ -153,6 +153,48 @@ pub async fn leave_server(
     Ok(())
 }
 
+pub async fn kick_member(
+    server_repo: &ServerRepository,
+    server_id: Uuid,
+    target_user_id: Uuid,
+    requester_id: Uuid,
+) -> Result<()> {
+    // Vérifier que le serveur existe
+    let server = server_repo
+        .find_by_id(server_id)
+        .await?
+        .ok_or(Error::ServerNotFound)?;
+
+    // Vérifier que le requester est membre et a le droit de kick (Owner ou Admin)
+    let requester = server_repo
+        .find_member(server_id, requester_id)
+        .await?
+        .ok_or(Error::ServerForbidden)?;
+
+    if requester.role == MemberRole::Member {
+        return Err(Error::ServerForbidden);
+    }
+
+    // Vérifier que la cible est bien membre
+    let target = server_repo
+        .find_member(server_id, target_user_id)
+        .await?
+        .ok_or(Error::UserNotFound)?;
+
+    // On ne peut pas kick l'Owner
+    if target.user_id == server.owner_id {
+        return Err(Error::ServerForbidden);
+    }
+
+    // Un Admin ne peut pas kick un autre Admin
+    if requester.role == MemberRole::Admin && target.role == MemberRole::Admin {
+        return Err(Error::ServerForbidden);
+    }
+
+    server_repo.remove_member(server_id, target_user_id).await?;
+    Ok(())
+}
+
 pub async fn list_members(
     server_repo: &ServerRepository,
     server_id: Uuid,

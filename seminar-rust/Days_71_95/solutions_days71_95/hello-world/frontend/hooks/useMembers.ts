@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { listMembers, ServerMember } from "@/lib/api-server";
+import { listMembers, kickMember as apiKickMember, ServerMember } from "@/lib/api-server";
 import { handleAuthError, isAuthError, getErrorMessage } from "@/lib/auth/utils";
 import { useWebSocket } from "./useWebSocket";
 import { ServerEvent } from "@/lib/gateway";
@@ -58,6 +58,22 @@ export function useMembers(serverId: string | null) {
     return unsubscribe;
   }, [onEvent]);
 
+  const kickMember = useCallback(async (userId: string): Promise<boolean> => {
+    if (!serverId) return false;
+    // Optimistic UI : on retire le membre immédiatement
+    setMembers((prev) => prev.filter((m) => m.user_id !== userId));
+    try {
+      await apiKickMember(serverId, userId);
+      return true;
+    } catch (err) {
+      // Rollback en cas d'erreur
+      loadMembers(serverId);
+      const errorMessage = getErrorMessage(err, "Failed to kick member");
+      if (isAuthError(errorMessage)) handleAuthError();
+      return false;
+    }
+  }, [serverId, loadMembers]);
+
   const refresh = useCallback(() => {
     if (serverId) {
       loadMembers(serverId);
@@ -75,6 +91,7 @@ export function useMembers(serverId: string | null) {
     error,
     refresh,
     getUserStatus,
+    kickMember,
   };
 }
 

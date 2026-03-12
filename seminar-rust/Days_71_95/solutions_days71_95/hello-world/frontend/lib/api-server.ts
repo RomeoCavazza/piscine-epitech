@@ -195,6 +195,12 @@ export async function listMembers(serverId: string): Promise<ServerMember[]> {
   return fetchApi<ServerMember[]>(`/servers/${serverId}/members`);
 }
 
+export async function kickMember(serverId: string, userId: string): Promise<void> {
+  return fetchApi<void>(`/servers/${serverId}/members/${userId}`, {
+    method: "DELETE",
+  });
+}
+
 export async function listMessages(channelId: string, limit = 50): Promise<Message[]> {
   return fetchApi<Message[]>(`/channels/${channelId}/messages?limit=${limit}`);
 }
