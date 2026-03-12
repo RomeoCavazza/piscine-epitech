@@ -87,7 +87,7 @@ export default function Home() {
     error: serversError,
   } = useServers();
 
-  const { channels, selectedChannel, selectChannel, createChannel, loading: channelsLoading, error: channelsError } = useChannels(
+  const { channels, selectedChannel, selectChannel, createChannel, deleteChannel, loading: channelsLoading, error: channelsError } = useChannels(
     selectedServer?.id ?? null
   );
 
@@ -280,18 +280,37 @@ export default function Home() {
                   <div className="px-2 py-2 text-white/40 text-sm italic">Aucun channel</div>
                 ) : (
                   channels.map((channel) => (
-                    <button
+                    <div
                       key={channel.id}
-                      onClick={() => selectChannel(channel)}
-                      className={`w-full text-left px-2 py-1.5 rounded flex items-center gap-2 transition-colors ${
+                      className={`group w-full flex items-center rounded transition-colors ${
                         selectedChannel?.id === channel.id
-                          ? "bg-[#4fdfff]/15 text-white"
-                          : "text-white/60 hover:bg-white/5 hover:text-white"
+                          ? "bg-[#4fdfff]/15"
+                          : "hover:bg-white/5"
                       }`}
                     >
-                      <span className="text-white/40">#</span>
-                      <span className="truncate text-sm">{channel.name}</span>
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => selectChannel(channel)}
+                        className={`flex-1 text-left px-2 py-1.5 flex items-center gap-2 ${
+                          selectedChannel?.id === channel.id
+                            ? "text-white"
+                            : "text-white/60 group-hover:text-white"
+                        }`}
+                      >
+                        <span className="text-white/40">#</span>
+                        <span className="truncate text-sm">{channel.name}</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => deleteChannel(channel.id)}
+                        className="opacity-0 group-hover:opacity-100 pr-2 text-white/30 hover:text-[#ff3333] transition-all"
+                        title="Supprimer le channel"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
+                    </div>
                   ))
                 )}
               </div>
