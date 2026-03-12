@@ -56,25 +56,6 @@ function getMemberAvatar(member: { user_id: string; avatar_url?: string }): stri
  * Page principale - Design Moderne Cyberpunk
  * Layout: SERVER SIDEBAR (72px) | CHANNEL SIDEBAR (240px) | CHAT CENTER | MEMBERS SIDEBAR (240px)
  */
-const handleDeleteServer = async (serverId: string) => {
-  if (!confirm("Supprimer définitivement ce serveur ?")) return;
-  
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servers/${serverId}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-    });
-
-    if (response.ok) {
-      window.location.reload(); 
-    }
-  } catch (err) {
-    console.error("Erreur:", err);
-  }
-};
-
 export default function Home() {
   const { user } = useAuth();
   const {
@@ -83,6 +64,7 @@ export default function Home() {
     selectServer,
     createServer,
     leaveServer,
+    deleteServer,
     loading: serversLoading,
     error: serversError,
   } = useServers();
@@ -104,6 +86,7 @@ export default function Home() {
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [showServerMenu, setShowServerMenu] = useState(false);
   const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   // Initialize currentUser from useAuth
   if (user && !currentUser) {
@@ -246,7 +229,7 @@ export default function Home() {
                     </button>
                     <button
                       type="button"
-                      onClick={(e) => { e.stopPropagation(); setShowServerMenu(false); handleDeleteServer(selectedServer.id); }}
+                      onClick={() => { setShowServerMenu(false); setShowDeleteConfirm(true); }}
                       className="w-full text-left px-4 py-2 text-sm text-[#ff3333]/70 hover:bg-[#ff3333]/10 transition-colors"
                     >
                       Supprimer le serveur
@@ -678,6 +661,44 @@ export default function Home() {
           serverName={selectedServer.name}
           onClose={() => setShowInviteModal(false)}
         />
+      )}
+
+      {/* ========== MODAL DELETE SERVER ========== */}
+      {showDeleteConfirm && selectedServer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowDeleteConfirm(false)} />
+          <div className="relative bg-[rgba(20,20,20,0.98)] border-2 border-[#ff3333] rounded-xl p-6 w-full max-w-sm shadow-[0_0_40px_rgba(255,51,51,0.3)]">
+            <h2 className="text-xl font-bold text-center text-white mb-2">Supprimer le serveur</h2>
+            <p className="text-center text-white/60 text-sm mb-6">
+              Es-tu sûr de vouloir supprimer définitivement{" "}
+              <span className="text-white font-semibold">{selectedServer.name}</span> ?
+              Cette action est irréversible.
+            </p>
+            <div className="flex gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                size="md"
+                onClick={() => setShowDeleteConfirm(false)}
+                className="flex-1"
+              >
+                Annuler
+              </Button>
+              <Button
+                type="button"
+                variant="danger"
+                size="md"
+                onClick={async () => {
+                  setShowDeleteConfirm(false);
+                  await deleteServer(selectedServer.id);
+                }}
+                className="flex-1"
+              >
+                Supprimer
+              </Button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ========== MODAL LEAVE SERVER ========== */}
