@@ -1,46 +1,88 @@
 <div align="center">
 
-<img src="frontend/public/logo.png" width="120" />
+<img src="frontend/public/logo.png" width="120" alt="Hello World" />
 
 <h1><a href="https://hello-world-messagerie-jfk7-5vqlt1b3u-florian-billons-projects.vercel.app">Hello World</a></h1>
 
 <p><strong>Real-time messaging platform inspired by Discord</strong></p>
 
 <p>
-  <a href="https://www.rust-lang.org/">
-    <img src="https://img.shields.io/badge/Rust-1.91+-orange.svg?style=flat-square&logo=rust&logoColor=white" alt="Rust 1.91+" />
-  </a>
-  <a href="https://nextjs.org/">
-    <img src="https://img.shields.io/badge/Next.js-16-black.svg?style=flat-square&logo=next.js&logoColor=white" alt="Next.js 16" />
-  </a>
-  <a href="https://www.postgresql.org/">
-    <img src="https://img.shields.io/badge/PostgreSQL-15-336791.svg?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL 15" />
-  </a>
-  <a href="https://www.mongodb.com/">
-    <img src="https://img.shields.io/badge/MongoDB-7-47A248.svg?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB 7" />
-  </a>
+  <a href="https://www.rust-lang.org/"><img src="https://img.shields.io/badge/Rust-1.91+-orange.svg?style=flat-square&logo=rust&logoColor=white" alt="Rust 1.91+" /></a>
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-16-black.svg?style=flat-square&logo=next.js&logoColor=white" alt="Next.js 16" /></a>
+  <a href="https://www.postgresql.org/"><img src="https://img.shields.io/badge/PostgreSQL-15-336791.svg?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL 15" /></a>
+  <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/MongoDB-7-47A248.svg?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB 7" /></a>
 </p>
 
 </div>
 
-## Introduction
+---
 
-Hello World is a full-stack real-time messaging application built with a Rust backend (Axum) and a Next.js frontend. It features server-based chat rooms, channels, WebSocket messaging, and comprehensive member management with role-based permissions.
+## 1. Le projet
 
-The architecture uses PostgreSQL for relational data (users, servers, channels, memberships, bans) and MongoDB for message storage, enabling horizontal scalability for high-volume messaging.
+**Hello World** est une application de messagerie temps réel (type Discord) : backend Rust (Axum), frontend Next.js. Les données relationnelles (utilisateurs, serveurs, canaux, membres, invitations) sont dans PostgreSQL ; l’historique des messages est dans MongoDB pour la scalabilité.
 
-## Architecture
+### Fonctionnalités
+
+- Authentification JWT + hachage bcrypt
+- Serveurs et rôles (Owner / Admin / Member)
+- Canaux texte avec ordre par position
+- Messagerie temps réel via WebSocket avec indicateur « en train d’écrire » (sidebar + au-dessus du champ message)
+- Profils utilisateur et statuts (Online / Offline / DND / Invisible)
+- Gestion des membres : kick, ban (temporaire ou permanent)
+- Édition de messages (fenêtre 5 minutes)
+- Emojis et Unicode
+- Système d’invitations avec expiration et limite d’utilisation
+- Cartes de profil et actions admin
+
+### Tech Stack
+
+| Couche     | Technologie |
+|------------|-------------|
+| Frontend   | Next.js 16, React 19, TypeScript, Tailwind CSS |
+| Backend    | Rust 1.91, Axum, Tokio, SQLx, driver MongoDB |
+| Base de données | PostgreSQL 15 (relationnel), MongoDB 7 (messages) |
+| Auth       | JWT (jsonwebtoken), bcrypt |
+| Infra      | Docker Compose, GitHub Actions CI/CD |
+
+**Arborescence du projet :**
+
+```
+├── backend/
+│   ├── src/
+│   │   ├── main.rs, ctx.rs, error.rs
+│   │   ├── handlers/     # auth, channels, invites, messages, servers, user, user_public
+│   │   ├── models/       # channel, invite, message, server, user
+│   │   ├── repositories/
+│   │   ├── services/     # auth, channels, invites, messages, servers, realtime/
+│   │   ├── routes/
+│   │   └── web/          # mw_auth, ws/ (connection, handler, hub, protocol)
+│   ├── migrations/       # init.sql, mongodb_indexes.js
+│   ├── Cargo.toml, Dockerfile
+├── frontend/
+│   ├── app/              # (auth)/login, register, invite/[code], layout, page
+│   ├── components/      # ProfileCard, SmartImg, layout/MemberSidebar, ui/, modals/InviteModal
+│   ├── hooks/            # useAuth, useChannels, useMembers, useMessages, useServers, useWebSocket
+│   ├── lib/              # api-server, gateway, auth/, config, avatar, theme
+│   └── public/           # logo, avatars, background
+├── docs/                 # Consignes.pdf, architecture/, specifications/, uml/
+├── docker-compose.yml, env.example
+└── .github/workflows/ci.yml, railway.json, render.yaml, fly.toml
+```
+
+---
+
+## 2. Architecture
 
 ```mermaid
 flowchart LR
-    subgraph Client
-        Browser[Next.js App]
+    subgraph client["Client"]
+        Browser[Next.js]
     end
-    subgraph Backend
-        API[Rust Axum API]
+    subgraph backend["Backend"]
+        API[Axum API]
         WS[WebSocket]
     end
-    subgraph Data
+    subgraph data["Data"]
         PG[(PostgreSQL)]
         Mongo[(MongoDB)]
     end
@@ -51,196 +93,49 @@ flowchart LR
     WS --> API
 ```
 
-## High-Level Flow
+**Flux simplifié (login puis envoi de message) :**
 
 ```mermaid
 sequenceDiagram
     participant U as User
-    participant F as Frontend (Next.js)
-    participant A as API (Rust)
+    participant F as Frontend
+    participant A as API
     participant P as PostgreSQL
     participant M as MongoDB
-
     U->>F: Login
     F->>A: POST /auth/login
     A->>P: Check user
     A-->>F: JWT
-    F->>A: GET /servers (Authorization)
-    A->>P: List servers
-    A-->>F: Servers list
     U->>F: Send message
     F->>A: POST /channels/:id/messages
-    A->>M: Insert message
-    A->>WS: Broadcast to channel
-    WS-->>F: Real-time message
+    A->>M: Insert
+    A-->>F: Broadcast via WS
 ```
 
-## Features
+---
 
-- User authentication with JWT tokens and bcrypt password hashing
-- Server creation and management with role-based access control (Owner/Admin/Member)
-- Text channels within servers with position ordering
-- Real-time messaging via WebSocket with typing indicators
-- User profiles with status indicators (Online/Offline/DND/Invisible)
-- Member management (kick, ban permanently or temporarily)
-- Message editing (5-minute window)
-- Emoji and Unicode support
-- Invite system with expiration and usage limits
-- Profile cards with admin actions
+## 3. Démarrage (install + config)
 
-## Tech Stack
+### Prérequis
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
-| Backend | Rust 1.91, Axum, Tokio, SQLx, MongoDB driver |
-| Database | PostgreSQL 15 (relational), MongoDB 7 (messages) |
-| Auth | JWT (jsonwebtoken), bcrypt |
-| Infrastructure | Docker Compose, GitHub Actions CI/CD |
+- Rust 1.75+ avec cargo
+- Node.js 20+ avec npm
+- Docker et Docker Compose (pour les bases locales), ou PostgreSQL 15+ et MongoDB 7+ en cloud (Neon, Atlas)
 
-## Project Structure
-
-```mermaid
-flowchart TB
-    subgraph hello-world["hello-world/"]
-        subgraph backend["backend/"]
-            main[main.rs]
-            handlers[handlers/]
-            services[services/]
-            repos[repositories/]
-            routes[routes/]
-        end
-        subgraph frontend["frontend/"]
-            app[app/]
-            components[components/]
-            hooks[hooks/]
-            lib[lib/]
-        end
-        docker[docker-compose.yml]
-        ci[.github/workflows/ci.yml]
-    end
-    main --> handlers
-    main --> routes
-    handlers --> services
-    services --> repos
-    app --> components
-    app --> hooks
-    lib --> app
-```
-
-```
-hello-world/
-├── backend/
-│   ├── src/
-│   │   ├── main.rs              # Entry point, router setup
-│   │   ├── ctx.rs               # Request context (authenticated user)
-│   │   ├── error.rs             # Centralized error handling
-│   │   ├── handlers/            # HTTP request handlers (8 modules)
-│   │   ├── models/              # Data structures and DTOs (6 models)
-│   │   ├── repositories/        # Database access layer (6 repos)
-│   │   ├── services/            # Business logic (8 services)
-│   │   │   └── realtime/        # WebSocket handlers
-│   │   ├── routes/              # Route definitions (6 modules)
-│   │   └── web/                 # Middleware (auth) + WebSocket
-│   ├── tests/                   # Integration tests (48 tests)
-│   ├── migrations/
-│   │   ├── init.sql             # PostgreSQL schema
-│   │   └── mongodb_indexes.js   # MongoDB indexes
-│   ├── Cargo.toml
-│   └── Dockerfile
-├── frontend/
-│   ├── app/
-│   │   ├── (auth)/              # Login/Register routes
-│   │   ├── layout.tsx           # Root layout
-│   │   └── page.tsx             # Main chat interface
-│   ├── components/              # React components
-│   │   ├── ProfileCard.tsx
-│   │   ├── layout/MemberSidebar.tsx
-│   │   └── modals/MemberProfileModal.tsx
-│   ├── hooks/                   # Custom hooks (6 hooks)
-│   ├── lib/                     # API clients
-│   │   ├── api-server.ts        # HTTP client
-│   │   └── gateway.ts           # WebSocket client
-│   └── public/                  # Static assets
-├── docs/                        # Documentation
-│   ├── Consignes.pdf
-│   └── diagrams/
-│       ├── class-diagram.puml
-│       └── database-schema.puml
-├── docker-compose.yml           # Local development services
-├── shell.nix                    # Nix development environment
-├── run_tests.sh                 # Automated test script
-└── .github/workflows/ci.yml     # CI/CD pipeline
-```
-
-## Installation
-
-### Prerequisites
-
-- Rust 1.75+ with cargo
-- Node.js 20+ with npm
-- Docker and Docker Compose (for local databases)
-- PostgreSQL 15+ or Neon (cloud)
-- MongoDB 7+ or Atlas (cloud)
-
-### Local Development Setup
-
-Start PostgreSQL and MongoDB containers:
+### Étape 1 — Bases de données
 
 ```bash
 docker-compose up -d
-```
-
-Initialize the PostgreSQL schema:
-
-```bash
 docker exec -i helloworld-postgres psql -U postgres -d helloworld < backend/migrations/init.sql
 ```
 
-### Backend
+### Étape 2 — Backend
 
 ```bash
 cd backend
-
-# Create .env file
-cat > .env << 'EOF'
-DATABASE_URL=postgres://postgres:postgres@localhost:5433/helloworld
-MONGODB_URL=mongodb://localhost:27017
-JWT_SECRET=CHANGE_ME_generate_with_openssl_rand_base64_32
-PORT=3001
-RUST_LOG=info
-EOF
-
-# Run
-cargo run
 ```
 
-The API will be available at `http://localhost:3001`.
-
-### Frontend
-
-```bash
-cd frontend
-echo "NEXT_PUBLIC_API_URL=http://localhost:3001" > .env.local
-
-npm install
-npm run dev
-```
-
-The application will be available at `http://localhost:3000`.
-
-## Configuration
-
-### Backend Environment Variables
-
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `DATABASE_URL` | PostgreSQL connection string | `postgresql://user:pass@localhost:5433/dbname` |
-| `MONGODB_URL` | MongoDB connection string | `mongodb://localhost:27017` |
-| `JWT_SECRET` | Secret key for JWT signing (min 32 chars) | Generate with `openssl rand -base64 32` |
-| `PORT` | Server port | `3001` |
-| `RUST_LOG` | Logging level | `info` |
-**Example `.env` file:**
+Créer un fichier `.env` à la racine de `backend/` :
 
 ```bash
 # PostgreSQL
@@ -249,137 +144,151 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5433/helloworld
 # MongoDB
 MONGODB_URL=mongodb://localhost:27017
 
-# Authentication (CHANGE IN PRODUCTION!)
+# Auth (à changer en production)
 JWT_SECRET=CHANGE_ME_generate_with_openssl_rand_base64_32
 
-# Server
+# Serveur
 PORT=3001
 RUST_LOG=info
 ```
 
-**Production (Neon + Atlas):**
+Lancer le serveur :
+
+```bash
+cargo run
+```
+
+L’API est disponible sur **http://localhost:3001**.
+
+### Étape 3 — Frontend
+
+```bash
+cd frontend
+echo "NEXT_PUBLIC_API_URL=http://localhost:3001" > .env.local
+npm install
+npm run dev
+```
+
+L’application est disponible sur **http://localhost:3000**.
+
+### Variables d’environnement (résumé)
+
+| Contexte  | Variable                 | Description / Exemple |
+|-----------|--------------------------|------------------------|
+| Backend   | `DATABASE_URL`           | Chaîne de connexion PostgreSQL |
+| Backend   | `MONGODB_URL`           | Chaîne de connexion MongoDB |
+| Backend   | `JWT_SECRET`            | Clé de signature JWT (min. 32 caractères). Exemple : `openssl rand -base64 32` |
+| Backend   | `PORT`                  | Port du serveur (ex. 3001) |
+| Backend   | `RUST_LOG`              | Niveau de log (ex. info) |
+| Frontend  | `NEXT_PUBLIC_API_URL`   | URL de l’API backend (ex. http://localhost:3001) |
+
+### Production (Neon + Atlas)
+
+- Créer une base PostgreSQL sur [neon.tech](https://neon.tech) et une instance MongoDB sur [mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas).
+- Renseigner les chaînes de connexion dans les variables d’environnement du déploiement.
+- Exemple :
 
 ```bash
 DATABASE_URL=postgres://user:password@ep-xxx.us-east-1.aws.neon.tech/neondb?sslmode=require
 MONGODB_URL=mongodb+srv://user:password@cluster.mongodb.net/?retryWrites=true&w=majority
-JWT_SECRET=<generate-secure-random-32-chars>
+JWT_SECRET=<clé_secrète_32_caractères_minimum>
 PORT=3001
 RUST_LOG=info
 ```
-### Frontend Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | Backend API URL | `http://localhost:3001` |
+- Déploiement : backend (Railway, Render, Fly.io), frontend (Vercel). Voir `railway.json`, `render.yaml`, `fly.toml`.
 
-### Production Configuration
+---
 
-For production deployment with Neon (PostgreSQL) and MongoDB Atlas:
-
-1. Create a Neon database at [neon.tech](https://neon.tech)
-2. Create a MongoDB Atlas cluster at [mongodb.com/cloud/atlas](https://mongodb.com/cloud/atlas)
-3. Update environment variables with connection strings
-4. Deploy backend to Railway: `railway up`
-5. Deploy frontend to Vercel: `cd frontend && vercel --prod`
-
-See deployment configuration files: `railway.json`, `render.yaml`, `fly.toml`.
-
-## API Endpoints
+## 4. Référence API & données
 
 ### Authentication
 
-```
-POST   /auth/signup      Create new account
-POST   /auth/login       Authenticate user and get JWT token
-POST   /auth/logout      Invalidate session
-GET    /me               Get current user profile
-PATCH  /me               Update current user profile
-```
+| Méthode | Endpoint           | Description |
+|---------|--------------------|-------------|
+| POST    | `/auth/signup`     | Créer un compte |
+| POST    | `/auth/login`      | Connexion et récupération du JWT |
+| POST    | `/auth/logout`     | Invalider la session |
+| GET     | `/me`              | Profil de l’utilisateur connecté |
+| PATCH   | `/me`              | Mettre à jour le profil |
 
 ### Servers
 
-```
-GET    /servers                               List user's servers
-POST   /servers                               Create server
-GET    /servers/{id}                          Get server details
-PUT    /servers/{id}                          Update server name
-DELETE /servers/{id}                          Delete server (owner only)
-GET    /servers/{id}/members                  List server members
-PATCH  /servers/{id}/members/{user_id}        Update member role
-POST   /servers/{id}/members/{user_id}/kick   Kick member from server
-POST   /servers/{id}/members/{user_id}/ban    Ban member (temporary or permanent)
-DELETE /servers/{id}/members/{user_id}/ban    Unban member
-GET    /servers/{id}/bans                     List all active bans
-```
+| Méthode | Endpoint                                    | Description |
+|---------|---------------------------------------------|-------------|
+| GET     | `/servers`                                  | Liste des serveurs de l’utilisateur |
+| POST    | `/servers`                                  | Créer un serveur |
+| GET     | `/servers/{id}`                             | Détail d’un serveur |
+| PUT     | `/servers/{id}`                             | Modifier le nom du serveur |
+| DELETE  | `/servers/{id}`                             | Supprimer le serveur (owner uniquement) |
+| GET     | `/servers/{id}/members`                     | Liste des membres |
+| PATCH   | `/servers/{id}/members/{user_id}`           | Changer le rôle d’un membre |
+| POST    | `/servers/{id}/members/{user_id}/kick`      | Expulser un membre |
+| POST    | `/servers/{id}/members/{user_id}/ban`       | Bannir (temporaire ou permanent) |
+| DELETE  | `/servers/{id}/members/{user_id}/ban`       | Débannir |
+| GET     | `/servers/{id}/bans`                        | Liste des bans actifs |
 
 ### Channels
 
-```
-GET    /servers/{server_id}/channels    List channels in server
-POST   /servers/{server_id}/channels    Create channel
-GET    /channels/{id}                   Get channel details
-PUT    /channels/{id}                   Update channel name
-DELETE /channels/{id}                   Delete channel
-```
+| Méthode | Endpoint                              | Description |
+|---------|--------------------------------------|-------------|
+| GET     | `/servers/{server_id}/channels`       | Liste des canaux du serveur |
+| POST    | `/servers/{server_id}/channels`       | Créer un canal |
+| GET     | `/channels/{id}`                     | Détail d’un canal |
+| PUT     | `/channels/{id}`                     | Modifier le nom du canal |
+| DELETE  | `/channels/{id}`                     | Supprimer le canal |
 
 ### Messages
 
-```
-GET    /channels/{id}/messages    Get messages (pagination supported)
-POST   /channels/{id}/messages    Send message
-PUT    /messages/{id}             Edit message (author only, 5-min window)
-DELETE /messages/{id}             Delete message
-```
+| Méthode | Endpoint                    | Description |
+|---------|-----------------------------|-------------|
+| GET     | `/channels/{id}/messages`   | Liste des messages (pagination) |
+| POST    | `/channels/{id}/messages`   | Envoyer un message |
+| PUT     | `/messages/{id}`           | Modifier un message (auteur, fenêtre 5 min) |
+| DELETE  | `/messages/{id}`           | Supprimer un message |
 
 ### Invites
 
-```
-POST   /servers/{id}/invites    Create invite code
-GET    /invites/{code}          Get invite details
-POST   /invites/{code}/use      Join server via invite
-DELETE /invites/{id}            Revoke invite
-```
+| Méthode | Endpoint                  | Description |
+|---------|---------------------------|-------------|
+| POST    | `/servers/{id}/invites`   | Créer un code d’invitation |
+| GET     | `/invites/{code}`         | Détail d’une invitation |
+| POST    | `/invites/{code}/use`     | Rejoindre le serveur via l’invitation |
+| DELETE  | `/invites/{id}`           | Révoquer l’invitation |
 
 ### WebSocket
 
-```
-WS     /ws    WebSocket connection for real-time events
-```
+**Connexion :** `WS /ws` (authentification par JWT).
 
-**WebSocket Events Flow:**
+**Événements serveur :** `MESSAGE_CREATE`, `MESSAGE_UPDATE`, `MESSAGE_DELETE`, `TYPING_START`, `TYPING_STOP`, `PRESENCE_UPDATE`.
 
 ```mermaid
 sequenceDiagram
     participant C1 as Client 1
-    participant WS as WebSocket Server
+    participant WS as WebSocket
     participant C2 as Client 2
-
-    C1->>WS: Connect (JWT)
-    C2->>WS: Connect (JWT)
+    C1->>WS: Connect JWT
+    C2->>WS: Connect JWT
     C1->>WS: Join channel
     C2->>WS: Join channel
     C1->>WS: Send message
-    WS->>C2: message event
-    C1->>WS: typing start
-    WS->>C2: typing event
-    C1->>WS: typing stop
-    WS->>C2: typing event
+    WS->>C2: MESSAGE_CREATE
+    C1->>WS: Typing start
+    WS->>C2: TYPING_START
 ```
 
-**WebSocket Events**: `message`, `message_update`, `message_delete`, `typing`, `presence`
+### Base de données
 
-## Database Schema
-
-### Entity Relationship (PostgreSQL + MongoDB)
+**Schéma des tables et relations (PostgreSQL + MongoDB) :**
 
 ```mermaid
 erDiagram
-    users ||--o{ server_members : "has"
     users ||--o{ servers : "owns"
+    users ||--o{ server_members : "member"
     servers ||--o{ server_members : "has"
     servers ||--o{ channels : "contains"
-    servers ||--o{ bans : "has"
     servers ||--o{ invites : "has"
+    users ||--o{ invites : "creates"
     channels ||--o{ channel_messages : "contains"
 
     users {
@@ -387,211 +296,107 @@ erDiagram
         string email
         string password_hash
         string username
+        string avatar_url
         string status
+        timestamptz created_at
     }
+
     servers {
         uuid id PK
         uuid owner_id FK
         string name
+        timestamptz created_at
+        timestamptz updated_at
     }
+
     server_members {
-        uuid server_id PK,FK
-        uuid user_id PK,FK
+        uuid server_id PK
+        uuid user_id PK
         string role
+        timestamptz joined_at
     }
+
     channels {
         uuid id PK
         uuid server_id FK
         string name
         int position
+        timestamptz created_at
+        timestamptz updated_at
     }
-    bans {
-        uuid id PK
-        uuid server_id FK
-        uuid user_id FK
-        timestamp expires_at
-    }
+
     invites {
         uuid id PK
         uuid server_id FK
+        uuid created_by FK
         string code
         int max_uses
-        timestamp expires_at
+        int uses
+        timestamptz expires_at
+        boolean revoked
+        timestamptz created_at
     }
+
     channel_messages {
         objectid _id PK
         uuid channel_id
-        string content
+        uuid server_id
         uuid author_id
-        timestamp created_at
+        string content
+        timestamptz created_at
+        timestamptz edited_at
+        timestamptz deleted_at
     }
 ```
 
-### PostgreSQL Tables
+**PostgreSQL** (schéma dans `backend/migrations/init.sql`) :
 
-```sql
--- users: User accounts
-CREATE TABLE users (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  username VARCHAR(50) NOT NULL,
-  avatar_url TEXT,
-  status VARCHAR(20) DEFAULT 'online',
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+- **users** — id, email, password_hash, username, avatar_url, status, created_at
+- **servers** — id, name, owner_id, created_at, updated_at
+- **server_members** — server_id, user_id, role, joined_at (PK (server_id, user_id))
+- **channels** — id, server_id, name, position, created_at, updated_at
+- **invites** — id, server_id, code, created_by, expires_at, max_uses, uses, revoked, created_at
 
--- servers: Server instances
-CREATE TABLE servers (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  name VARCHAR(100) NOT NULL,
-  owner_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+**MongoDB** :
 
--- server_members: Memberships with roles
-CREATE TABLE server_members (
-  server_id UUID REFERENCES servers(id) ON DELETE CASCADE,
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  role VARCHAR(20) DEFAULT 'Member',
-  joined_at TIMESTAMPTZ DEFAULT NOW(),
-  PRIMARY KEY (server_id, user_id)
-);
+- **channel_messages** — historique des messages (message_id, channel_id, server_id, author_id, content, created_at, edited_at, deleted_at)
 
--- channels: Text channels
-CREATE TABLE channels (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  server_id UUID REFERENCES servers(id) ON DELETE CASCADE,
-  name VARCHAR(100) NOT NULL,
-  position INT DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+Schémas détaillés : `docs/uml/database-schema.puml`, `docs/architecture/database.md`.
 
--- bans: Ban records
-CREATE TABLE bans (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  server_id UUID REFERENCES servers(id) ON DELETE CASCADE,
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  banned_by UUID REFERENCES users(id),
-  reason TEXT,
-  banned_at TIMESTAMPTZ DEFAULT NOW(),
-  expires_at TIMESTAMPTZ,
-  is_permanent BOOLEAN DEFAULT FALSE
-);
+---
 
--- invites: Invite codes
-CREATE TABLE invites (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  server_id UUID REFERENCES servers(id) ON DELETE CASCADE,
-  code VARCHAR(10) UNIQUE NOT NULL,
-  created_by UUID REFERENCES users(id),
-  max_uses INT,
-  uses INT DEFAULT 0,
-  expires_at TIMESTAMPTZ,
-  revoked BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-```
+## 5. Tests, déploiement et qualité
 
-### MongoDB Collections
-
-- **channel_messages**: Message history (message_id, channel_id, server_id, author_id, content, created_at, edited_at, deleted_at)
-
-See `docs/diagrams/database-schema.puml` for the complete schema diagram.
-
-## Testing
-
-Run the test suite:
+### Tests
 
 ```bash
-# All tests (backend)
-./run_tests.sh
-
-# Or manually
 cd backend
 cargo test
-
-# With coverage (requires nix-shell)
-nix-shell
-cd backend
-cargo tarpaulin --out Html --output-dir coverage
 ```
 
-**Test Coverage**: 48 tests (18 unit + 30 integration), covering validation logic, business rules, and data structures.
+Couverture : tests unitaires et d’intégration (validation, règles métier, structures de données).
 
-## Deployment
+### Déploiement
 
-The project includes deployment configurations for:
-
-- **Railway** (Backend): Docker-based deployment with automatic builds
-- **Vercel** (Frontend): Next.js optimized hosting with edge network
-- **Render**: Alternative platform with managed PostgreSQL
-- **Fly.io**: Container deployment via CLI
-
-Quick deployment:
-
-```bash
-# Backend to Railway
-cd backend
-railway up
-
-# Frontend to Vercel
-cd frontend
-vercel --prod
-```
-
-## Development
+- **Backend :** Railway (`railway up`), Render ou Fly.io — voir `railway.json`, `render.yaml`, `fly.toml`.
+- **Frontend :** Vercel — `cd frontend && vercel --prod`.
 
 ### CI/CD
 
-GitHub Actions automatically runs on push to `main`:
+GitHub Actions sur push vers `main` :
 
-- Backend: Rust build and tests with PostgreSQL/MongoDB services
-- Frontend: Next.js build verification
+- Backend : build Rust + tests avec services PostgreSQL et MongoDB.
+- Frontend : `npm ci` puis `npm run build`.
 
-### CI/CD Pipeline
+### Qualité de code
 
-```mermaid
-flowchart LR
-    subgraph Trigger
-        Push[Push to main]
-    end
-    subgraph Backend Job
-        B1[Checkout]
-        B2[Setup Rust]
-        B3[PostgreSQL service]
-        B4[MongoDB service]
-        B5[cargo build]
-        B6[cargo test]
-    end
-    subgraph Frontend Job
-        F1[Checkout]
-        F2[Setup Node]
-        F3[npm ci]
-        F4[npm run build]
-    end
-    Push --> Backend Job
-    Push --> Frontend Job
-    B1 --> B2 --> B3 --> B4 --> B5 --> B6
-    F1 --> F2 --> F3 --> F4
-```
+- **Rust :** `cargo fmt`, `cargo clippy` avant de committer.
+- **TypeScript / Next.js :** ESLint et Prettier configurés.
 
-### Code Quality
+---
 
-- **Rust**: Use `cargo fmt` and `cargo clippy` before committing
-- **TypeScript**: ESLint and Prettier configured via Next.js
+## 6. À propos
 
-## Contributing
+Projet pédagogique Epitech Pre-MSc. Les contributions sont bienvenues dans un cadre d’apprentissage.
 
-This is an academic project (Epitech Pre-MSc). Contributions are welcome for learning purposes.
-
-## License
-
-Educational project for Epitech Pre-MSc program.
-
-## Acknowledgments
-
-- [Axum](https://github.com/tokio-rs/axum) - Fast Rust web framework
-- [Next.js](https://nextjs.org/) - React framework for production
-- [PostgreSQL](https://postgresql.org/) - Advanced relational database
-- [MongoDB](https://mongodb.com/) - Document database for scalability
+**Crédits :** [Axum](https://github.com/tokio-rs/axum), [Next.js](https://nextjs.org/), [PostgreSQL](https://postgresql.org/), [MongoDB](https://mongodb.com/).

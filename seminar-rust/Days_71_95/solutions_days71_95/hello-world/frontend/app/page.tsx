@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { logout } from "@/lib/auth/actions";
 import { useServers, useChannels, useMessages, useMembers, useAuth } from "@/hooks";
@@ -73,7 +73,7 @@ export default function Home() {
     selectedServer?.id ?? null
   );
 
-  const { messages, sendMessage, loading: messagesLoading, error: messagesError } = useMessages(selectedChannel?.id ?? null);
+  const { messages, sendMessage, loading: messagesLoading, error: messagesError, typingUsers, typingStart, typingStop } = useMessages(selectedChannel?.id ?? null);
   const { members, kickMember } = useMembers(selectedServer?.id ?? null);
 
   const [showCreateServer, setShowCreateServer] = useState(false);
@@ -87,11 +87,40 @@ export default function Home() {
   const [showServerMenu, setShowServerMenu] = useState(false);
   const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-
-  // Initialize currentUser from useAuth
+  const typingStopTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const TYPING_STOP_DELAY_MS = 2000;
   if (user && !currentUser) {
     setCurrentUser(user as User);
   }
+
+  const scheduleTypingStop = useCallback(() => {
+    if (typingStopTimeoutRef.current) clearTimeout(typingStopTimeoutRef.current);
+    if (!selectedChannel?.id) return;
+    typingStopTimeoutRef.current = setTimeout(() => {
+      typingStop(selectedChannel.id);
+      typingStopTimeoutRef.current = null;
+    }, TYPING_STOP_DELAY_MS);
+  }, [selectedChannel?.id, typingStop]);
+
+  const handleInputFocus = useCallback(() => {
+    if (selectedChannel?.id) typingStart(selectedChannel.id);
+  }, [selectedChannel?.id, typingStart]);
+
+  const handleInputBlur = useCallback(() => {
+    if (typingStopTimeoutRef.current) {
+      clearTimeout(typingStopTimeoutRef.current);
+      typingStopTimeoutRef.current = null;
+    }
+    if (selectedChannel?.id) typingStop(selectedChannel.id);
+  }, [selectedChannel?.id, typingStop]);
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setMessageInput(e.target.value);
+      scheduleTypingStop();
+    },
+    [scheduleTypingStop]
+  );
 
   // Style des boutons action (rouge + bordure cyan)
 
@@ -117,6 +146,7 @@ export default function Home() {
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!messageInput.trim()) return;
+    if (selectedChannel?.id) typingStop(selectedChannel.id);
     await sendMessage(messageInput.trim());
     setMessageInput("");
   };
@@ -440,11 +470,30 @@ export default function Home() {
         {/* Message input */}
         {selectedChannel && (
           <footer className="px-4 py-3 border-t border-[#4fdfff]/20 bg-[rgba(0,0,0,0.2)]">
+            {/* Typing indicator above input */}
+            {typingUsers.size > 0 && (() => {
+              const entries = Array.from(typingUsers.entries()).filter(([id]) => id !== user?.id);
+              if (entries.length === 0) return null;
+              const names = entries.map(([, name]) => name).join(", ");
+              const label = entries.length === 1 ? `${names} est en train d'écrire` : `${names} sont en train d'écrire`;
+              return (
+                <div className="flex items-center gap-2 px-2 pb-1 text-sm text-white/60">
+                  <div className="flex gap-0.5">
+                    <span className="w-1.5 h-1.5 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:0ms]" />
+                    <span className="w-1.5 h-1.5 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:150ms]" />
+                    <span className="w-1.5 h-1.5 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:300ms]" />
+                  </div>
+                  <span>{label}</span>
+                </div>
+              );
+            })()}
             <form onSubmit={handleSendMessage}>
-              <input 
+              <input
                 type="text"
                 value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
+                onChange={handleInputChange}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
                 placeholder={`Message #${selectedChannel.name}`}
                 className="w-full px-4 py-2.5 bg-[rgba(20,20,20,0.8)] border border-[#4fdfff]/30 rounded-lg text-white placeholder:text-white/40 outline-none focus:border-[#4fdfff] focus:bg-[rgba(20,20,20,0.95)] focus:shadow-[0_0_8px_rgba(79,223,255,0.3)] transition-all"
               />
@@ -485,6 +534,7 @@ export default function Home() {
                     {members
                       .filter((m) => m.role === "Owner")
                       .map((member) => {
+                        const isTypingOwner = selectedChannel?.id && typingUsers.has(member.user_id);
                         return (
                           <div
                             key={member.user_id}
@@ -498,9 +548,16 @@ export default function Home() {
                               />
                               <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-[rgba(5,10,15,0.95)] rounded-full" />
                             </div>
-                            <span className="text-sm text-white/90 truncate">
+                            <span className="text-sm text-white/90 truncate flex-1">
                               {member.username}
                             </span>
+                            {isTypingOwner && (
+                              <div className="flex gap-0.5 flex-shrink-0" title="en train d'écrire">
+                                <span className="w-1 h-1 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:0ms]" />
+                                <span className="w-1 h-1 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:150ms]" />
+                                <span className="w-1 h-1 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:300ms]" />
+                              </div>
+                            )}
                           </div>
                         );
                       })}
@@ -521,6 +578,7 @@ export default function Home() {
                         .map((member) => {
                           const isMe = member.user_id === user?.id;
                           const kickable = canKick && !isMe && !(myRole === "Admin" && member.role === "Admin");
+                          const isTyping = selectedChannel?.id && typingUsers.has(member.user_id);
                           return (
                             <div
                               key={member.user_id}
@@ -537,6 +595,13 @@ export default function Home() {
                               <span className="text-sm text-white/70 truncate flex-1">
                                 {member.username}
                               </span>
+                              {isTyping && (
+                                <div className="flex gap-0.5 flex-shrink-0" title="en train d'écrire">
+                                  <span className="w-1 h-1 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:0ms]" />
+                                  <span className="w-1 h-1 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:150ms]" />
+                                  <span className="w-1 h-1 bg-[#4fdfff] rounded-full animate-bounce [animation-delay:300ms]" />
+                                </div>
+                              )}
                               {kickable && (
                                 <button
                                   type="button"
