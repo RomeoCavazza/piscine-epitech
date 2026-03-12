@@ -82,6 +82,7 @@ export default function Home() {
     selectedServer,
     selectServer,
     createServer,
+    leaveServer,
     loading: serversLoading,
     error: serversError,
   } = useServers();
@@ -101,6 +102,8 @@ export default function Home() {
   const [showProfile, setShowProfile] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [showInviteModal, setShowInviteModal] = useState(false);
+  const [showServerMenu, setShowServerMenu] = useState(false);
+  const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
 
   // Initialize currentUser from useAuth
   if (user && !currentUser) {
@@ -214,25 +217,43 @@ export default function Home() {
           </svg>
         </button>
       </aside>
-{/* ========== CHANNEL SIDEBAR (240px) ========== */}
+
+      {/* ========== CHANNEL SIDEBAR (240px) ========== */}
       <aside className="w-60 bg-[rgba(5,10,15,0.95)] border-r border-[#4fdfff]/20 flex flex-col">
         {selectedServer ? (
           <>
-            {/* Server header avec bouton de suppression */}
-            <div className="h-12 px-4 flex items-center border-b border-[#4fdfff]/30 shadow-lg bg-[rgba(0,0,0,0.3)] group">
+            {/* Server header avec dropdown */}
+            <div className="relative h-12 px-4 flex items-center border-b border-[#4fdfff]/30 shadow-lg bg-[rgba(0,0,0,0.3)]">
               <h2 className="font-bold text-white truncate flex-1">{selectedServer.name}</h2>
-              
-              {/* BOUTON SUPPRIMER LE SERVEUR (Visible au survol du header) */}
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteServer(selectedServer.id);
-                }}
-                className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-500 text-[#4fdfff]"
-                title="Supprimer ce serveur"
+              <button
+                type="button"
+                onClick={() => setShowServerMenu((v) => !v)}
+                className="text-[#4fdfff] text-xs font-mono hover:text-white transition-colors px-1"
+                title="Options du serveur"
               >
-                <span className="text-xs font-mono">▼</span>
+                ▼
               </button>
+              {showServerMenu && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setShowServerMenu(false)} />
+                  <div className="absolute top-12 right-2 z-50 bg-[rgba(15,20,25,0.98)] border border-[#4fdfff]/30 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.8)] py-1 min-w-[180px]">
+                    <button
+                      type="button"
+                      onClick={() => { setShowServerMenu(false); setShowLeaveConfirm(true); }}
+                      className="w-full text-left px-4 py-2 text-sm text-[#ff3333] hover:bg-[#ff3333]/10 transition-colors"
+                    >
+                      Quitter le serveur
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); setShowServerMenu(false); handleDeleteServer(selectedServer.id); }}
+                      className="w-full text-left px-4 py-2 text-sm text-[#ff3333]/70 hover:bg-[#ff3333]/10 transition-colors"
+                    >
+                      Supprimer le serveur
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Channels */}
@@ -292,9 +313,9 @@ export default function Home() {
           >
             <div className="relative flex-shrink-0">
               {(currentUser || user)?.avatar_url ? (
-                <img 
-                  src={normalizeAvatarUrl((currentUser || user)?.avatar_url) || ''} 
-                  alt="Avatar" 
+                <img
+                  src={normalizeAvatarUrl((currentUser || user)?.avatar_url) || ''}
+                  alt="Avatar"
                   className="w-8 h-8 rounded-full object-cover border border-[#4fdfff]/50"
                 />
               ) : (
@@ -638,6 +659,44 @@ export default function Home() {
           serverName={selectedServer.name}
           onClose={() => setShowInviteModal(false)}
         />
+      )}
+
+      {/* ========== MODAL LEAVE SERVER ========== */}
+      {showLeaveConfirm && selectedServer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowLeaveConfirm(false)} />
+          <div className="relative bg-[rgba(20,20,20,0.98)] border-2 border-[#ff3333] rounded-xl p-6 w-full max-w-sm shadow-[0_0_40px_rgba(255,51,51,0.3)]">
+            <h2 className="text-xl font-bold text-center text-white mb-2">Quitter le serveur</h2>
+            <p className="text-center text-white/60 text-sm mb-6">
+              Es-tu sûr de vouloir quitter{" "}
+              <span className="text-white font-semibold">{selectedServer.name}</span> ?
+              Tu devras être réinvité pour y revenir.
+            </p>
+            <div className="flex gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                size="md"
+                onClick={() => setShowLeaveConfirm(false)}
+                className="flex-1"
+              >
+                Annuler
+              </Button>
+              <Button
+                type="button"
+                variant="danger"
+                size="md"
+                onClick={async () => {
+                  setShowLeaveConfirm(false);
+                  await leaveServer(selectedServer.id);
+                }}
+                className="flex-1"
+              >
+                Quitter
+              </Button>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );
