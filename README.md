@@ -4,6 +4,46 @@
 </div>
 <!-- markdownlint-enable MD033 -->
 
+## Overview
+
+Repository of practical work and projects from technical seminars (Days 01-80).
+
+- Show daily progress of the cohort.
+- Document learned concepts and solutions.
+- Present clear, versioned, structured, easily shareable work.
+
+### Structure
+
+```text
+piscine/
+├── seminar-preparation/     # Days 01-10 : Linux, Python, algorithms
+├── seminar-web/             # Days 11-20 : HTML, CSS, JavaScript, PHP
+├── seminar-job-board/       # Days 21-30 : Full-stack project
+├── seminar-java/            # Days 31-40 : OOP, generics, design patterns
+├── seminar-my-first-game/   # Days 41-55 : 2D game development (libGDX)
+├── seminar-devops/          # Days 56-60 : Administration, virtualization, automation
+├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
+├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
+├── seminar-project-management/ # T-CEN-500 : Project management, Gantt, budget, risks, communications
+└── code-competition/         # 5G antenna optimization competition
+```
+
+### Standardized Organization
+
+Each seminar follows a uniform structure:
+
+```text
+seminar-xxx/
+├── README.md                    # Main seminar README
+└── Day_XX/
+    ├── README.md                # Day explanatory README
+    └── consignes_dayXX.pdf      # Instructions PDF
+```
+
+---
+
+## Seminars
+
 ### 📚 Preparation Seminar (Days 01-10)
 
 Linux, Python, and algorithmic fundamentals.
@@ -132,34 +172,6 @@ At the end of the seminars, a final project was carried out to consolidate all l
 → [**View the Capstone Documentation Portal**](docs/README.md)
 
 ---
-
-## Structure
-
-```text
-piscine/
-├── seminar-preparation/     # Days 01-10 : Linux, Python, algorithms
-├── seminar-web/             # Days 11-20 : HTML, CSS, JavaScript, PHP
-├── seminar-job-board/       # Days 21-30 : Full-stack project
-├── seminar-java/            # Days 31-40 : OOP, generics, design patterns
-├── seminar-my-first-game/   # Days 41-55 : 2D game development (libGDX)
-├── seminar-devops/          # Days 56-60 : Administration, virtualization, automation
-├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
-├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
-├── seminar-project-management/ # T-CEN-500 : Project management, Gantt, budget, risks, communications
-└── code-competition/         # 5G antenna optimization competition
-```
-
-## Standardized Organization
-
-Each seminar follows a uniform structure:
-
-```text
-seminar-xxx/
-├── README.md                    # Main seminar README
-└── Day_XX/
-    ├── README.md                # Day explanatory README
-    └── consignes_dayXX.pdf      # Instructions PDF
-```
 
 ## Technologies Covered
 
