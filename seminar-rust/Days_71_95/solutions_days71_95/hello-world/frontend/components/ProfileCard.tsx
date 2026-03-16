@@ -4,47 +4,20 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { User, updateMe, UpdateProfilePayload } from "@/lib/api-server";
 import { logout } from "@/lib/auth/actions";
+import { normalizeAvatarUrl } from "@/lib/avatar";
+import { UserStatus, STATUS_LABELS, getStatusColor, getStatusLabel, normalizeStatus } from "@/lib/presence";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+
+// Générer la liste des 100 avatars
+const AVATARS = Array.from({ length: 100 }, (_, i) =>
+  `/avatars/avatar_${String(i + 1).padStart(3, '0')}.png`
+);
 
 interface ProfileCardProps {
   user: User;
   onClose: () => void;
   onUpdate?: (user: User) => void;
-}
-
-type UserStatus = "online" | "offline" | "dnd" | "invisible";
-
-const statusColors: Record<UserStatus, string> = {
-  online: "bg-green-500",
-  offline: "bg-gray-500",
-  dnd: "bg-red-500",
-  invisible: "bg-gray-400",
-};
-
-const statusLabels: Record<UserStatus, string> = {
-  online: "En ligne",
-  offline: "Hors ligne",
-  dnd: "Ne pas déranger",
-  invisible: "Invisible",
-};
-
-// Générer la liste des 100 avatars
-const AVATARS = Array.from({ length: 100 }, (_, i) => 
-  `/avatars/avatar_${String(i + 1).padStart(3, '0')}.png`
-);
-
-/**
- * Normalise le chemin d'avatar (ancien format → nouveau format)
- */
-function normalizeAvatarUrl(url: string | null | undefined): string | null {
-  if (!url) return null;
-  if (url.includes('/space_invaders_avatars/space_invader_')) {
-    return url
-      .replace('/space_invaders_avatars/', '/avatars/')
-      .replace('space_invader_', 'avatar_');
-  }
-  return url;
 }
 
 export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProps) {
@@ -54,7 +27,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
   const [editData, setEditData] = useState({
     username: user.username,
     avatar_url: normalizeAvatarUrl(user.avatar_url) || "",
-    status: (user.status?.toLowerCase() || "online") as UserStatus,
+    status: normalizeStatus(user.status),
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -65,7 +38,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
     router.refresh();
   };
 
-  const currentStatus = (user.status?.toLowerCase() || "online") as UserStatus;
+  const currentStatus = normalizeStatus(user.status);
   const memberSince = new Date(user.created_at).toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",
@@ -96,14 +69,14 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/70 backdrop-blur-md" 
+      <div
+        className="absolute inset-0 bg-black/70 backdrop-blur-md"
         onClick={onClose}
       />
-      
+
       {/* Card */}
       <div className="relative w-full max-w-[420px] bg-[rgba(5,10,15,0.98)] border border-[#4fdfff]/30 rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden animate-[fadeIn_0.2s_ease]">
-        
+
         {/* Header avec avatar */}
         <div className="relative bg-gradient-to-br from-[#4fdfff]/10 to-[#ff3333]/5 p-6 pb-16">
           {/* Close button */}
@@ -122,8 +95,8 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
             <div className="relative">
               <div className="w-24 h-24 rounded-full bg-[rgba(5,10,15,0.98)] p-1 border-2 border-[#4fdfff]/50">
                 {user.avatar_url ? (
-                  <img 
-                    src={normalizeAvatarUrl(user.avatar_url) || ''} 
+                  <img
+                    src={normalizeAvatarUrl(user.avatar_url) || ''}
                     alt={user.username}
                     className="w-full h-full rounded-full object-cover"
                   />
@@ -136,11 +109,11 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
                 )}
               </div>
               {/* Status badge */}
-              <div className={`absolute bottom-0 right-0 w-6 h-6 rounded-full border-[3px] border-[rgba(5,10,15,0.98)] ${statusColors[currentStatus]}`} />
+              <div className={`absolute bottom-0 right-0 w-6 h-6 rounded-full border-[3px] border-[rgba(5,10,15,0.98)] ${getStatusColor(currentStatus)}`} />
             </div>
           </div>
         </div>
-        
+
         {/* Content */}
         <div className="px-6 pb-6 -mt-8">
           {/* Username section */}
@@ -155,7 +128,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
                   value={editData.username}
                   onChange={(e) => setEditData({ ...editData, username: e.target.value })}
                 />
-                
+
                 {/* Avatar selector */}
                 <div>
                   <label className="text-[10px] font-bold text-white/60 uppercase tracking-wider block mb-2">
@@ -171,7 +144,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
                     )}
                     <span>{showAvatarPicker ? "Fermer" : "Choisir un avatar"}</span>
                   </button>
-                  
+
                   {showAvatarPicker && (
                     <div className="mt-2 max-h-[240px] overflow-y-auto bg-[rgba(0,0,0,0.6)] border border-[#4fdfff]/20 rounded-lg p-3 grid grid-cols-8 gap-2">
                       {AVATARS.map((avatarUrl, index) => (
@@ -182,12 +155,11 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
                             setEditData({ ...editData, avatar_url: avatarUrl });
                             setShowAvatarPicker(false);
                           }}
-                          className={`w-10 h-10 rounded-lg hover:ring-2 hover:ring-[#4fdfff] transition-all ${
-                            editData.avatar_url === avatarUrl ? "ring-2 ring-[#4fdfff]" : ""
-                          }`}
+                          className={`w-10 h-10 rounded-lg hover:ring-2 hover:ring-[#4fdfff] transition-all ${editData.avatar_url === avatarUrl ? "ring-2 ring-[#4fdfff]" : ""
+                            }`}
                         >
-                          <img 
-                            src={avatarUrl} 
+                          <img
+                            src={avatarUrl}
                             alt={`Avatar ${index + 1}`}
                             className="w-full h-full rounded-lg object-cover"
                           />
@@ -196,7 +168,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
                     </div>
                   )}
                 </div>
-                
+
                 {/* Status edit */}
                 <div>
                   <label htmlFor="edit-status" className="text-[10px] font-bold text-white/60 uppercase tracking-wider block mb-2">
@@ -208,7 +180,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
                     onChange={(e) => setEditData({ ...editData, status: e.target.value as UserStatus })}
                     className="w-full px-3 py-2 bg-[rgba(20,20,20,0.8)] border border-[#4fdfff]/30 rounded-lg text-white text-sm focus:outline-none focus:border-[#4fdfff] focus:shadow-[0_0_8px_rgba(79,223,255,0.3)] transition-all"
                   >
-                    {Object.entries(statusLabels).map(([value, label]) => (
+                    {Object.entries(STATUS_LABELS).map(([value, label]) => (
                       <option key={value} value={value}>{label}</option>
                     ))}
                   </select>
@@ -227,7 +199,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
               </div>
             )}
           </div>
-          
+
           {/* Info section */}
           <div className="bg-[rgba(0,0,0,0.4)] rounded-lg p-4 mb-4 border border-[#4fdfff]/20 space-y-4">
             {/* Status display */}
@@ -236,11 +208,11 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
                 Statut
               </h4>
               <div className="flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full ${statusColors[currentStatus]}`} />
-                <span className="text-sm text-white">{statusLabels[currentStatus]}</span>
+                <div className={`w-3 h-3 rounded-full ${getStatusColor(currentStatus)}`} />
+                <span className="text-sm text-white">{getStatusLabel(currentStatus)}</span>
               </div>
             </div>
-            
+
             {/* Member since */}
             <div>
               <h4 className="text-[10px] font-bold text-white/50 uppercase tracking-wider mb-2">
@@ -248,7 +220,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
               </h4>
               <p className="text-sm text-white">{memberSince}</p>
             </div>
-            
+
             {/* Email */}
             <div>
               <h4 className="text-[10px] font-bold text-white/50 uppercase tracking-wider mb-2">
@@ -257,7 +229,7 @@ export default function ProfileCard({ user, onClose, onUpdate }: ProfileCardProp
               <p className="text-sm text-white/80 break-all">{user.email}</p>
             </div>
           </div>
-          
+
           {/* Actions */}
           <div className="space-y-2">
             {isEditing ? (
