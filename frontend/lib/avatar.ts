@@ -32,3 +32,10 @@ export function getAvatar(userId: string, currentUser: User | null): string {
   }
   return getAvatarFromId(userId);
 }
+
+/**
+ * Génère l'URL d'avatar pour un membre (avatar_url optionnel côté API)
+ */
+export function getMemberAvatar(member: { user_id: string; avatar_url?: string }): string {
+  return normalizeAvatarUrl(member.avatar_url) || getAvatarFromId(member.user_id);
+}

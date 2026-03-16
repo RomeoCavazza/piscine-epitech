@@ -6,51 +6,9 @@ import { useServers, useChannels, useMessages, useMembers, useAuth } from "@/hoo
 import ProfileCard from "@/components/ProfileCard";
 import InviteModal from "@/modals/InviteModal";
 import { User } from "@/lib/api-server";
+import { normalizeAvatarUrl, getAvatar, getMemberAvatar } from "@/lib/avatar";
+import { getStatusColor, getStatusLabel } from "@/lib/presence";
 import Button from "@/components/ui/Button";
-
-/**
- * Normalise le chemin d'avatar (ancien format → nouveau format)
- */
-function normalizeAvatarUrl(url: string | null | undefined): string | null {
-  if (!url) return null;
-  // Convertit l'ancien chemin vers le nouveau
-  if (url.includes('/space_invaders_avatars/space_invader_')) {
-    return url
-      .replace('/space_invaders_avatars/', '/avatars/')
-      .replace('space_invader_', 'avatar_');
-  }
-  return url;
-}
-
-/**
- * Génère une URL d'avatar déterministe basée sur un UUID
- * Utilise le premier caractère hexa pour choisir parmi les 100 avatars
- */
-function getAvatarFromId(id: string): string {
-  // Prend les 2 premiers caractères hexa et les convertit en nombre (0-255)
-  const hex = id.replace(/-/g, '').slice(0, 2);
-  const num = parseInt(hex, 16);
-  // Map sur 1-100
-  const avatarNum = (num % 100) + 1;
-  return `/avatars/avatar_${String(avatarNum).padStart(3, '0')}.png`;
-}
-
-/**
- * Retourne l'avatar approprié : si c'est l'utilisateur connecté, utilise son avatar réel
- */
-function getAvatar(userId: string, currentUser: User | null): string {
-  if (currentUser && userId === currentUser.id) {
-    return normalizeAvatarUrl(currentUser.avatar_url) || getAvatarFromId(userId);
-  }
-  return getAvatarFromId(userId);
-}
-
-/**
- * Génère l'URL d'avatar pour un membre avec avatar_url optionnel
- */
-function getMemberAvatar(member: { user_id: string; avatar_url?: string }): string {
-  return normalizeAvatarUrl(member.avatar_url) || getAvatarFromId(member.user_id);
-}
 
 /**
  * Page principale - Design Moderne Cyberpunk
@@ -360,16 +318,12 @@ export default function Home() {
                   </span>
                 </div>
               )}
-              <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[rgba(5,10,15,0.95)] rounded-full ${
-                (currentUser || user)?.status?.toLowerCase() === "online" ? "bg-green-500" :
-                (currentUser || user)?.status?.toLowerCase() === "dnd" ? "bg-red-500" :
-                "bg-gray-500"
-              }`} />
+              <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[rgba(5,10,15,0.95)] rounded-full ${getStatusColor((currentUser || user)?.status)}`} />
             </div>
             <div className="flex-1 min-w-0 text-left">
               <p className="text-sm font-medium text-white truncate">{(currentUser || user)?.username || "Guest"}</p>
               <p className="text-[10px] text-[#4fdfff] font-mono uppercase">
-                {(currentUser || user)?.status || "CONNECTED"}
+                {getStatusLabel((currentUser || user)?.status)}
               </p>
             </div>
           </button>
@@ -549,7 +503,7 @@ export default function Home() {
                                 alt="Owner"
                                 className="w-8 h-8 rounded-full object-cover border border-[#ff3333]/50"
                               />
-                              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-[rgba(5,10,15,0.95)] rounded-full" />
+                              <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[rgba(5,10,15,0.95)] rounded-full ${getStatusColor(member.status)}`} />
                             </div>
                             <span className="text-sm text-white/90 truncate flex-1">
                               {member.username}
@@ -593,7 +547,7 @@ export default function Home() {
                                   alt="Member"
                                   className="w-8 h-8 rounded-full object-cover border border-[#4fdfff]/30"
                                 />
-                                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-gray-500 border-2 border-[rgba(5,10,15,0.95)] rounded-full" />
+                                <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[rgba(5,10,15,0.95)] rounded-full ${getStatusColor(member.status)}`} />
                               </div>
                               <span className="text-sm text-white/70 truncate flex-1">
                                 {member.username}
