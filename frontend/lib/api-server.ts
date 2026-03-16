@@ -110,6 +110,7 @@ export interface ServerMember {
   joined_at: string;
   username: string;
   avatar_url?: string;
+  status?: string;
 }
 
 export interface User {
