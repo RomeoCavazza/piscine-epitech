@@ -1,48 +1,56 @@
 # Documentation - Hello World RTC
 
-Application de messagerie instantanee en temps reel (type Discord).
+Real-time instant messaging application (Discord-like).
 
-## Structure de la documentation
+---
+
+## 📂 Documentation Structure
 
 ```text
 docs/
-├── README.md                    # Ce fichier
-├── specifications/              # Specifications du projet
-│   ├── requirements.md          # Cahier des charges complet
-│   ├── grading-criteria.md      # Criteres de notation
-│   └── moscow.md                # Priorisation MoSCoW
-├── architecture/                # Architecture technique
-│   ├── overview.md              # Vue d'ensemble
-│   ├── database.md              # Modele de donnees
-│   └── folder-structure.md      # Structure des dossiers
-└── uml/                         # Diagrammes UML
-    ├── classes.puml             # Diagramme de classes
-    ├── database-schema.puml     # Schema de base de donnees
-    └── entities.md              # Description des entites
+├── README.md                    # This portal
+├── specifications/              # Project specifications
+│   ├── requirements.md          # Complete requirements
+│   ├── grading-criteria.md      # Evaluation criteria
+│   └── moscow.md                # MoSCoW prioritization
+├── architecture/                # Technical architecture
+│   ├── overview.md              # Global overview
+│   ├── database.md              # Data model & logic
+│   └── folder-structure.md      # Directory hierarchy
+└── uml/                         # UML Diagrams
+    ├── classes.puml             # Class diagram (Archival)
+    ├── database-schema.puml     # DB schema (Archival)
+    └── entities.md              # Entity descriptions
 ```
 
-## Stack Technique
+---
 
-| Composant           | Technologie                                    |
+## 🛠️ Technical Stack
+
+| Component           | Technology                                    |
 | ------------------- | ---------------------------------------------- |
 | **Frontend**        | Next.js 16 + React 19 + TypeScript             |
 | **Backend**         | Rust + Axum + Tokio                            |
-| **Base de donnees** | PostgreSQL (relationnel) + MongoDB (messages)  |
-| **Temps reel**      | WebSockets                                     |
+| **Databases**       | PostgreSQL (Relational) + MongoDB (Messages)   |
+| **Real-time**       | WebSockets                                     |
 | **Styling**         | Tailwind CSS 4                                 |
 
-## Fonctionnalites principales
+---
 
-- **Authentification** : Inscription/Connexion JWT
-- **Serveurs** : Creation, rejoindre via code d'invitation
-- **Canaux** : Canaux textuels par serveur
-- **Messages** : Temps reel via WebSocket
-- **Roles** : Owner / Admin / Member (RBAC)
-- **Presence** : Utilisateurs connectes, indicateur de frappe
+## 🚀 Key Features
 
-## Liens rapides
+- **Authentication**: JWT-based Signup/Login.
+- **Servers**: Create and join via invitation codes.
+- **Channels**: Textual channels per server.
+- **Messages**: Real-time delivery via WebSocket.
+- **Roles**: RBAC (Owner / Admin / Member).
+- **Presence**: Online status and typing indicators.
 
-- [Specifications completes](./specifications/requirements.md)
-- [Architecture technique](./architecture/overview.md)
-- [Schema de base de donnees](./architecture/database.md)
-- [Diagramme de classes](./uml/classes.puml)
+---
+
+## 🔗 Quick Links
+
+- [**Technical Specification**](./specification.txt) — Consolidated logic & rules.
+- [**Requirements**](./specifications/requirements.md) — Full product scope.
+- [**Database Schema**](./architecture/database.md) — ERD and persistence logic.
+- [**Code Metrics**](./cloc-report.md) — Repository statistics.
