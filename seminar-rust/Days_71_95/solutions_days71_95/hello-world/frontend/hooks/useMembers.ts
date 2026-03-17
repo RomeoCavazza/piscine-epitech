@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { listMembers, kickMember as apiKickMember, ServerMember } from "@/lib/api-server";
+import { banMember as apiBanMember, listMembers, kickMember as apiKickMember, ServerMember } from "@/lib/api-server";
 import { handleAuthError, isAuthError, getErrorMessage } from "@/lib/auth/utils";
 import { useWebSocket } from "./useWebSocket";
 import { ServerEvent } from "@/lib/gateway";
@@ -74,6 +74,21 @@ export function useMembers(serverId: string | null) {
     }
   }, [serverId, loadMembers]);
 
+  const banMember = useCallback(async (userId: string): Promise<boolean> => {
+    if (!serverId) return false;
+    // Optimistic UI : on retire le membre immédiatement (ban implique kick)
+    setMembers((prev) => prev.filter((m) => m.user_id !== userId));
+    try {
+      await apiBanMember(serverId, userId, {});
+      return true;
+    } catch (err) {
+      loadMembers(serverId);
+      const errorMessage = getErrorMessage(err, "Failed to ban member");
+      if (isAuthError(errorMessage)) handleAuthError();
+      return false;
+    }
+  }, [serverId, loadMembers]);
+
   const refresh = useCallback(() => {
     if (serverId) {
       loadMembers(serverId);
@@ -92,6 +107,7 @@ export function useMembers(serverId: string | null) {
     refresh,
     getUserStatus,
     kickMember,
+    banMember,
   };
 }
 
