@@ -201,6 +201,22 @@ impl WsHub {
         }
     }
 
+    /// Broadcast un événement à toutes les connexions actives
+    pub async fn broadcast_all(&self, event: &ServerEvent) {
+        let event_json = match event.to_json() {
+            Ok(json) => json,
+            Err(e) => {
+                eprintln!("[Hub] Failed to serialize event: {}", e);
+                return;
+            }
+        };
+
+        let connections = self.connections.lock().await;
+        for tx in connections.values() {
+            let _ = tx.send(event_json.clone());
+        }
+    }
+
     /// Nombre de connexions actives
     pub async fn connection_count(&self) -> usize {
         self.connections.lock().await.len()

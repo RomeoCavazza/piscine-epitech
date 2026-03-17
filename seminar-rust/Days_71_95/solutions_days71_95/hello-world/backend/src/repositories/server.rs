@@ -1,7 +1,7 @@
 use sqlx::PgPool;
 use uuid::Uuid;
 
-use crate::models::{MemberRole, Server, ServerMember};
+use crate::models::{MemberRole, Server, ServerBan, ServerMember};
 
 #[derive(Clone)]
 pub struct ServerRepository {
@@ -174,5 +174,71 @@ impl ServerRepository {
         .bind(user_id)
         .fetch_optional(&self.pool)
         .await
+    }
+
+    pub async fn upsert_ban(
+        &self,
+        server_id: Uuid,
+        user_id: Uuid,
+        banned_by: Uuid,
+        reason: Option<String>,
+        expires_at: Option<chrono::DateTime<chrono::Utc>>,
+    ) -> sqlx::Result<ServerBan> {
+        sqlx::query_as::<_, ServerBan>(
+            r#"
+            INSERT INTO server_bans (server_id, user_id, banned_by, reason, expires_at, banned_at)
+            VALUES ($1, $2, $3, $4, $5, NOW())
+            ON CONFLICT (server_id, user_id)
+            DO UPDATE SET banned_by = EXCLUDED.banned_by, reason = EXCLUDED.reason, expires_at = EXCLUDED.expires_at, banned_at = NOW()
+            RETURNING server_id, user_id, banned_by, reason, expires_at, banned_at
+            "#,
+        )
+        .bind(server_id)
+        .bind(user_id)
+        .bind(banned_by)
+        .bind(reason)
+        .bind(expires_at)
+        .fetch_one(&self.pool)
+        .await
+    }
+
+    pub async fn remove_ban(&self, server_id: Uuid, user_id: Uuid) -> sqlx::Result<()> {
+        sqlx::query("DELETE FROM server_bans WHERE server_id = $1 AND user_id = $2")
+            .bind(server_id)
+            .bind(user_id)
+            .execute(&self.pool)
+            .await?;
+        Ok(())
+    }
+
+    pub async fn list_bans(&self, server_id: Uuid) -> sqlx::Result<Vec<ServerBan>> {
+        sqlx::query_as::<_, ServerBan>(
+            r#"
+            SELECT server_id, user_id, banned_by, reason, expires_at, banned_at
+            FROM server_bans
+            WHERE server_id = $1
+            ORDER BY banned_at DESC
+            "#,
+        )
+        .bind(server_id)
+        .fetch_all(&self.pool)
+        .await
+    }
+
+    pub async fn is_user_banned(&self, server_id: Uuid, user_id: Uuid) -> sqlx::Result<bool> {
+        let banned: Option<bool> = sqlx::query_scalar(
+            r#"
+            SELECT TRUE
+            FROM server_bans
+            WHERE server_id = $1
+              AND user_id = $2
+              AND (expires_at IS NULL OR expires_at > NOW())
+            "#,
+        )
+        .bind(server_id)
+        .bind(user_id)
+        .fetch_optional(&self.pool)
+        .await?;
+        Ok(banned.unwrap_or(false))
     }
 }

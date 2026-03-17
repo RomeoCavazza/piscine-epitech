@@ -58,3 +58,20 @@ pub struct UpdateMemberRolePayload {
 pub struct TransferOwnershipPayload {
     pub new_owner_id: Uuid,
 }
+
+#[derive(Debug, Deserialize)]
+pub struct BanMemberPayload {
+    pub reason: Option<String>,
+    /// ISO 8601 string or null. If provided, ban is temporary until this timestamp.
+    pub expires_at: Option<DateTime<Utc>>,
+}
+
+#[derive(Debug, Clone, Serialize, FromRow)]
+pub struct ServerBan {
+    pub server_id: Uuid,
+    pub user_id: Uuid,
+    pub banned_by: Uuid,
+    pub reason: Option<String>,
+    pub expires_at: Option<DateTime<Utc>>,
+    pub banned_at: DateTime<Utc>,
+}

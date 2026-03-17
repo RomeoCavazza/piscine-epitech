@@ -1,4 +1,4 @@
-use bson::{doc, Binary, Uuid as BsonUuid};
+use bson::doc;
 use chrono::Utc;
 use futures::TryStreamExt;
 use mongodb::Database;
@@ -32,7 +32,7 @@ impl MessageRepository {
         message_id: Uuid,
     ) -> mongodb::error::Result<Option<ChannelMessage>> {
         self.collection()
-            .find_one(doc! { "message_id": BsonUuid::from(message_id) })
+            .find_one(doc! { "message_id": message_id.to_string() })
             .await
     }
 
@@ -44,20 +44,14 @@ impl MessageRepository {
     ) -> mongodb::error::Result<Vec<ChannelMessage>> {
         let collection = self.collection();
 
-        let uuid_bytes = channel_id.as_bytes();
-        let binary = Binary {
-            bytes: uuid_bytes.to_vec(),
-            subtype: bson::spec::BinarySubtype::Generic,
-        };
-
         let mut filter = doc! {
-            "channel_id": binary,
+            "channel_id": channel_id.to_string(),
             "deleted_at": null,
         };
 
         if let Some(before_id) = before {
             if let Some(before_msg) = collection
-                .find_one(doc! { "message_id": BsonUuid::from(before_id) })
+                .find_one(doc! { "message_id": before_id.to_string() })
                 .await?
             {
                 filter.insert("created_at", doc! { "$lt": before_msg.created_at });
@@ -80,7 +74,7 @@ impl MessageRepository {
     ) -> mongodb::error::Result<()> {
         self.collection()
             .update_one(
-                doc! { "message_id": BsonUuid::from(message_id) },
+                doc! { "message_id": message_id.to_string() },
                 doc! {
                     "$set": {
                         "content": content,
@@ -99,11 +93,11 @@ impl MessageRepository {
     ) -> mongodb::error::Result<()> {
         self.collection()
             .update_one(
-                doc! { "message_id": BsonUuid::from(message_id) },
+                doc! { "message_id": message_id.to_string() },
                 doc! {
                     "$set": {
                         "deleted_at": Utc::now(),
-                        "deleted_by": BsonUuid::from(deleted_by),
+                        "deleted_by": deleted_by.to_string(),
                     }
                 },
             )

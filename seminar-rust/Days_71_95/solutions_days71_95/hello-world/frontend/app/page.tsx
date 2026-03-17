@@ -32,7 +32,7 @@ export default function Home() {
   );
 
   const { messages, sendMessage, loading: messagesLoading, error: messagesError, typingUsers, typingStart, typingStop } = useMessages(selectedChannel?.id ?? null);
-  const { members, kickMember } = useMembers(selectedServer?.id ?? null);
+  const { members, kickMember, banMember } = useMembers(selectedServer?.id ?? null);
 
   const [showCreateServer, setShowCreateServer] = useState(false);
   const [newServerName, setNewServerName] = useState("");
@@ -528,6 +528,7 @@ export default function Home() {
                         .map((member) => {
                           const isMe = member.user_id === user?.id;
                           const kickable = canKick && !isMe && !(myRole === "Admin" && member.role === "Admin");
+                          const bannable = kickable; // mêmes règles que kick pour cette version
                           const isTyping = selectedChannel?.id && typingUsers.has(member.user_id);
                           return (
                             <div
@@ -553,16 +554,30 @@ export default function Home() {
                                 </div>
                               )}
                               {kickable && (
-                                <button
-                                  type="button"
-                                  onClick={() => kickMember(member.user_id)}
-                                  className="opacity-0 group-hover:opacity-100 text-white/30 hover:text-[#ff3333] transition-all flex-shrink-0"
-                                  title={`Expulser ${member.username}`}
-                                >
-                                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6m3-3l3 3-3 3" />
-                                  </svg>
-                                </button>
+                                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all flex-shrink-0">
+                                  <button
+                                    type="button"
+                                    onClick={() => kickMember(member.user_id)}
+                                    className="text-white/30 hover:text-[#ff3333] transition-colors"
+                                    title={`Expulser ${member.username}`}
+                                  >
+                                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6m3-3l3 3-3 3" />
+                                    </svg>
+                                  </button>
+                                  {bannable && (
+                                    <button
+                                      type="button"
+                                      onClick={() => banMember(member.user_id)}
+                                      className="text-white/30 hover:text-[#ff3333] transition-colors"
+                                      title={`Bannir ${member.username}`}
+                                    >
+                                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-12.728 12.728M6.343 6.343l11.314 11.314" />
+                                      </svg>
+                                    </button>
+                                  )}
+                                </div>
                               )}
                             </div>
                           );

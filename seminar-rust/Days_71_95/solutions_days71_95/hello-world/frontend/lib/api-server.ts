@@ -110,6 +110,7 @@ export interface ServerMember {
   joined_at: string;
   username: string;
   avatar_url?: string;
+  status?: string;
 }
 
 export interface User {
@@ -201,6 +202,37 @@ export async function kickMember(serverId: string, userId: string): Promise<void
   return fetchApi<void>(`/servers/${serverId}/members/${userId}`, {
     method: "DELETE",
   });
+}
+
+export interface BanMemberPayload {
+  reason?: string | null;
+  expires_at?: string | null; // ISO string
+}
+
+export interface ServerBan {
+  server_id: string;
+  user_id: string;
+  banned_by: string;
+  reason?: string | null;
+  expires_at?: string | null;
+  banned_at: string;
+}
+
+export async function banMember(serverId: string, userId: string, payload: BanMemberPayload = {}): Promise<ServerBan> {
+  return fetchApi<ServerBan>(`/servers/${serverId}/members/${userId}/ban`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function unbanMember(serverId: string, userId: string): Promise<void> {
+  return fetchApi<void>(`/servers/${serverId}/members/${userId}/ban`, {
+    method: "DELETE",
+  });
+}
+
+export async function listBans(serverId: string): Promise<ServerBan[]> {
+  return fetchApi<ServerBan[]>(`/servers/${serverId}/bans`);
 }
 
 export async function listMessages(channelId: string, limit = 50): Promise<Message[]> {

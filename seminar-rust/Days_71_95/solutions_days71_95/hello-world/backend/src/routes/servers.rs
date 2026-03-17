@@ -23,5 +23,7 @@ pub fn routes() -> Router<AppState> {
         .route("/{id}/leave", delete(servers::leave_server))
         .route("/{id}/members", get(servers::list_members))
         .route("/{id}/members/{userId}", put(servers::update_member_role).delete(servers::kick_member))
+        .route("/{id}/members/{userId}/ban", post(servers::ban_member).delete(servers::unban_member))
+        .route("/{id}/bans", get(servers::list_bans))
         .route("/{id}/transfer", put(servers::transfer_ownership))
 }
