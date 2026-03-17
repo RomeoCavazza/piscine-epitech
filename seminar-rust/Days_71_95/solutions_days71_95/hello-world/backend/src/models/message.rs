@@ -4,7 +4,7 @@ use serde::de::Error as _;
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-mod uuid_compat_string {
+mod uuid_compat_binary_generic {
     use super::*;
     use bson::Binary;
     use serde::{Deserializer, Serializer};
@@ -21,7 +21,11 @@ mod uuid_compat_string {
     where
         S: Serializer,
     {
-        serializer.serialize_str(&value.to_string())
+        let b = Binary {
+            subtype: bson::spec::BinarySubtype::Generic,
+            bytes: value.as_bytes().to_vec(),
+        };
+        b.serialize(serializer)
     }
 
     pub fn deserialize<'de, D>(deserializer: D) -> Result<Uuid, D::Error>
@@ -44,7 +48,13 @@ mod uuid_compat_string {
             S: Serializer,
         {
             match value {
-                Some(v) => serializer.serialize_some(&v.to_string()),
+                Some(v) => {
+                    let b = Binary {
+                        subtype: bson::spec::BinarySubtype::Generic,
+                        bytes: v.as_bytes().to_vec(),
+                    };
+                    serializer.serialize_some(&b)
+                }
                 None => serializer.serialize_none(),
             }
         }
@@ -62,13 +72,13 @@ mod uuid_compat_string {
 pub struct ChannelMessage {
     #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
     pub id: Option<ObjectId>,
-    #[serde(with = "uuid_compat_string")]
+    #[serde(with = "uuid_compat_binary_generic")]
     pub message_id: Uuid,
-    #[serde(with = "uuid_compat_string")]
+    #[serde(with = "uuid_compat_binary_generic")]
     pub server_id: Uuid,
-    #[serde(with = "uuid_compat_string")]
+    #[serde(with = "uuid_compat_binary_generic")]
     pub channel_id: Uuid,
-    #[serde(with = "uuid_compat_string")]
+    #[serde(with = "uuid_compat_binary_generic")]
     pub author_id: Uuid,
     pub content: String,
     pub created_at: DateTime<Utc>,
@@ -77,7 +87,7 @@ pub struct ChannelMessage {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub deleted_at: Option<DateTime<Utc>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[serde(with = "uuid_compat_string::option")]
+    #[serde(with = "uuid_compat_binary_generic::option")]
     pub deleted_by: Option<Uuid>,
 }
 

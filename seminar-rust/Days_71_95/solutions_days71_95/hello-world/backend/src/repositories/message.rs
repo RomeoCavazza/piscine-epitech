@@ -1,4 +1,4 @@
-use bson::doc;
+use bson::{doc, Binary};
 use chrono::Utc;
 use futures::TryStreamExt;
 use mongodb::Database;
@@ -22,6 +22,13 @@ impl MessageRepository {
         self.db.collection(COLLECTION_NAME)
     }
 
+    fn uuid_to_binary(uuid: Uuid) -> Binary {
+        Binary {
+            subtype: bson::spec::BinarySubtype::Generic,
+            bytes: uuid.as_bytes().to_vec(),
+        }
+    }
+
     pub async fn create(&self, message: &ChannelMessage) -> mongodb::error::Result<()> {
         self.collection().insert_one(message).await?;
         Ok(())
@@ -32,7 +39,7 @@ impl MessageRepository {
         message_id: Uuid,
     ) -> mongodb::error::Result<Option<ChannelMessage>> {
         self.collection()
-            .find_one(doc! { "message_id": message_id.to_string() })
+            .find_one(doc! { "message_id": Self::uuid_to_binary(message_id) })
             .await
     }
 
@@ -45,13 +52,13 @@ impl MessageRepository {
         let collection = self.collection();
 
         let mut filter = doc! {
-            "channel_id": channel_id.to_string(),
+            "channel_id": Self::uuid_to_binary(channel_id),
             "deleted_at": null,
         };
 
         if let Some(before_id) = before {
             if let Some(before_msg) = collection
-                .find_one(doc! { "message_id": before_id.to_string() })
+                .find_one(doc! { "message_id": Self::uuid_to_binary(before_id) })
                 .await?
             {
                 filter.insert("created_at", doc! { "$lt": before_msg.created_at });
@@ -74,7 +81,7 @@ impl MessageRepository {
     ) -> mongodb::error::Result<()> {
         self.collection()
             .update_one(
-                doc! { "message_id": message_id.to_string() },
+                doc! { "message_id": Self::uuid_to_binary(message_id) },
                 doc! {
                     "$set": {
                         "content": content,
@@ -93,11 +100,11 @@ impl MessageRepository {
     ) -> mongodb::error::Result<()> {
         self.collection()
             .update_one(
-                doc! { "message_id": message_id.to_string() },
+                doc! { "message_id": Self::uuid_to_binary(message_id) },
                 doc! {
                     "$set": {
                         "deleted_at": Utc::now(),
-                        "deleted_by": deleted_by.to_string(),
+                        "deleted_by": Self::uuid_to_binary(deleted_by),
                     }
                 },
             )
