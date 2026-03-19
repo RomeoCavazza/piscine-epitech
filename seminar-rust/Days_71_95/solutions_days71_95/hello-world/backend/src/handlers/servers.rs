@@ -8,8 +8,8 @@ use uuid::Uuid;
 use crate::ctx::Ctx;
 use crate::error::Result;
 use crate::models::{
-    BanMemberPayload, CreateServerPayload, Server, ServerBan, ServerMember, TransferOwnershipPayload,
-    UpdateMemberRolePayload, UpdateServerPayload,
+    BanMemberPayload, CreateServerPayload, Server, ServerBan, ServerMember,
+    TransferOwnershipPayload, UpdateMemberRolePayload, UpdateServerPayload,
 };
 use crate::services;
 use crate::AppState;
@@ -92,7 +92,7 @@ pub async fn list_members(
     }
 
     let members = services::list_members(&state.server_repo, id).await?;
-    
+
     // Enrichir avec les infos utilisateur
     let mut members_with_user = Vec::new();
     for member in members {
@@ -107,7 +107,7 @@ pub async fn list_members(
             });
         }
     }
-    
+
     Ok(Json(members_with_user))
 }
 
@@ -126,7 +126,14 @@ pub async fn ban_member(
     Path((server_id, user_id)): Path<(Uuid, Uuid)>,
     Json(payload): Json<BanMemberPayload>,
 ) -> Result<Json<ServerBan>> {
-    let ban = services::ban_member(&state.server_repo, server_id, user_id, payload, ctx.user_id()).await?;
+    let ban = services::ban_member(
+        &state.server_repo,
+        server_id,
+        user_id,
+        payload,
+        ctx.user_id(),
+    )
+    .await?;
     Ok(Json(ban))
 }
 

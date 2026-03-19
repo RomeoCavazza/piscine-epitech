@@ -1,5 +1,6 @@
 pub use self::error::{Error, Result};
 
+use axum::http::{header, HeaderValue, Method};
 use axum::{
     middleware,
     routing::{get, post},
@@ -8,8 +9,7 @@ use axum::{
 use mongodb::{Client as MongoClient, Database as MongoDatabase};
 use sqlx::postgres::PgPoolOptions;
 use std::time::Duration;
-use tower_http::cors::CorsLayer;
-use axum::http::{Method, HeaderValue, header}; // On utilise axum::http au lieu de http direct
+use tower_http::cors::CorsLayer; // On utilise axum::http au lieu de http direct
 
 mod ctx;
 mod error;
@@ -58,7 +58,7 @@ async fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(
             tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| tracing_subscriber::EnvFilter::new("info"))
+                .unwrap_or_else(|_| tracing_subscriber::EnvFilter::new("info")),
         )
         .init();
 
@@ -116,22 +116,26 @@ async fn main() {
         ws_hub,
         ws_metrics,
     };
-let cors = CorsLayer::new()
-    .allow_origin("https://hello-world-messagerie-jfk7.vercel.app".parse::<HeaderValue>().unwrap())
-    .allow_methods([
-        Method::GET, 
-        Method::POST, 
-        Method::PATCH, 
-        Method::DELETE, 
-        Method::OPTIONS // Très important pour les navigateurs
-    ])
-    .allow_headers([
-        header::CONTENT_TYPE, 
-        header::AUTHORIZATION,
-        header::UPGRADE,
-        header::CONNECTION,
-    ]);
-    
+    let cors = CorsLayer::new()
+        .allow_origin(
+            "https://hello-world-messagerie-jfk7.vercel.app"
+                .parse::<HeaderValue>()
+                .unwrap(),
+        )
+        .allow_methods([
+            Method::GET,
+            Method::POST,
+            Method::PATCH,
+            Method::DELETE,
+            Method::OPTIONS, // Très important pour les navigateurs
+        ])
+        .allow_headers([
+            header::CONTENT_TYPE,
+            header::AUTHORIZATION,
+            header::UPGRADE,
+            header::CONNECTION,
+        ]);
+
     let routes_protected = routes::create_router()
         .route(
             "/me",
@@ -163,7 +167,7 @@ let cors = CorsLayer::new()
         .layer(cors)
         .with_state(state);
 
-// 1. Récupération du port dynamique de Render
+    // 1. Récupération du port dynamique de Render
     let port = std::env::var("PORT").unwrap_or_else(|_| "3001".to_string());
     let addr = format!("0.0.0.0:{}", port);
 
