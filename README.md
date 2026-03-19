@@ -48,11 +48,11 @@ seminar-xxx/
 
 Linux, Python, and algorithmic fundamentals.
 
-![Linux](https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black)
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-![Bash](https://img.shields.io/badge/Bash-4EAA25?logo=gnubash&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
-![Vim](https://img.shields.io/badge/Vim-019733?logo=vim&logoColor=white)
+![Linux](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg)
+![Python](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg)
+![Bash](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg)
+![Git](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg)
+![Vim](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg)
 
 → [View the seminar](seminar-preparation/README.md)
 
@@ -60,12 +60,12 @@ Linux, Python, and algorithmic fundamentals.
 
 Linux/Bash utilities, semantic HTML5/CSS, client-side JavaScript, and PHP integration.
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-![Materialize](https://img.shields.io/badge/Materialize-EE6E73?logo=materialdesign&logoColor=white)
+![HTML5](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg)
+![CSS3](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg)
+![JavaScript](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg)
+![PHP](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg)
+![MySQL](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg)
+![Materialize](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materializecss/materializecss-original.svg)
 
 → [View the seminar](seminar-web/README.md)
 
@@ -73,11 +73,11 @@ Linux/Bash utilities, semantic HTML5/CSS, client-side JavaScript, and PHP integr
 
 Complete recruitment platform with database, REST API, and user interface.
 
-![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-![REST API](https://img.shields.io/badge/REST%20API-02569B?logo=rest&logoColor=white)
-![JSON](https://img.shields.io/badge/JSON-000000?logo=json&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![PHP](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg)
+![MySQL](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg)
+**REST API**
+![JSON](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg)
+![JavaScript](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg)
 
 → [View the seminar](seminar-job-board/README.md)
 
@@ -85,11 +85,11 @@ Complete recruitment platform with database, REST API, and user interface.
 
 Introduction to object-oriented programming with Java and advanced concepts.
 
-![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-25A162?logo=junit5&logoColor=white)
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-000000?logo=intellijidea&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+![Java](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg)
+![Maven](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg)
+![JUnit](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg)
+![IntelliJ IDEA](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg)
+![Git](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg)
 
 → [View the seminar](seminar-java/README.md)
 
@@ -97,11 +97,11 @@ Introduction to object-oriented programming with Java and advanced concepts.
 
 Development of a complete 2D game in Java with libGDX, following OOP principles.
 
-![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)
-![libGDX](https://img.shields.io/badge/libGDX-FF0000?logo=libgdx&logoColor=white)
-![Gradle](https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-25A162?logo=junit5&logoColor=white)
-![JaCoCo](https://img.shields.io/badge/JaCoCo-00AA00?logo=jacoco&logoColor=white)
+![Java](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg)
+![libGDX](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg)
+![Gradle](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg)
+![JUnit](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg)
+**JaCoCo**
 
 → [View the seminar](seminar-my-first-game/README.md)
 
@@ -109,12 +109,12 @@ Development of a complete 2D game in Java with libGDX, following OOP principles.
 
 System administration, virtualization, network security, application deployment, and automation with Ansible.
 
-![Debian](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=white)
-![Ansible](https://img.shields.io/badge/Ansible-EE0000?logo=ansible&logoColor=white)
-![VirtualBox](https://img.shields.io/badge/VirtualBox-183A61?logo=virtualbox&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white)
-![MariaDB](https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=white)
-![SSH](https://img.shields.io/badge/SSH-000000?logo=ssh&logoColor=white)
+![Debian](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg)
+![Ansible](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg)
+**VirtualBox**
+![Nginx](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg)
+![MariaDB](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg)
+![SSH](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg)
 
 → [View the seminar](seminar-devops/README.md)
 
@@ -122,11 +122,11 @@ System administration, virtualization, network security, application deployment,
 
 Containerization, Docker Compose orchestration, and microservices deployment.
 
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
-![Docker Compose](https://img.shields.io/badge/Docker%20Compose-2496ED?logo=docker&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)
+![Docker](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg)
+![Docker Compose](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg)
+![Node.js](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg)
+![PostgreSQL](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg)
+![Redis](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg)
 
 → [View the seminar](seminar-docker/README.md)
 
@@ -134,11 +134,11 @@ Containerization, Docker Compose orchestration, and microservices deployment.
 
 Continuous Integration & Delivery with Jenkins, Configuration as Code (JCasC), and Job DSL pipelines.
 
-![Jenkins](https://img.shields.io/badge/Jenkins-D24939?logo=jenkins&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)
-![YAML](https://img.shields.io/badge/YAML-000000?logo=yaml&logoColor=white)
-![Groovy](https://img.shields.io/badge/Groovy-4298B8?logo=apachegroovy&logoColor=white)
+![Jenkins](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg)
+![Git](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg)
+![GitHub](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg)
+![YAML](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg)
+![Groovy](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg)
 
 → [View the seminar](seminar-jenkins/README.md)
 
@@ -152,9 +152,9 @@ Upfront project management around the SmartFridge product: Gantt planning, budge
 
 Algorithmic optimization competition: optimal deployment of a 5G antenna network to cover a city while minimizing installation costs.
 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-![Algorithms](https://img.shields.io/badge/Algorithms-FF6B6B?logo=algorithm&logoColor=white)
-![Optimization](https://img.shields.io/badge/Optimization-4ECDC4?logo=optimization&logoColor=white)
+![Python](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg)
+**Algorithms**
+**Optimization**
 
 → [View the competition](code-competition/README.md)
 
