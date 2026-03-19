@@ -1,4 +1,7 @@
-<!-- markdownlint-disable MD033 -->
+# Epitech Piscine - Technical Curriculum
+
+A high-intensity, polyglot journey through the foundations of modern software engineering. From the binary logic of Linux systems to the memory-safe architectures of Rust and GPU-accelerated algorithmic optimization, this repository documents 80 days of continuous technical evolution at Epitech.
+
 <div align="center">
   <img src="assets/epitech_logo.png" alt="Epitech Logo" width="500"/>
   <br />
@@ -6,11 +9,10 @@
   <img src="https://img.shields.io/badge/Stack-Polyglot-6366f1?style=for-the-badge" alt="Stack" />
   <img src="https://img.shields.io/badge/Focus-Systems_&_Web-ff4757?style=for-the-badge" alt="Focus" />
 </div>
-<!-- markdownlint-enable MD033 -->
 
 ## Overview
 
-The definitive repository of technical seminars and high-stakes projects (Days 01-80) delivered at Epitech. A journey from binary logic and Python scripting to advanced systems engineering with Rust and DevOps automation.
+This repository serves as a professional portfolio for all technical seminars and high-stakes projects (Days 01-80). It is structured to provide both a horizontal view of the curriculum and a vertical deep-dive into the technical implementation of every daily challenge.
 
 ### Project Structure
 
@@ -97,42 +99,13 @@ Continuous Integration with Jenkins and Configuration as Code pipelines.
 Memory-safe systems programming and Discord-like real-time messaging.
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tauri/tauri-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" height="25" />
 
+### [Project Management Seminar — SmartFridge (T‑CEN‑500)](seminar-project-management/README.md)
+Holistic project management around the SmartFridge product: Gantt planning, budget, resources, and risk communication.
+<img src="https://img.shields.io/badge/Planning-Gantt-6366f1?style=flat-square" /> <img src="https://img.shields.io/badge/Budgeting-Resources-ff4757?style=flat-square" /> <img src="https://img.shields.io/badge/Risks-Management-00f2a6?style=flat-square" />
+
 ### [Code Competition — 5G or not 5G?](competition/README.md)
 Algorithmic optimization for 5G antenna network deployment using CUDA.
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="assets/nvidia.png" height="25" />
-
----
-
-## Technologies Covered
-
-### Backend
-- **Python**: Scripts, algorithms, console applications
-- **Java**: OOP, generics, design patterns, libGDX
-- **PHP**: Web backend, REST API, database integration
-- **Rust**: Memory safety, zero-cost abstractions, Axum, Tauri
-
-### Frontend
-- **HTML5/CSS3**: Semantic, responsive, Materialize
-- **JavaScript ES6+**: DOM, events, fetch API, validation
-- **Modern UI**: Next.js 19, Leptos (WASM), Yew
-
-### Databases
-- **MySQL / MariaDB**: Relational schemas, SQL queries, PDO
-- **PostgreSQL**: Relational database, advanced queries, Docker integration
-- **NoSQL**: MongoDB (documents), Redis (in-memory)
-
-### System & DevOps
-- **Linux/Debian**: System administration, service management
-- **Virtualization**: VirtualBox, virtual machines, snapshots
-- **Network**: DHCP (kea-dhcp4-server), DNS (bind9), routing, nftables
-- **Security**: SSH, fail2ban, firewall, authentication
-- **Automation**: Ansible (Infrastructure as Code), bash scripts, cron
-- **CI/CD**: Jenkins pipelines, GitHub Actions, Docker Compose
-
-### Algorithms & Optimization
-- **Greedy algorithms**: Local optimization strategies
-- **Clustering**: Spatial grouping for shared antenna coverage
-- **GPU Acceleration**: NVIDIA CUDA, Numba JIT, vectorized computations
 
 ---
 
@@ -166,11 +139,33 @@ graph TD
 
 ---
 
-## Skills Developed
+## Technologies Covered
 
-- **Full-Stack Mastery**: Bridging the gap between low-level system logic (C/C++, Rust) and modern high-level web interfaces (React/Next.js, PHP).
-- **Object-Oriented Architecture**: Deep understanding of SOLID principles, advanced design patterns, and modular software engineering.
-- **Enterprise DevSecOps**: Automating the entire software lifecycle from ground-up Linux environments to containerized, CI/CD-driven deployments.
-- **Scientific Computing**: Translating complex mathematical objective functions into high-performance, GPU-accelerated algorithmic solvers.
-- **Project Leadership**: Mastering technical documentation, team communication, resource planning, and risk management through high-stakes seminars.
-- **Polyglot Fluency**: Seamlessly switching between paradigms (Procedural, OOP, Functional) across Python, Java, Rust, PHP, and JavaScript.
+### Backend
+- **Python**: Scripts, algorithms, console applications
+- **Java**: OOP, generics, design patterns, libGDX
+- **PHP**: Web backend, REST API, database integration
+- **Rust**: Memory safety, zero-cost abstractions, Axum, Tauri
+
+### Frontend
+- **HTML5/CSS3**: Semantic, responsive, Materialize
+- **JavaScript ES6+**: DOM, events, fetch API, validation
+- **Modern UI**: Next.js 19, Leptos (WASM), Yew
+
+### Databases
+- **MySQL / MariaDB**: Relational schemas, SQL queries, PDO
+- **PostgreSQL**: Relational database, advanced queries, Docker integration
+- **NoSQL**: MongoDB (documents), Redis (in-memory)
+
+### System & DevOps
+- **Linux/Debian**: System administration, service management
+- **Virtualization**: VirtualBox, virtual machines, snapshots
+- **Network**: DHCP (kea-dhcp4-server), DNS (bind9), routing, nftables
+- **Security**: SSH, fail2ban, firewall, authentication
+- **Automation**: Ansible (Infrastructure as Code), bash scripts, cron
+- **CI/CD**: Jenkins pipelines, GitHub Actions, Docker Compose
+
+### Algorithms & Optimization
+- **Greedy algorithms**: Local optimization strategies
+- **Clustering**: Spatial grouping for shared antenna coverage
+- **GPU Acceleration**: NVIDIA CUDA, Numba JIT, vectorized computations
