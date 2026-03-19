@@ -44,87 +44,67 @@ seminar-xxx/
 
 ## Seminars
 
-### Preparation Seminar (Days 01-10)
+### [Preparation Seminar — Days 01-10](seminar-preparation/README.md)
 
 Linux, Python, and algorithmic fundamentals.
 
-→ [View the seminar](seminar-preparation/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" height="25" alt="linux" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" height="25" alt="bash" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg" height="25" alt="vim" />
 
-### Web Seminar (Days 11-20)
+### [Web Seminar — Days 11-20](seminar-web/README.md)
 
 Linux/Bash utilities, semantic HTML5/CSS, client-side JavaScript, and PHP integration.
 
-→ [View the seminar](seminar-web/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" height="25" alt="html5" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" height="25" alt="css3" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" alt="javascript" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" alt="php" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" alt="mysql" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materializecss/materializecss-original.svg" height="25" alt="materializecss" />
 
-### Job Board Seminar (Days 21-30)
+### [Job Board Seminar — Days 21-30](seminar-job-board/README.md)
 
 Complete recruitment platform with database, REST API, and user interface.
 
-→ [View the seminar](seminar-job-board/README.md)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" alt="php" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" alt="mysql" /> <img src="assets/rest-api.png" height="25" alt="REST API" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" height="25" alt="json" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" alt="javascript" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" alt="php" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" alt="mysql" /> **REST API** <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" height="25" alt="json" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" alt="javascript" />
-
-### Java Seminar (Days 31-40)
+### [Java Seminar — Days 31-40](seminar-java/README.md)
 
 Introduction to object-oriented programming with Java and advanced concepts.
 
-→ [View the seminar](seminar-java/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" alt="java" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg" height="25" alt="maven" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" alt="junit" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" height="25" alt="intellij" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" />
 
-### My First Game Seminar (Days 41-55)
+### [My First Game Seminar — Days 41-55](seminar-my-first-game/README.md)
 
 Development of a complete 2D game in Java with libGDX, following OOP principles.
 
-→ [View the seminar](seminar-my-first-game/README.md)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" alt="java" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg" height="25" alt="libgdx" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" height="25" alt="gradle" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" alt="junit" /> <img src="assets/jacoco.png" height="25" alt="JaCoCo" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" alt="java" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg" height="25" alt="libgdx" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" height="25" alt="gradle" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" alt="junit" /> **JaCoCo**
-
-### DevOps Seminar (Days 56-60)
+### [DevOps Seminar — Days 56-60](seminar-devops/README.md)
 
 System administration, virtualization, network security, application deployment, and automation with Ansible.
 
-→ [View the seminar](seminar-devops/README.md)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg" height="25" alt="debian" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" height="25" alt="ansible" /> <img src="assets/virtualbox.png" height="25" alt="VirtualBox" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" height="25" alt="nginx" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" height="25" alt="mariadb" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg" height="25" alt="ssh" />
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg" height="25" alt="debian" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" height="25" alt="ansible" /> **VirtualBox** <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" height="25" alt="nginx" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" height="25" alt="mariadb" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg" height="25" alt="ssh" />
-
-### Docker Seminar (Days 60-67)
+### [Docker Seminar — Days 60-67](seminar-docker/README.md)
 
 Containerization, Docker Compose orchestration, and microservices deployment.
 
-→ [View the seminar](seminar-docker/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" alt="docker" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" alt="docker" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" height="25" alt="nodejs" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" alt="postgresql" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" alt="redis" />
 
-### Jenkins Seminar (Days 66-70)
+### [Jenkins Seminar — Days 66-70](seminar-jenkins/README.md)
 
 Continuous Integration & Delivery with Jenkins, Configuration as Code (JCasC), and Job DSL pipelines.
 
-→ [View the seminar](seminar-jenkins/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="25" alt="jenkins" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" height="25" alt="github" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg" height="25" alt="yaml" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg" height="25" alt="groovy" />
 
-### Project Management Seminar – SmartFridge (T‑CEN‑500)
+### [Project Management Seminar — SmartFridge (T‑CEN‑500)](seminar-project-management/README.md)
 
 Upfront project management around the SmartFridge product: Gantt planning, budget, resources, risks, communications, and final presentation.
 
-→ [View the seminar](seminar-project-management/README.md)
-
-### Code Competition — 5G or not 5G ?
+### [Code Competition — 5G or not 5G ?](code-competition/README.md)
 
 Algorithmic optimization competition: optimal deployment of a 5G antenna network to cover a city while minimizing installation costs.
-
-→ [View the competition](code-competition/README.md)
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" /> **Algorithms** **Optimization**
 
 ---
 
-## Capstone Project: Hello World RTC
+## [Capstone Project: Hello World RTC](docs/README.md)
 
 At the end of the seminars, a final project was carried out to consolidate all learned skills. It is a real-time messaging application (Discord-like) using the full technical stack.
 
@@ -132,8 +112,6 @@ At the end of the seminars, a final project was carried out to consolidate all l
 - **Backend**: Rust (Axum, Tokio)
 - **Real-time**: WebSockets
 - **Databases**: PostgreSQL & MongoDB
-
-→ [**View the Capstone Documentation Portal**](docs/README.md)
 
 ---
 
