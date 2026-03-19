@@ -13,6 +13,11 @@
   <a href="https://www.mongodb.com/"><img src="https://img.shields.io/badge/MongoDB-7-47A248.svg?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB 7" /></a>
 </p>
 
+<p>
+  <a href="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/backend-ci.yml"><img src="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/backend-ci.yml/badge.svg" alt="Backend CI" /></a>
+  <a href="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/frontend-ci.yml"><img src="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/frontend-ci.yml/badge.svg" alt="Frontend CI" /></a>
+</p>
+
 </div>
 
 ---
