@@ -48,11 +48,11 @@ seminar-xxx/
 
 Linux, Python, and algorithmic fundamentals.
 
-![Linux](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg)
-![Python](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg)
-![Bash](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg)
-![Git](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg)
-![Vim](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" height="25" alt="linux" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" height="25" alt="bash" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg" height="25" alt="vim" />
 
 → [View the seminar](seminar-preparation/README.md)
 
@@ -60,12 +60,12 @@ Linux, Python, and algorithmic fundamentals.
 
 Linux/Bash utilities, semantic HTML5/CSS, client-side JavaScript, and PHP integration.
 
-![HTML5](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg)
-![CSS3](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg)
-![JavaScript](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg)
-![PHP](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg)
-![MySQL](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg)
-![Materialize](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materializecss/materializecss-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" height="25" alt="html5" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" height="25" alt="css3" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" alt="javascript" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" alt="php" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" alt="mysql" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materializecss/materializecss-original.svg" height="25" alt="materializecss" />
 
 → [View the seminar](seminar-web/README.md)
 
@@ -73,11 +73,11 @@ Linux/Bash utilities, semantic HTML5/CSS, client-side JavaScript, and PHP integr
 
 Complete recruitment platform with database, REST API, and user interface.
 
-![PHP](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg)
-![MySQL](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" alt="php" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" alt="mysql" />
 **REST API**
-![JSON](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg)
-![JavaScript](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" height="25" alt="json" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" alt="javascript" />
 
 → [View the seminar](seminar-job-board/README.md)
 
@@ -85,11 +85,11 @@ Complete recruitment platform with database, REST API, and user interface.
 
 Introduction to object-oriented programming with Java and advanced concepts.
 
-![Java](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg)
-![Maven](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg)
-![JUnit](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg)
-![IntelliJ IDEA](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg)
-![Git](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" alt="java" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg" height="25" alt="maven" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" alt="junit" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" height="25" alt="intellij" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" />
 
 → [View the seminar](seminar-java/README.md)
 
@@ -97,10 +97,10 @@ Introduction to object-oriented programming with Java and advanced concepts.
 
 Development of a complete 2D game in Java with libGDX, following OOP principles.
 
-![Java](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg)
-![libGDX](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg)
-![Gradle](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg)
-![JUnit](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" alt="java" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg" height="25" alt="libgdx" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" height="25" alt="gradle" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" alt="junit" />
 **JaCoCo**
 
 → [View the seminar](seminar-my-first-game/README.md)
@@ -109,12 +109,12 @@ Development of a complete 2D game in Java with libGDX, following OOP principles.
 
 System administration, virtualization, network security, application deployment, and automation with Ansible.
 
-![Debian](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg)
-![Ansible](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg" height="25" alt="debian" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" height="25" alt="ansible" />
 **VirtualBox**
-![Nginx](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg)
-![MariaDB](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg)
-![SSH](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" height="25" alt="nginx" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" height="25" alt="mariadb" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg" height="25" alt="ssh" />
 
 → [View the seminar](seminar-devops/README.md)
 
@@ -122,11 +122,11 @@ System administration, virtualization, network security, application deployment,
 
 Containerization, Docker Compose orchestration, and microservices deployment.
 
-![Docker](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg)
-![Docker Compose](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg)
-![Node.js](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg)
-![PostgreSQL](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg)
-![Redis](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" alt="docker" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" alt="docker" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" height="25" alt="nodejs" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" alt="postgresql" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" alt="redis" />
 
 → [View the seminar](seminar-docker/README.md)
 
@@ -134,11 +134,11 @@ Containerization, Docker Compose orchestration, and microservices deployment.
 
 Continuous Integration & Delivery with Jenkins, Configuration as Code (JCasC), and Job DSL pipelines.
 
-![Jenkins](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg)
-![Git](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg)
-![GitHub](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg)
-![YAML](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg)
-![Groovy](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="25" alt="jenkins" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" height="25" alt="github" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg" height="25" alt="yaml" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg" height="25" alt="groovy" />
 
 → [View the seminar](seminar-jenkins/README.md)
 
@@ -152,7 +152,7 @@ Upfront project management around the SmartFridge product: Gantt planning, budge
 
 Algorithmic optimization competition: optimal deployment of a 5G antenna network to cover a city while minimizing installation costs.
 
-![Python](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" />
 **Algorithms**
 **Optimization**
 
