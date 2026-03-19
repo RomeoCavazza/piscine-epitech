@@ -41,7 +41,7 @@ graph TD
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 21-22**: Structural design: Database schemas and UML modeling.
 - **Day 23-24**: Core backend: User authentication and session management.
@@ -51,7 +51,7 @@ graph TD
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Architectural Vision**: Thinking in terms of MVC and decoupled systems.
 - **Data Integrity**: Designing robust relational schemas and complex SQL queries.

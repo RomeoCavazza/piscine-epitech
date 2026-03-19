@@ -42,7 +42,7 @@ graph TD
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 41-43**: libGDX discovery: rendering loops, textures, and sprites.
 - **Day 44-46**: Input & Interaction: managing keyboard/mouse and physics basics.
@@ -52,7 +52,7 @@ graph TD
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Modular Design**: Breaking down complex systems into decoupled entities.
 - **Performance Tuning**: Optimizing memory usage and render calls for 60FPS.

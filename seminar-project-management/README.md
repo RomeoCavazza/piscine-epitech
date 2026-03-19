@@ -42,7 +42,7 @@ graph LR
 
 ---
 
-## 📅 Key Deliverables (PAR-15)
+## Key Deliverables (PAR-15)
 
 - **Budget Consolidation**: Detailed CAPEX/OPEX hypothesis and chiffrage.
 - **Gantt Orchestration**: Complete project timeline with dependencies and critical paths.
@@ -52,7 +52,7 @@ graph LR
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Strategic Vision**: Translating business goals into structured implementation plans.
 - **Financial Acumen**: Understanding the economic impact of technical decisions.

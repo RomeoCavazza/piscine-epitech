@@ -44,7 +44,7 @@ graph TD
 
 ---
 
-## 📅 The Implementation (god_tier_cuda.py)
+## The Implementation (god_tier_cuda.py)
 
 - **Vectorized Pre-computation**: Using NumPy/CuPy to calculate millions of building-antenna distance pairs in milliseconds.
 - **Weighted Greedy Heuristic**: Selecting positions based on dynamic `Potential Population Coverage / Installation Cost` ratios.
@@ -53,7 +53,7 @@ graph TD
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Algorithmic Mastery**: Mastering combinatorial optimization and high-level heuristics.
 - **GPU Engineering**: Bridging Python logic with high-performance CUDA kernels.

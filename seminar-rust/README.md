@@ -42,7 +42,7 @@ graph TD
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 71-73**: **Bootstrap**: Ownership fundamentals, borrowing, lifetimes, and pattern matching.
 - **Day 74-76**: **Core API**: Building RESTful services with Actix and robust error handling.
@@ -50,7 +50,7 @@ graph TD
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Memory Fearlessness**: Writing complex systems without fearing Segfaults or Race Conditions.
 - **Zero-Cost Abstractions**: Leveraging traits and generics for high-level logic with C-level speed.

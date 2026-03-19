@@ -41,7 +41,7 @@ graph LR
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 11**: System scripts for web management: archiving, compression, and deployment.
 - **Day 12**: Semantic HTML5 architecture and web accessibility standards (CodingPedia).
@@ -55,7 +55,7 @@ graph LR
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Full-Stack Thinking**: Understanding the handover between client and server.
 - **Standards Compliance**: Writing clean, semantic, and SEO-friendly code.
