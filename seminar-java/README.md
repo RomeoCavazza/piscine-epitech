@@ -52,7 +52,7 @@ classDiagram
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 31**: Foundation: Basics, types, and the Java ecosystem.
 - **Day 32**: Advanced classes: Inheritance, polymorphism, and the Gecko model.
@@ -67,7 +67,7 @@ classDiagram
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Architectural Thinking**: Designing self-documenting and maintainable object trees.
 - **Strong Typing**: Leveraging the compiler to catch errors before execution.

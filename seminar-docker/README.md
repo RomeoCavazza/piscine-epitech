@@ -44,7 +44,7 @@ graph TD
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 60-62**: Docker Fundamentals: basic images, containers, and volumes.
 - **Day 63-64**: **Bootstrap Project**: Containerizing a Node.js stack with PostgreSQL.
@@ -52,7 +52,7 @@ graph TD
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Isolation Excellence**: Resolving "it works on my machine" through containerization.
 - **Distributed Thinking**: Understanding communication protocols between isolated services.

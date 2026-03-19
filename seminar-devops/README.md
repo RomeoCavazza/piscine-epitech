@@ -43,7 +43,7 @@ graph LR
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 56**: Virtualization & Debian basics: setting up the baseline environment and SSH security.
 - **Day 57**: Advanced Networking: DHCP (Kea), DNS (Bind9), and internal routing with nftables.
@@ -52,7 +52,7 @@ graph LR
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Infrastructural Vision**: Understanding how bits flow across hardware and software layers.
 - **Automation First**: Eliminating manual tasks through robust IaC playbooks.

@@ -41,7 +41,7 @@ graph LR
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 01**: Linux fundamentals, distribution architecture, and security basics (Bandit).
 - **Day 02**: Arithmetic logic: divisions, modulo, suites, and precision (π calculation).
@@ -56,7 +56,7 @@ graph LR
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Technical Agility**: Seamless navigation in a Unix-like environment.
 - **Computational Thinking**: Solving complex problems through recursive and modular logic.

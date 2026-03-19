@@ -43,7 +43,7 @@ graph LR
 
 ---
 
-## 📅 Chronological Journey
+## Chronological Journey
 
 - **Day 66-67**: JCasC Discovery: Defining a complete Jenkins instance in a single `my_marvin.yml`.
 - **Day 68-69**: Job DSL Mastery: Factoring repetitive tasks into a programmatic Groovy script.
@@ -51,7 +51,7 @@ graph LR
 
 ---
 
-## 🎨 Skills developed
+## Skills developed
 
 - **Reproducibility Excellence**: Eliminating "click-ops" through declarative configuration.
 - **Scale Engineering**: Automating the creation of hundreds of jobs with code.
