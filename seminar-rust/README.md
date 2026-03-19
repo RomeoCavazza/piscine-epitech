@@ -3,7 +3,7 @@
   <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
   <br />
   <img src="https://img.shields.io/badge/Seminar-Rust_Systems-6366f1?style=for-the-badge" alt="Seminar Badge" />
-  <img src="https://img.shields.io/badge/Days-71--80-00f2a6?style=for-the-badge" alt="Days Badge" />
+  <img src="https://img.shields.io/badge/Days-71--95-00f2a6?style=for-the-badge" alt="Days Badge" />
   <img src="https://img.shields.io/badge/Performance-Memory_Safety-ff4757?style=for-the-badge" alt="Focus Badge" />
 </div>
 <!-- markdownlint-enable MD033 -->
