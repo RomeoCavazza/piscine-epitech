@@ -1,8 +1,4 @@
 <div align="center">
-  <img src="assets/epitech_logo.png" alt="Epitech Logo" width="500"/>
-</div>
-
-<div align="center">
 
 <img src="frontend/public/logo.png" width="120" alt="Hello World" />
 
