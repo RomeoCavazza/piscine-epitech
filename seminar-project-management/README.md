@@ -1,34 +1,60 @@
-# Séminaire Project Management – SmartFridge (T‑CEN‑500)
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <br />
+  <img src="https://img.shields.io/badge/Seminar-Project_Management-6366f1?style=for-the-badge" alt="Seminar Badge" />
+  <img src="https://img.shields.io/badge/Project-SmartFridge-00f2a6?style=for-the-badge" alt="Project Badge" />
+  <img src="https://img.shields.io/badge/Focus-Strategy_&_Planning-ff4757?style=for-the-badge" alt="Focus Badge" />
+</div>
+<!-- markdownlint-enable MD033 -->
 
-Gestion de projet amont autour d’un produit innovant : **SmartFridge**, un réfrigérateur connecté nouvelle génération.  
-Objectif : cadrer le projet (planning, budget, ressources, risques, communication) et produire les livrables attendus.
+# Seminar: Strategic Project Management (SmartFridge)
 
-## Contenu
+Beyond the code: mastering the industrial frameworks of product innovation, risk mitigation, and strategic resource orchestration for the **SmartFridge** ecosystem.
 
-- **Ressources officielles** (`ressources/`)  
-  > ⚠️ Les PDFs officiels ne sont pas versionnés pour des raisons de propriété intellectuelle.  
-  > Consultez les fichiers `OBJECTIVES.md` dans chaque répertoire pour les objectifs et enseignements.
+---
 
-- **Livrables PAR-15** (`livrables/`)  
-  - `Par-15_budget.xlsx` : budget consolidé et hypothèses.  
-  - `PAR-15_gantt.xlsx` : planning projet (jalons, dépendances).  
-  - `PAR-15_resources.xlsx` : ressources humaines/matérielles et charges.  
-  - `PAR-15_risks.pdf` : risques, impacts et plans de mitigation (non versionné).  
-  - `PAR-15_skills.pdf` : personas RH et compétences clés (non versionné).  
-  - `PAR-15_communication1.pdf` / `PAR-15_communication2.pdf` : kits de communication (non versionnés).
+> [!IMPORTANT]
+> **Core Objectives**: 
+> - **Cadrage**: Defining the mission, scope, and strategic alignment.
+> - **Planning**: Construction and optimization of complex **Gantt** charts.
+> - **Financials**: Managing **CAPEX/OPEX** chiffrage and resource allocation.
+> - **Communication**: Orchestrating board-level reporting and stakeholder kits.
 
-## Notions clés
+## Management Core
 
-- **Gestion de projet** : cadrage, jalons, livrables, suivi.  
-- **Planning** : construction/critique de Gantt, dépendances et chemins critiques.  
-- **Ressources & budget** : chiffrage CAPEX/OPEX, allocations et arbitrages.  
-- **Risques & qualité** : probabilité/impact, plans de mitigation, effets planning/budget.  
-- **Communication** : messages adaptés aux équipes et au board, supports synthétiques.
+| Pillar | Implementation |
+|---|---|
+| **Timeline** | ![Gantt](https://img.shields.io/badge/Method-Gantt_Chart-blue?style=flat-square) ![Milestones](https://img.shields.io/badge/Track-Critical_Path-F05032?style=flat-square) |
+| **Execution** | ![Resources](https://img.shields.io/badge/Asset-HR_&_Persona-green?style=flat-square) ![Budget](https://img.shields.io/badge/Finance-CAPEX_/_OPEX-f3b145?style=flat-square) |
+| **Quality** | ![Risk](https://img.shields.io/badge/Safety-Mitigation_Plan-ff4757?style=flat-square) ![QA](https://img.shields.io/badge/Control-Deliverables-019733?style=flat-square) |
+| **Output** | ![Reporting](https://img.shields.io/badge/Board-Communication_Kits-EE6E73?style=flat-square) |
 
-## Compétences visées
+### Project Lifecycle
 
-- Traduire un sujet métier en **plan de projet structuré**.  
-- Construire un **Gantt cohérent** relié au budget, ressources et risques.  
-- Formaliser des **personas RH** et besoins en compétences.  
-- Concevoir des **supports de communication** adaptés aux interlocuteurs.  
-- Défendre un **budget** et un **planning** devant les parties prenantes.
+```mermaid
+graph LR
+    C[Cadrage] --> P[Planning: Gantt]
+    P --> R[Resource & Budget]
+    R --> S[Security & Risks]
+    S --> D[Delivery & Board Sync]
+```
+
+---
+
+## 📅 Key Deliverables (PAR-15)
+
+- **Budget Consolidation**: Detailed CAPEX/OPEX hypothesis and chiffrage.
+- **Gantt Orchestration**: Complete project timeline with dependencies and critical paths.
+- **Resource Matrix**: Mapping human and material assets to project phases.
+- **Risk Mitigation**: Probabilistic impact analysis and strategic fallback plans.
+- **Strategic Communication**: Multi-channel kits for team alignment and board reporting.
+
+---
+
+## 🎨 Skills developed
+
+- **Strategic Vision**: Translating business goals into structured implementation plans.
+- **Financial Acumen**: Understanding the economic impact of technical decisions.
+- **Risk Governance**: Anticipating bottlenecks and implementing robust mitigation.
+- **Leadership Sync**: Mastering the art of professional delivery and stakeholder management.

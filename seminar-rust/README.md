@@ -1,40 +1,58 @@
-# Séminaire Rust (Days 71–80)
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <br />
+  <img src="https://img.shields.io/badge/Seminar-Rust_Systems-6366f1?style=for-the-badge" alt="Seminar Badge" />
+  <img src="https://img.shields.io/badge/Days-71--80-00f2a6?style=for-the-badge" alt="Days Badge" />
+  <img src="https://img.shields.io/badge/Performance-Memory_Safety-ff4757?style=for-the-badge" alt="Focus Badge" />
+</div>
+<!-- markdownlint-enable MD033 -->
 
-![Rust](https://img.shields.io/badge/Rust-000000?logo=rust&logoColor=white)
-![Cargo](https://img.shields.io/badge/Cargo-000000?logo=rust&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+# Seminar: Systems Programming & Modern Web (Rust)
 
-Introduction à la programmation système avec Rust : sécurité mémoire, ownership, et développement web moderne.
+Entering the elite tier of systems engineering: mastering **Ownership**, **Borrowing**, and **Lifetimes** to build zero-cost abstractions with absolute memory safety.
 
-## Contenu
-- Days 71–80 → Projet complet : Application web full-stack avec Rust ([README](Days_71_80/README.md))
+---
 
-## Notions
-- **Rust** : ownership, borrowing, lifetimes, pattern matching
-- **Cargo** : gestionnaire de paquets et build system
-- **Backend** : framework web (Actix/Rocket), ORM, API REST
-- **Frontend** : Yew/Leptos, WASM compilation
-- **Database** : intégration PostgreSQL, migrations
-- **Containerization** : Docker, déploiement d'applications Rust
+> [!IMPORTANT]
+> **Core Objectives**: 
+> - **Ownership Mastery**: Deep dive into the borrow checker and memory management.
+> - **Full-Stack Rust**: Building decoupled architectures with Actix/Rocket and Yew/Leptos.
+> - **WASM Compilation**: Bringing high-performance code to the browser.
+> - **Database Synergy**: Type-safe database interactions with PostgreSQL.
 
-## Structure du projet
+## Technical Core
 
-### Bootstrap
-Exercices d'introduction aux fondamentaux de Rust : syntaxe de base, ownership, types, traits.
+| Layer | Implementation |
+|---|---|
+| **Language** | ![Rust](https://img.shields.io/badge/Language-Rust-000000?style=flat-square&logo=rust&logoColor=white) |
+| **Backend** | ![Actix](https://img.shields.io/badge/API-Actix_Web-2496ED?style=flat-square) ![Rocket](https://img.shields.io/badge/API-Rocket-FF4B4B?style=flat-square) |
+| **Frontend** | ![Leptos](https://img.shields.io/badge/UI-Leptos_/_WASM-f78516?style=flat-square) ![Yew](https://img.shields.io/badge/UI-Yew_/_WASM-4EAA25?style=flat-square) |
+| **Database** | ![PostgreSQL](https://img.shields.io/badge/DB-PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white) |
 
-### Hello World
-Application web complète démontrant :
-- Backend API RESTful
-- Frontend moderne
-- Base de données PostgreSQL
-- Déploiement Docker
-- Tests unitaires et d'intégration
+### Decoupled Rust Architecture
 
-## Compétences développées
-- Programmation système sécurisée (memory safety sans GC)
-- Développement web moderne avec Rust
-- Architecture full-stack
-- Gestion avancée de la mémoire et des ressources
-- Tests et déploiement d'applications Rust
+```mermaid
+graph TD
+    Client[Frontend: WASM / Leptos] <--> API[Backend: Actix Web]
+    API <--> Logic[Business Logic & Traits]
+    Logic <--> DB[(PostgreSQL)]
+    Build[Cargo / Docker] --> API
+```
+
+---
+
+## 📅 Chronological Journey
+
+- **Day 71-73**: **Bootstrap**: Ownership fundamentals, borrowing, lifetimes, and pattern matching.
+- **Day 74-76**: **Core API**: Building RESTful services with Actix and robust error handling.
+- **Day 77-80**: **Project: Hello World**: A complete, containerized full-stack Rust application.
+
+---
+
+## 🎨 Skills developed
+
+- **Memory Fearlessness**: Writing complex systems without fearing Segfaults or Race Conditions.
+- **Zero-Cost Abstractions**: Leveraging traits and generics for high-level logic with C-level speed.
+- **Type-Safe Full-Stack**: Ensuring data integrity from the DB schema to the UI state.
+- **Modern Build Lifecycle**: Mastering Cargo, cross-compilation, and Rust Dockerization.

@@ -1,93 +1,61 @@
-# Code Competition — 5G or not 5G ?
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <br />
+  <img src="https://img.shields.io/badge/Seminar-5G_Algorithms-6366f1?style=for-the-badge" alt="Seminar Badge" />
+  <img src="https://img.shields.io/badge/Final-Competition-00f2a6?style=for-the-badge" alt="Days Badge" />
+  <img src="https://img.shields.io/badge/Tech-CUDA_&_Optimization-ff4757?style=for-the-badge" alt="Focus Badge" />
+</div>
+<!-- markdownlint-enable MD033 -->
 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-![Algorithms](https://img.shields.io/badge/Algorithms-FF6B6B?logo=algorithm&logoColor=white)
-![Optimization](https://img.shields.io/badge/Optimization-4ECDC4?logo=optimization&logoColor=white)
-![CUDA](https://img.shields.io/badge/CUDA-76B900?logo=nvidia&logoColor=white)
+# Code Competition: 5G or not 5G?
 
-## Contexte
+A high-stakes algorithmic sprint: solving the multi-dimensional challenge of optimal 5G antenna placement with cost efficiency and massive scale in mind.
 
-Compétition algorithmique d'optimisation : déploiement optimal d'un réseau d'antennes 5G pour couvrir une ville tout en minimisant les coûts d'installation.
+---
 
-## Problématique
+> [!IMPORTANT]
+> **The Challenge**: 
+> - **Input**: City maps with building coordinates and varying populations.
+> - **Hardware**: Diverse 5G antenna types with specific costs and ranges.
+> - **Constraint**: 100% population coverage at the **absolute minimum cost**.
 
-Étant donné :
-- Une carte de bâtiments avec leurs positions (x, y) et populations
-- Un ensemble d'antennes 5G avec leurs coûts d'installation et portées
-- Une contrainte de couverture minimale de la population
+## Technical Core
 
-Objectif : **Minimiser le coût total** d'installation des antennes tout en garantissant que chaque bâtiment est couvert par au moins une antenne.
+| Layer | Implementation |
+|---|---|
+| **Logic** | ![Python 3](https://img.shields.io/badge/Language-Python_3-3776AB?style=flat-square&logo=python&logoColor=white) |
+| **GPU** | ![CUDA](https://img.shields.io/badge/Acceleration-NVIDIA_CUDA-76B900?style=flat-square&logo=nvidia&logoColor=white) ![Numba](https://img.shields.io/badge/Compiler-Numba_/_JIT-blue?style=flat-square) |
+| **Math** | ![NumPy](https://img.shields.io/badge/Crunching-NumPy-013243?style=flat-square&logo=numpy&logoColor=white) ![CuPy](https://img.shields.io/badge/Crunching-CuPy-4EAA25?style=flat-square) |
+| **Vis** | ![Matplotlib](https://img.shields.io/badge/Visuals-Matplotlib-11557c?style=flat-square) |
 
-## Contraintes
+### Heuristic Optimization Logic
 
-- **Couverture** : Un bâtiment est couvert si la distance euclidienne à une antenne ≤ portée de l'antenne
-- **Optimisation** : Trouver le placement optimal (nombre et positions) des antennes
-- **Budget** : Chaque antenne a un coût d'installation variable selon sa portée
-
-## Approche algorithmique
-
-### Stratégies possibles
-
-1. **Greedy (glouton)** : Placer itérativement l'antenne qui couvre le plus de bâtiments non couverts
-2. **Clustering** : Regrouper les bâtiments proches et placer une antenne par cluster
-3. **Optimisation locale** : Recherche locale avec perturbations pour échapper aux minima locaux
-4. **Heuristiques avancées** : Algorithmes génétiques, recuit simulé, colonies de fourmis
-
-### Solution implémentée
-
-Le fichier [god_tier_cuda.py](god_tier_cuda.py) contient une solution optimisée utilisant :
-- Clustering spatial des bâtiments
-- Calcul de couverture vectorisé
-- Optimisation greedy avec backtracking
-- **Accélération GPU avec CUDA** pour les calculs de distance
-
-## Technologies
-
-- **Python 3.x** : langage principal
-- **NumPy** : calculs vectorisés, distances euclidiennes
-- **CUDA/CuPy** : accélération GPU pour les calculs massifs
-- **Matplotlib** : visualisation des résultats (optionnel)
-
-## Structure du code
-
-```python
-# Pseudo-code de la stratégie
-1. Charger les données (bâtiments, antennes disponibles)
-2. Calculer la matrice de distances bâtiments-positions possibles
-3. Algorithme greedy optimisé :
-   - Sélectionner l'antenne avec le meilleur ratio couverture/coût
-   - Marquer les bâtiments couverts
-   - Répéter jusqu'à couverture complète
-4. Optimisation locale pour réduire le coût
-5. Retourner la configuration optimale
+```mermaid
+graph TD
+    Data[Load Maps & Costs] --> Cluster[Spatial Building Clustering]
+    Cluster --> GPU[GPU Matrix: Building-Antenna Distances]
+    GPU --> Greedy[Greedy Solver: Best Ratio Selection]
+    Greedy --> Back[Backtracking & Local Refresh]
+    Back --> Result{100% Covered?}
+    Result -- No --> Greedy
+    Result -- Yes --> Final[Optimized JSON Result]
 ```
 
-## Métriques de performance
+---
 
-- **Coût total** : somme des coûts des antennes installées (à minimiser)
-- **Couverture** : pourcentage de la population couverte (≥ 100%)
-- **Temps d'exécution** : performance algorithmique
-- **Mémoire** : efficacité du code
+## 📅 The Implementation (god_tier_cuda.py)
 
-## Compétences développées
+- **Vectorized Pre-computation**: Using NumPy/CuPy to calculate millions of building-antenna distance pairs in milliseconds.
+- **Weighted Greedy Heuristic**: Selecting positions based on dynamic `Potential Population Coverage / Installation Cost` ratios.
+- **CUDA JIT Acceleration**: Critical kernels implemented with **Numba** to leverage thousands of GPU cores for distance matrices.
+- **Local Perturbation**: Fine-tuning the final placement to eliminate redundant antennas.
 
-- **Algorithmique** : optimisation combinatoire, heuristiques
-- **Structures de données** : graphes, arbres de recherche
-- **Performance** : vectorisation, parallélisation GPU
-- **Analyse de complexité** : compromis temps/mémoire
-- **Modélisation** : transformation d'un problème métier en problème algorithmique
+---
 
-## Résultats
+## 🎨 Skills developed
 
-La solution implémentée permet de :
-- ✅ Couvrir 100% des bâtiments
-- ✅ Minimiser le coût d'installation
-- ✅ Temps d'exécution optimisé avec CUDA
-- ✅ Scalabilité sur grandes instances (milliers de bâtiments)
-
-## Ressources
-
-- [Introduction to Optimization Algorithms](https://en.wikipedia.org/wiki/Optimization_algorithm)
-- [Greedy Algorithms](https://en.wikipedia.org/wiki/Greedy_algorithm)
-- [CUDA Python (CuPy)](https://cupy.dev/)
-- [Facility Location Problem](https://en.wikipedia.org/wiki/Facility_location_problem)
+- **Algorithmic Mastery**: Mastering combinatorial optimization and high-level heuristics.
+- **GPU Engineering**: Bridging Python logic with high-performance CUDA kernels.
+- **Complex Modeling**: Translating business cost-constraints into mathematical objective functions.
+- **Performance at Scale**: Designing systems capable of processing thousands of buildings in seconds.

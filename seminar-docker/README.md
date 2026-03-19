@@ -1,43 +1,61 @@
-# Séminaire Docker (Days 60–67)
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <br />
+  <img src="https://img.shields.io/badge/Seminar-Docker_&_Orchestration-6366f1?style=for-the-badge" alt="Seminar Badge" />
+  <img src="https://img.shields.io/badge/Days-60--67-00f2a6?style=for-the-badge" alt="Days Badge" />
+  <img src="https://img.shields.io/badge/Focus-Microservices-ff4757?style=for-the-badge" alt="Focus Badge" />
+</div>
+<!-- markdownlint-enable MD033 -->
 
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
-![Docker Compose](https://img.shields.io/badge/Docker%20Compose-2496ED?logo=docker&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+# Seminar: Containerization & Microservices
 
-Conteneurisation d'applications, orchestration avec Docker Compose, et déploiement de microservices.
+Mastering the paradigm shift of containerization: isolating applications, managing dependencies, and orchestrating complex distributed systems with Docker and Docker Compose.
 
-## Contenu
-- Days 60–67 → Docker et orchestration : bootstrap et projet Popeye ([README](Day_61_65/README.md))
-  - **Bootstrap** : Première application conteneurisée (Node.js), Dockerfile, Docker Compose avec PostgreSQL
-  - **Projet Popeye** : Application de vote distribuée avec architecture microservices (Flask, Java worker, Node.js, Redis, PostgreSQL)
+---
 
-## Notions
-- **Conteneurisation** : Images Docker, Dockerfile, build, run, exec, logs
-- **Orchestration** : Docker Compose, services, networks, volumes, depends_on
-- **Architecture microservices** : Séparation des responsabilités, communication inter-services
-- **Réseaux Docker** : Réseaux bridge, isolation, communication entre conteneurs
-- **Volumes** : Persistance des données, volumes nommés, bind mounts
-- **Multi-services** : Gestion de dépendances, healthchecks, restart policies
+> [!IMPORTANT]
+> **Core Objectives**: 
+> - **Container Mastery**: Building optimized images with multi-stage Dockerfiles.
+> - **Orchestration**: Designing complex inter-service networks with **Docker Compose**.
+> - **Architecture**: Deploying the **Popeye** project (distributed voting app).
+> - **Persistence**: Managing volumes, bind mounts, and database state.
 
-## Technologies
-- **Conteneurisation** : Docker, Docker Compose
-- **Backend** : Node.js (Express), Python (Flask), Java
-- **Bases de données** : PostgreSQL, Redis
-- **Orchestration** : Docker Compose, services, networks, volumes
-- **Outils** : docker, docker-compose, docker build, docker run
+## Technical Core
 
-## Compétences
-- **Conteneurisation** : Création et gestion d'images Docker, Dockerfile
-- **Orchestration** : Configuration Docker Compose, services multiples
-- **Architecture microservices** : Conception et déploiement d'applications distribuées
-- **Réseaux Docker** : Configuration de réseaux, communication inter-conteneurs
-- **Gestion des données** : Volumes, persistance, backup
-- **Déploiement** : Configuration production, monitoring, bonnes pratiques
+| Layer | Implementation |
+|---|---|
+| **Engine** | ![Docker](https://img.shields.io/badge/Engine-Docker-2496ED?style=flat-square&logo=docker&logoColor=white) |
+| **Orchestration** | ![Docker Compose](https://img.shields.io/badge/Orchestrator-Docker_Compose-2496ED?style=flat-square&logo=docker&logoColor=white) |
+| **Languages** | ![Node.js](https://img.shields.io/badge/Runtime-Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white) ![Python](https://img.shields.io/badge/Logic-Python_3-3776AB?style=flat-square&logo=python&logoColor=white) |
+| **Databases** | ![PostgreSQL](https://img.shields.io/badge/DB-PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white) ![Redis](https://img.shields.io/badge/Cache-Redis-DC382D?style=flat-square&logo=redis&logoColor=white) |
+
+### Microservices Architecture (Project Popeye)
+
+```mermaid
+graph TD
+    User((User)) --> Vote[Vote App: Flask]
+    Vote --> Redis[(Redis)]
+    Worker[Worker: Java] --> Redis
+    Worker --> DB[(PostgreSQL)]
+    Result[Result App: Node.js] --> DB
+    Result --> FinalUser((Final User))
+```
+
+---
+
+## 📅 Chronological Journey
+
+- **Day 60-62**: Docker Fundamentals: basic images, containers, and volumes.
+- **Day 63-64**: **Bootstrap Project**: Containerizing a Node.js stack with PostgreSQL.
+- **Day 65-67**: **Project Popeye**: Orchestrating a 5-tier microservices architecture.
+
+---
+
+## 🎨 Skills developed
+
+- **Isolation Excellence**: Resolving "it works on my machine" through containerization.
+- **Distributed Thinking**: Understanding communication protocols between isolated services.
+- **Optimized Builds**: Implementing multi-stage builds to minimize image size.
+- **Infrastructure as Logic**: Defining complex stack dependencies in YAML.
 
