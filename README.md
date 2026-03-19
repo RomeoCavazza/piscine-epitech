@@ -47,9 +47,9 @@ seminar-xxx/
 
 ### [Preparation Seminar — Days 01-10](seminar-preparation/README.md)
 
-Linux, Python, and algorithmic fundamentals.
+Linux fundamentals (Bandit), Python scripting (syntax, recursion, exceptions), and introductory graphics/game development with **Turtle** and **Pygame**.
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" height="25" alt="linux" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" height="25" alt="bash" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg" height="25" alt="vim" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" height="25" alt="linux" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" height="25" alt="bash" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg" height="25" alt="vim" /> **Turtle** **Pygame**
 
 ### [Web Seminar — Days 11-20](seminar-web/README.md)
 
@@ -105,9 +105,9 @@ Upfront project management around the SmartFridge product: Gantt planning, budge
 
 ### [Code Competition — 5G or not 5G ?](code-competition/README.md)
 
-Algorithmic optimization competition: optimal deployment of a 5G antenna network to cover a city while minimizing installation costs.
+High-performance algorithmic optimization competition: optimal deployment of a 5G antenna network using **CUDA**-accelerated greedy solvers (**Numba**), spatial clustering, and vectorized computations for massive datasets. Optimized for NVIDIA Blackwell / RTX 5070 Ti.
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" /> **Algorithms** **Optimization**
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" alt="python" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" alt="numpy" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" height="25" alt="pandas" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" height="25" alt="matplotlib" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nvidia/nvidia-original.svg" height="25" alt="nvidia" /> **CUDA** **Numba** **Parallel Compute**
 
 ---
 
