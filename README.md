@@ -1,7 +1,4 @@
-# Epitech Piscine - Technical Curriculum
-
-A high-intensity, polyglot journey through the foundations of modern software engineering. From the binary logic of Linux systems to the memory-safe architectures of Rust and GPU-accelerated algorithmic optimization, this repository documents 80 days of continuous technical evolution at Epitech.
-
+<!-- markdownlint-disable MD033 -->
 <div align="center">
   <img src="assets/epitech_logo.png" alt="Epitech Logo" width="500"/>
   <br />
@@ -9,6 +6,7 @@ A high-intensity, polyglot journey through the foundations of modern software en
   <img src="https://img.shields.io/badge/Stack-Polyglot-6366f1?style=for-the-badge" alt="Stack" />
   <img src="https://img.shields.io/badge/Focus-Systems_&_Web-ff4757?style=for-the-badge" alt="Focus" />
 </div>
+<!-- markdownlint-enable MD033 -->
 
 ## Overview
 
@@ -65,46 +63,57 @@ Line-by-line breakdown of the multi-stack ecosystem (excluding external dependen
 
 ### [Preparation Seminar — Days 01-10](seminar-preparation/README.md)
 Linux fundamentals, Python scripting, and introductory graphics development with **Turtle** and **Pygame**.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg" height="25" />
 
 ### [Web Seminar — Days 11-20](seminar-web/README.md)
 Semantic HTML5/CSS, client-side JavaScript, and PHP integration.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" />
 
 ### [Job Board Seminar — Days 21-30](seminar-job-board/README.md)
 Full-stack recruitment platform with REST API and database integration.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" /> <img src="assets/rest-api.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" height="25" />
 
 ### [Java Seminar — Days 31-40](seminar-java/README.md)
 Object-oriented mastery: generics, reflection, and fundamental design patterns.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" height="25" />
 
 ### [My First Game Seminar — Days 41-55](seminar-my-first-game/README.md)
 2D game development using libGDX, adhering to SOLID principles and modular architecture.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" height="25" /> <img src="assets/jacoco.png" height="25" />
 
 ### [DevOps Seminar — Days 56-60](seminar-devops/README.md)
 Linux administration, advanced networking, system security, and Ansible automation.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" height="25" /> <img src="assets/virtualbox.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg" height="25" />
 
 ### [Docker Seminar — Days 60-67](seminar-docker/README.md)
 Containerization and microservices orchestration with Docker Compose.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" />
 
 ### [Jenkins Seminar — Days 66-70](seminar-jenkins/README.md)
 Continuous Integration with Jenkins and Configuration as Code pipelines.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg" height="25" />
 
 ### [Rust Seminar — Days 71-80](seminar-rust/README.md)
 Memory-safe systems programming and Discord-like real-time messaging.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tauri/tauri-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" height="25" />
 
 ### [Project Management Seminar — SmartFridge (T‑CEN‑500)](seminar-project-management/README.md)
 Holistic project management around the SmartFridge product: Gantt planning, budget, resources, and risk communication.
+
 <img src="https://img.shields.io/badge/Planning-Gantt-6366f1?style=flat-square" /> <img src="https://img.shields.io/badge/Budgeting-Resources-ff4757?style=flat-square" /> <img src="https://img.shields.io/badge/Risks-Management-00f2a6?style=flat-square" />
 
 ### [Code Competition — 5G or not 5G?](competition/README.md)
 Algorithmic optimization for 5G antenna network deployment using CUDA.
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="assets/nvidia.png" height="25" />
 
 ---
@@ -145,17 +154,17 @@ graph TD
 - **Python**: Scripts, algorithms, console applications
 - **Java**: OOP, generics, design patterns, libGDX
 - **PHP**: Web backend, REST API, database integration
-- **Rust**: Memory safety, zero-cost abstractions, Axum, Tauri
+- **Rust**: ![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white) Memory safety, zero-cost abstractions, Axum, Tauri
 
 ### Frontend
 - **HTML5/CSS3**: Semantic, responsive, Materialize
 - **JavaScript ES6+**: DOM, events, fetch API, validation
-- **Modern UI**: Next.js 19, Leptos (WASM), Yew
+- **Modern UI**: ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white) ![WASM](https://img.shields.io/badge/WASM-654FF0?style=flat-square&logo=webassembly&logoColor=white) ![Tauri](https://img.shields.io/badge/Tauri-24C8DB?style=flat-square&logo=tauri&logoColor=white)
 
 ### Databases
 - **MySQL / MariaDB**: Relational schemas, SQL queries, PDO
 - **PostgreSQL**: Relational database, advanced queries, Docker integration
-- **NoSQL**: MongoDB (documents), Redis (in-memory)
+- **NoSQL**: ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
 
 ### System & DevOps
 - **Linux/Debian**: System administration, service management
