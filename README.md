@@ -111,10 +111,6 @@ Algorithmic optimization competition: optimal deployment of a 5G antenna network
 
 ---
 
-
-
----
-
 ## Technologies Covered
 
 ### Backend
