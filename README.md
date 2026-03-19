@@ -24,6 +24,7 @@ piscine/
 ├── seminar-devops/          # Days 56-60 : Administration, virtualization, automation
 ├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
 ├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
+├── seminar-rust/            # Days 71-80 : Rust, memory safety, ownership, full-stack
 ├── seminar-project-management/ # T-CEN-500 : Project management, Gantt, budget, risks, communications
 └── code-competition/         # 5G antenna optimization competition
 ```
@@ -92,6 +93,12 @@ Continuous Integration & Delivery with Jenkins, Configuration as Code (JCasC), a
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="25" alt="jenkins" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" alt="git" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" height="25" alt="github" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg" height="25" alt="yaml" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg" height="25" alt="groovy" />
 
+### [Rust Seminar — Days 71-80](seminar-rust/README.md)
+
+Introduction to system programming with Rust: memory safety, ownership, and modern web development.
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" height="25" alt="rust" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" alt="docker" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" alt="postgresql" />
+
 ### [Project Management Seminar — SmartFridge (T‑CEN‑500)](seminar-project-management/README.md)
 
 Upfront project management around the SmartFridge product: Gantt planning, budget, resources, risks, communications, and final presentation.
@@ -104,14 +111,7 @@ Algorithmic optimization competition: optimal deployment of a 5G antenna network
 
 ---
 
-## [Capstone Project: Hello World RTC](docs/README.md)
 
-At the end of the seminars, a final project was carried out to consolidate all learned skills. It is a real-time messaging application (Discord-like) using the full technical stack.
-
-- **Frontend**: Next.js 16 (React 19)
-- **Backend**: Rust (Axum, Tokio)
-- **Real-time**: WebSockets
-- **Databases**: PostgreSQL & MongoDB
 
 ---
 
