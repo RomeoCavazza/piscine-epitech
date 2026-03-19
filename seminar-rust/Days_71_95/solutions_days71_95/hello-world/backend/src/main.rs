@@ -73,6 +73,12 @@ async fn main() {
         .await
         .expect("Failed to connect to PostgreSQL");
 
+    // Exécuter les migrations SQLx automatiquement au démarrage
+    sqlx::migrate!("./migrations")
+        .run(&pool)
+        .await
+        .expect("Failed to run database migrations");
+
     let mongodb_url =
         std::env::var("MONGODB_URL").unwrap_or_else(|_| "mongodb://localhost:27017".to_string());
     let mongo_client = MongoClient::with_uri_str(&mongodb_url)
