@@ -12,6 +12,23 @@
 
 The definitive repository of technical seminars and high-stakes projects (Days 01-80) delivered at Epitech. A journey from binary logic and Python scripting to advanced systems engineering with Rust and DevOps automation.
 
+### Project Structure
+
+```text
+piscine/
+├── seminar-preparation/     # Days 01-10 : Linux, Python, algorithms
+├── seminar-web/             # Days 11-20 : HTML, CSS, JavaScript, PHP
+├── seminar-job-board/       # Days 21-30 : Full-stack project
+├── seminar-java/            # Days 31-40 : OOP, generics, design patterns
+├── seminar-my-first-game/   # Days 41-55 : 2D game development (libGDX)
+├── seminar-devops/          # Days 56-60 : Administration, virtualization, automation
+├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
+├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
+├── seminar-rust/            # Days 71-80 : Rust, memory safety, ownership, full-stack
+├── seminar-project-management/ # T-CEN-500 : Project management
+└── competition/                # 5G antenna optimization competition
+```
+
 ---
 
 ## Technical Core
@@ -39,55 +56,6 @@ Line-by-line breakdown of the multi-stack ecosystem (excluding external dependen
 | **PHP** | 27 | ~6,000 | 6% |
 | **System/YML** | 12 | ~1,200 | 1% |
 | **Total** | **~700** | **~105,000** | **100%** |
-
----
-
-## Curriculum Roadmap
-
-```mermaid
-graph TD
-    subgraph Prepare[Phase 0: Foundation]
-        S1[Preparation Seminar: Linux & Python]
-    end
-    subgraph Web[Phase 1: Web Ecosystem]
-        S2[Web Seminar: LAMP & JS]
-        S3[Job Board: Full-Stack Integration]
-    end
-    subgraph Java[Phase 2: Object Oriented]
-        S4[Java Seminar: Patterns & OOP]
-        S5[My First Game: libGDX Engine]
-    end
-    subgraph Ops[Phase 3: Infrastructure]
-        S6[DevOps: Admin & Ansible]
-        S7[Docker: Containerization]
-        S8[Jenkins: CI/CD Pipelines]
-    end
-    subgraph System[Phase 4: High Performance]
-        S9[Rust Seminar: Memory Safety]
-        S10[5G Competition: CUDA Algorithms]
-    end
-    
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 --> S10
-```
-
----
-
-## Project Structure
-
-```text
-piscine/
-├── seminar-preparation/     # Days 01-10 : Linux, Python, algorithms
-├── seminar-web/             # Days 11-20 : HTML, CSS, JavaScript, PHP
-├── seminar-job-board/       # Days 21-30 : Full-stack project
-├── seminar-java/            # Days 31-40 : OOP, generics, design patterns
-├── seminar-my-first-game/   # Days 41-55 : 2D game development (libGDX)
-├── seminar-devops/          # Days 56-60 : Administration, virtualization, automation
-├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
-├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
-├── seminar-rust/            # Days 71-80 : Rust, memory safety, ownership, full-stack
-├── seminar-project-management/ # T-CEN-500 : Project management
-└── competition/                # 5G antenna optimization competition
-```
 
 ---
 
@@ -135,10 +103,74 @@ Algorithmic optimization for 5G antenna network deployment using CUDA.
 
 ---
 
+## Technologies Covered
+
+### Backend
+- **Python**: Scripts, algorithms, console applications
+- **Java**: OOP, generics, design patterns, libGDX
+- **PHP**: Web backend, REST API, database integration
+- **Rust**: Memory safety, zero-cost abstractions, Axum, Tauri
+
+### Frontend
+- **HTML5/CSS3**: Semantic, responsive, Materialize
+- **JavaScript ES6+**: DOM, events, fetch API, validation
+- **Modern UI**: Next.js 19, Leptos (WASM), Yew
+
+### Databases
+- **MySQL / MariaDB**: Relational schemas, SQL queries, PDO
+- **PostgreSQL**: Relational database, advanced queries, Docker integration
+- **NoSQL**: MongoDB (documents), Redis (in-memory)
+
+### System & DevOps
+- **Linux/Debian**: System administration, service management
+- **Virtualization**: VirtualBox, virtual machines, snapshots
+- **Network**: DHCP (kea-dhcp4-server), DNS (bind9), routing, nftables
+- **Security**: SSH, fail2ban, firewall, authentication
+- **Automation**: Ansible (Infrastructure as Code), bash scripts, cron
+- **CI/CD**: Jenkins pipelines, GitHub Actions, Docker Compose
+
+### Algorithms & Optimization
+- **Greedy algorithms**: Local optimization strategies
+- **Clustering**: Spatial grouping for shared antenna coverage
+- **GPU Acceleration**: NVIDIA CUDA, Numba JIT, vectorized computations
+
+---
+
+## Curriculum Roadmap
+
+```mermaid
+graph TD
+    subgraph Prepare[Phase 0: Foundation]
+        S1[Preparation Seminar: Linux & Python]
+    end
+    subgraph Web[Phase 1: Web Ecosystem]
+        S2[Web Seminar: LAMP & JS]
+        S3[Job Board: Full-Stack Integration]
+    end
+    subgraph Java[Phase 2: Object Oriented]
+        S4[Java Seminar: Patterns & OOP]
+        S5[My First Game: libGDX Engine]
+    end
+    subgraph Ops[Phase 3: Infrastructure]
+        S6[DevOps: Admin & Ansible]
+        S7[Docker: Containerization]
+        S8[Jenkins: CI/CD Pipelines]
+    end
+    subgraph System[Phase 4: High Performance]
+        S9[Rust Seminar: Memory Safety]
+        S10[5G Competition: CUDA Algorithms]
+    end
+    
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 --> S10
+```
+
+---
+
 ## Skills Developed
 
-- **Full-stack engineering**: Comprehensive mastery of the web trio (HTML/CSS/JS) and advanced backends (PHP/Rust/Java).
-- **Object-oriented design**: Deep dive into design patterns and modular system architecture.
-- **Infrastructure as Code**: Automation of complex environments with Ansible, Docker, and Jenkins.
-- **High-Performance computing**: Leveraging GPU acceleration (CUDA) and memory-safe systems (Rust).
-- **Technical Documentation**: Professional standards for versioning, testing, and documentation.
+- **Full-Stack Mastery**: Bridging the gap between low-level system logic (C/C++, Rust) and modern high-level web interfaces (React/Next.js, PHP).
+- **Object-Oriented Architecture**: Deep understanding of SOLID principles, advanced design patterns, and modular software engineering.
+- **Enterprise DevSecOps**: Automating the entire software lifecycle from ground-up Linux environments to containerized, CI/CD-driven deployments.
+- **Scientific Computing**: Translating complex mathematical objective functions into high-performance, GPU-accelerated algorithmic solvers.
+- **Project Leadership**: Mastering technical documentation, team communication, resource planning, and risk management through high-stakes seminars.
+- **Polyglot Fluency**: Seamlessly switching between paradigms (Procedural, OOP, Functional) across Python, Java, Rust, PHP, and JavaScript.
