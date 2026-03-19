@@ -1,4 +1,8 @@
 <div align="center">
+  <img src="assets/epitech_logo.png" alt="Epitech Logo" width="500"/>
+</div>
+
+<div align="center">
 
 <img src="frontend/public/logo.png" width="120" alt="Hello World" />
 
@@ -14,8 +18,8 @@
 </p>
 
 <p>
-  <a href="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/backend-ci.yml"><img src="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/backend-ci.yml/badge.svg" alt="Backend CI" /></a>
-  <a href="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/frontend-ci.yml"><img src="https://github.com/RomeoCavazza/piscine-epitech/actions/workflows/frontend-ci.yml/badge.svg" alt="Frontend CI" /></a>
+  <a href="https://github.com/EpitechMscProPromo2028/T-DEV-600-PAR_27/actions/workflows/backend-ci.yml"><img src="https://github.com/EpitechMscProPromo2028/T-DEV-600-PAR_27/actions/workflows/backend-ci.yml/badge.svg" alt="Backend CI" /></a>
+  <a href="https://github.com/EpitechMscProPromo2028/T-DEV-600-PAR_27/actions/workflows/frontend-ci.yml"><img src="https://github.com/EpitechMscProPromo2028/T-DEV-600-PAR_27/actions/workflows/frontend-ci.yml/badge.svg" alt="Frontend CI" /></a>
 </p>
 
 </div>
