@@ -65,8 +65,9 @@ uploads/
 # ISO files (too large for Git)
 *.iso
 
-# PDF files (intellectual property - replaced by OBJECTIVES.md)
+# PDF files (consignes, IP — do not commit)
 *.pdf
+**/*.pdf
 
 # Rust build artifacts
 **/target/

@@ -44,18 +44,18 @@ piscine/
 
 ## Repository Pulse
 
-Line-by-line breakdown of the multi-stack ecosystem (excluding external dependencies):
+Line-by-line breakdown of the multi-stack ecosystem (code only, excluding blank/comment lines and external dependencies). Generated with [cloc](https://github.com/AlDanial/cloc):
 
-| Language | Files | Lines | Weight |
-|---|---|---|---|
-| **Java** | 206 | ~25,000 | 24% |
-| **HTML/CSS** | 218 | ~18,000 | 17% |
-| **Python** | 106 | ~15,000 | 14% |
-| **Rust** | 83 | ~12,000 | 11% |
-| **JS** | 41 | ~8,000 | 8% |
-| **PHP** | 27 | ~6,000 | 6% |
-| **System/YML** | 12 | ~1,200 | 1% |
-| **Total** | **~700** | **~105,000** | **100%** |
+| Language     | Files | Lines (code) | Weight |
+|--------------|-------|--------------|--------|
+| **Java**     | 205   | ~9,300       | 16%   |
+| **HTML/CSS** | 207   | ~33,100      | 58%   |
+| **Python**   | 106   | ~1,400       | 2%    |
+| **Rust**     | 68    | ~3,700       | 7%    |
+| **JS/TS**    | 73    | ~9,100       | 16%   |
+| **PHP**      | 27    | ~510         | 1%    |
+| **System/YML** | 10   | ~540         | 1%    |
+| **Total**    | **~706** | **~56,700** | **100%** |
 
 ---
 
