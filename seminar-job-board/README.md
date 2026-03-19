@@ -1,34 +1,59 @@
-# Séminaire Job Board (Days 21–30)
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <br />
+  <img src="https://img.shields.io/badge/Seminar-Job_Board-6366f1?style=for-the-badge" alt="Seminar Badge" />
+  <img src="https://img.shields.io/badge/Days-21--30-00f2a6?style=for-the-badge" alt="Days Badge" />
+  <img src="https://img.shields.io/badge/Scale-Industrial_Project-ff4757?style=for-the-badge" alt="Focus Badge" />
+</div>
+<!-- markdownlint-enable MD033 -->
 
-![PHP](https://img.shields.io/badge/PHP-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![JSON](https://img.shields.io/badge/JSON-000000?logo=json&logoColor=white)
-![REST API](https://img.shields.io/badge/REST%20API-02569B?logo=rest&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white)
+# Seminar: Industrial Web Project (Job Board)
 
-Plateforme de recrutement complète avec base de données, API REST et interface utilisateur.
+The first large-scale structural project: architecting a complete recruitment platform from scratch, integrating complex business logic with a dynamic interface.
 
-## Contenu
-- Days 21–30 → Projet intégré : plateforme de recrutement complète ([README](Day_21_30/README.md))
+---
 
-## Notions
-- Backend PHP : architecture MVC, authentification, gestion de sessions
-- Base de données : schéma relationnel, requêtes SQL, PDO
-- API REST : endpoints, méthodes HTTP, format JSON
-- Frontend : interface utilisateur, formulaires, validation
-- Sécurité : protection CSRF, validation des données, sanitization
+> [!IMPORTANT]
+> **MVP Scope**: 
+> - **User Management**: Authentication, profiles (Candidates/Recruiters).
+> - **Job Lifecycle**: Creation, editing, deletion, and advanced application tracking.
+> - **API-First Design**: Decoupled REST architecture for future scalabilty.
+> - **Security Baseline**: Protection against CSRF, SQL injection, and XSS.
 
-## Fonctionnalités
-- Backend PHP : authentification, gestion utilisateurs/offres, API REST
-- Frontend : interface utilisateur, profils, administration
-- Base de données MySQL : schéma relationnel, requêtes SQL
-- Système de candidatures : application aux offres, suivi
+## Technical Core
 
-## Technologies
-PHP 8+, MySQL, PDO, HTML5, CSS3, JavaScript ES6+, REST API, JSON
+| Layer | Implementation |
+|---|---|
+| **Backend** | ![PHP 8](https://img.shields.io/badge/Server-PHP_8-777BB4?style=flat-square&logo=php&logoColor=white) ![PDO](https://img.shields.io/badge/DB_Access-PDO-4479A1?style=flat-square) |
+| **Database** | ![MySQL](https://img.shields.io/badge/Engine-MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) |
+| **API** | ![REST API](https://img.shields.io/badge/Architecture-REST_API-02569B?style=flat-square) ![JSON](https://img.shields.io/badge/Format-JSON-000000?style=flat-square&logo=json&logoColor=white) |
+| **Client** | ![HTML5/CSS3](https://img.shields.io/badge/View-HTML5_/_CSS3-E34F26?style=flat-square) ![JS ES6](https://img.shields.io/badge/Interaction-JavaScript_ES6-F7DF1E?style=flat-square) |
 
-## Compétences
-Développement full-stack, conception d'API REST, gestion de projet, base de données relationnelles, sécurité web
+### System Architecture
+
+```mermaid
+graph TD
+    Client[Frontend: JS & HTML] <--> API[REST API Enpoints]
+    API <--> Logic[PHP Controller & MVC]
+    Logic <--> DB[(MySQL Database)]
+```
+
+---
+
+## 📅 Chronological Journey
+
+- **Day 21-22**: Structural design: Database schemas and UML modeling.
+- **Day 23-24**: Core backend: User authentication and session management.
+- **Day 25-26**: Business logic: Job creation workflow and application system.
+- **Day 27-28**: API Development: Building endpoints for remote data access.
+- **Day 29-30**: Frontend integration: Orchestrating the UI with the backend API.
+
+---
+
+## 🎨 Skills developed
+
+- **Architectural Vision**: Thinking in terms of MVC and decoupled systems.
+- **Data Integrity**: Designing robust relational schemas and complex SQL queries.
+- **Secure Coding**: Implementing industrial-grade security protocols.
+- **Project Orchestration**: Managing a 10-day intensive development lifecycle.

@@ -26,7 +26,7 @@ piscine/
 ├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
 ├── seminar-rust/            # Days 71-80 : Rust, memory safety, ownership, full-stack
 ├── seminar-project-management/ # T-CEN-500 : Project management, Gantt, budget, risks, communications
-└── code-competition/         # 5G antenna optimization competition
+└── competition/                # 5G antenna optimization competition
 ```
 
 ### Standardized Organization
@@ -103,7 +103,7 @@ Advanced system programming with Rust (memory safety, segments, lifetimes), Disc
 
 Upfront project management around the SmartFridge product: Gantt planning, budget, resources, risks, communications, and final presentation.
 
-### [Code Competition — 5G or not 5G ?](code-competition/README.md)
+### [Code Competition — 5G or not 5G ?](competition/README.md)
 
 High-performance algorithmic optimization competition: optimal deployment of a 5G antenna network using **CUDA**-accelerated greedy solvers (**Numba**), spatial clustering, and vectorized computations for massive datasets. Optimized for NVIDIA Blackwell / RTX 5070 Ti.
 

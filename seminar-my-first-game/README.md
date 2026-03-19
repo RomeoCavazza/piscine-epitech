@@ -1,37 +1,61 @@
-# Séminaire My First Game (Days 41–55)
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <br />
+  <img src="https://img.shields.io/badge/Seminar-Game_Development-6366f1?style=for-the-badge" alt="Seminar Badge" />
+  <img src="https://img.shields.io/badge/Days-41--55-00f2a6?style=for-the-badge" alt="Days Badge" />
+  <img src="https://img.shields.io/badge/Engine-libGDX-ff4757?style=for-the-badge" alt="Focus Badge" />
+</div>
+<!-- markdownlint-enable MD033 -->
 
-![Java](https://img.shields.io/badge/Java-ED8B00?logo=openjdk&logoColor=white)
-![libGDX](https://img.shields.io/badge/libGDX-FF0000?logo=libgdx&logoColor=white)
-![Gradle](https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white)
-![JUnit](https://img.shields.io/badge/JUnit-25A162?logo=junit5&logoColor=white)
-![JaCoCo](https://img.shields.io/badge/JaCoCo-00AA00?logo=jacoco&logoColor=white)
+# Seminar: Advanced Game Engineering (libGDX)
 
-Développement d'un jeu 2D complet en Java en respectant les principes OOP. Le projet permet de choisir librement le genre de jeu (Platformer, RPG, Strategy, Shoot'em-up, etc.) tout en appliquant une architecture modulaire et des bonnes pratiques de développement.
+Mastering complex project architecture through the lens of 2D game development: implementing SOLID principles, design patterns, and high-performance rendering.
 
-## Contenu
-- Days 41–55 → Projet intégré : développement complet d'un jeu 2D ([README](Day_41_55/README.md))
-  - Exemple réalisé : **Wormy**, un jeu de type "Worm" avec système d'évolution
+---
 
-## Notions
-- **Architecture de jeu** : game loop, systèmes de rendu, gestion d'état, séparation des responsabilités
-- **OOP & Design Patterns** : principes SOLID, State, Observer, Factory, Composite
-- **Documentation** : UML/PlantUML avec design patterns, Javadoc complète, Game Design Document
-- **Tests & Qualité** : JUnit, couverture de code avec JaCoCo, tests unitaires et d'intégration
-- **GUI & Rendu** : libGDX (ou JavaFX/AWT/Swing), sprites, animations, gestion des entrées
-- **Optimisation** : gestion mémoire, cache, performance, réduction des allocations
+> [!IMPORTANT]
+> **Core Objectives**: 
+> - **Engine Mastery**: 2D rendering, input handling, and lifecycle management with **libGDX**.
+> - **Architecture**: Strict adherence to **SOLID** principles in a highly dynamic environment.
+> - **Build & Deploy**: Orchestrating cross-platform builds with **Gradle**.
+> - **Quality Assurance**: 100% logic coverage with **JUnit** and **JaCoCo**.
 
-## Exigences du projet
-- **Gameplay avant graphismes** : prioriser la substance et la mécanique de jeu
-- **Architecture OOP** : conception modulaire respectant les principes SOLID
-- **Documentation UML** : diagrammes montrant les design patterns utilisés
-- **Couverture de tests** : JaCoCo pour assurer la conformité du code
-- **Javadoc complète** : documentation exhaustive de toutes les classes publiques
-- **Game Design Document** : document de conception complet avant l'implémentation
-- **GUI fonctionnelle** : interface pour afficher le jeu et les informations du personnage
+## Technical Core
 
-## Technologies
-Java 17+, libGDX (ou JavaFX/AWT/Swing), Gradle, JUnit 5, JaCoCo, PlantUML, Tiled
+| Layer | Implementation |
+|---|---|
+| **Language** | ![Java](https://img.shields.io/badge/Language-Java-007396?style=flat-square&logo=java&logoColor=white) |
+| **Engine** | ![libGDX](https://img.shields.io/badge/Engine-libGDX-e34f26?style=flat-square&logo=libgdx&logoColor=white) |
+| **Build** | ![Gradle](https://img.shields.io/badge/Build-Gradle-02303a?style=flat-square&logo=gradle&logoColor=white) |
+| **Coverage** | ![JaCoCo](https://img.shields.io/badge/Coverage-JaCoCo-f78516?style=flat-square) ![JUnit 5](https://img.shields.io/badge/Tests-JUnit_5-25A162?style=flat-square&logo=junit5&logoColor=white) |
 
-## Compétences
-Développement de jeux 2D, architecture logicielle orientée objet, design patterns, tests unitaires avec couverture, documentation technique, gestion de projet, optimisation de performance
+### Game Architecture Logic
+
+```mermaid
+graph TD
+    Input[Input Handler] --> Logic[Game Logic / Systems]
+    Logic --> Rendering[libGDX Renderer]
+    State[State Management] <--> Logic
+    Asset[Asset Manager] --> Rendering
+```
+
+---
+
+## 📅 Chronological Journey
+
+- **Day 41-43**: libGDX discovery: rendering loops, textures, and sprites.
+- **Day 44-46**: Input & Interaction: managing keyboard/mouse and physics basics.
+- **Day 47-49**: Advanced Logic: Entity Component System (ECS) concepts and state machines.
+- **Day 50-52**: Quality Sync: Implementing unit tests and code coverage reports.
+- **Day 53-55**: Final Polish: Asset management, UI elements, and cross-platform export.
+
+---
+
+## 🎨 Skills developed
+
+- **Modular Design**: Breaking down complex systems into decoupled entities.
+- **Performance Tuning**: Optimizing memory usage and render calls for 60FPS.
+- **Quality Engineering**: Writing testable code in a non-deterministic environment.
+- **Pattern Mastery**: Implementing Singleton, Factory, and State patterns in a real-world scenario.
 
