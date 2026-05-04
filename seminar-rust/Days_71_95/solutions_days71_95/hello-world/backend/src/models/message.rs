@@ -68,6 +68,64 @@ mod uuid_compat_binary_generic {
     }
 }
 
+mod datetime_compat {
+    use super::*;
+    use serde::{Deserializer, Serializer};
+
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    enum DateTimeCompat {
+        Rfc3339(String),
+        Bson(bson::DateTime),
+    }
+
+    pub fn serialize<S>(value: &DateTime<Utc>, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        bson::DateTime::from_chrono(*value).serialize(serializer)
+    }
+
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<DateTime<Utc>, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        match DateTimeCompat::deserialize(deserializer)? {
+            DateTimeCompat::Rfc3339(value) => DateTime::parse_from_rfc3339(&value)
+                .map(|dt| dt.with_timezone(&Utc))
+                .map_err(D::Error::custom),
+            DateTimeCompat::Bson(value) => Ok(value.to_chrono()),
+        }
+    }
+
+    pub mod option {
+        use super::*;
+
+        pub fn serialize<S>(value: &Option<DateTime<Utc>>, serializer: S) -> Result<S::Ok, S::Error>
+        where
+            S: Serializer,
+        {
+            match value {
+                Some(v) => serializer.serialize_some(&bson::DateTime::from_chrono(*v)),
+                None => serializer.serialize_none(),
+            }
+        }
+
+        pub fn deserialize<'de, D>(deserializer: D) -> Result<Option<DateTime<Utc>>, D::Error>
+        where
+            D: Deserializer<'de>,
+        {
+            match Option::<DateTimeCompat>::deserialize(deserializer)? {
+                Some(DateTimeCompat::Rfc3339(value)) => DateTime::parse_from_rfc3339(&value)
+                    .map(|dt| Some(dt.with_timezone(&Utc)))
+                    .map_err(D::Error::custom),
+                Some(DateTimeCompat::Bson(value)) => Ok(Some(value.to_chrono())),
+                None => Ok(None),
+            }
+        }
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ChannelMessage {
     #[serde(rename = "_id", skip_serializing_if = "Option::is_none")]
@@ -81,14 +139,49 @@ pub struct ChannelMessage {
     #[serde(with = "uuid_compat_binary_generic")]
     pub author_id: Uuid,
     pub content: String,
+    #[serde(with = "datetime_compat")]
     pub created_at: DateTime<Utc>,
+    #[serde(default)]
+    #[serde(with = "datetime_compat::option")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub edited_at: Option<DateTime<Utc>>,
+    #[serde(default)]
+    #[serde(with = "datetime_compat::option")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub deleted_at: Option<DateTime<Utc>>,
+    #[serde(default)]
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(with = "uuid_compat_binary_generic::option")]
     pub deleted_by: Option<Uuid>,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub reactions: Vec<MessageReaction>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MessageReaction {
+    #[serde(with = "uuid_compat_binary_generic")]
+    pub user_id: Uuid,
+    pub emoji: String,
+    #[serde(with = "datetime_compat")]
+    pub created_at: DateTime<Utc>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MessageReactionPublic {
+    pub user_id: Uuid,
+    pub emoji: String,
+    pub created_at: DateTime<Utc>,
+}
+
+impl From<MessageReaction> for MessageReactionPublic {
+    fn from(value: MessageReaction) -> Self {
+        Self {
+            user_id: value.user_id,
+            emoji: value.emoji,
+            created_at: value.created_at,
+        }
+    }
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -102,6 +195,8 @@ pub struct MessageWithUser {
     pub created_at: DateTime<Utc>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub edited_at: Option<DateTime<Utc>>,
+    #[serde(default)]
+    pub reactions: Vec<MessageReactionPublic>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -112,4 +207,9 @@ pub struct CreateMessagePayload {
 #[derive(Debug, Deserialize)]
 pub struct UpdateMessagePayload {
     pub content: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct MessageReactionPayload {
+    pub emoji: String,
 }

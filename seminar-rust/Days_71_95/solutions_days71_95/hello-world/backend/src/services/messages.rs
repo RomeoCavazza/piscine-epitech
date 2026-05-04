@@ -2,9 +2,38 @@ use chrono::Utc;
 use uuid::Uuid;
 
 use crate::error::{Error, Result};
-use crate::models::{ChannelMessage, CreateMessagePayload, MessageWithUser, UpdateMessagePayload};
+use crate::models::{
+    ChannelMessage, CreateMessagePayload, MessageReactionPayload, MessageReactionPublic,
+    MessageWithUser, UpdateMessagePayload,
+};
 use crate::repositories::{ChannelRepository, MessageRepository, ServerRepository, UserRepository};
 use crate::services::{channels, servers};
+
+fn validate_reaction_emoji(emoji: &str) -> Result<()> {
+    let trimmed = emoji.trim();
+    if trimmed.is_empty() {
+        return Err(Error::InternalError {
+            message: "Reaction emoji cannot be empty".to_string(),
+        });
+    }
+
+    if trimmed.chars().count() > 16 {
+        return Err(Error::InternalError {
+            message: "Reaction emoji is too long".to_string(),
+        });
+    }
+
+    Ok(())
+}
+
+fn to_public_reactions(
+    reactions: Vec<crate::models::MessageReaction>,
+) -> Vec<MessageReactionPublic> {
+    reactions
+        .into_iter()
+        .map(MessageReactionPublic::from)
+        .collect()
+}
 
 pub async fn create_message(
     server_repo: &ServerRepository,
@@ -41,6 +70,7 @@ pub async fn create_message(
         edited_at: None,
         deleted_at: None,
         deleted_by: None,
+        reactions: vec![],
     };
 
     message_repo
@@ -59,6 +89,7 @@ pub async fn create_message(
         content,
         created_at: now,
         edited_at: None,
+        reactions: vec![],
     })
 }
 
@@ -107,6 +138,7 @@ pub async fn list_messages(
             content: m.content,
             created_at: m.created_at,
             edited_at: m.edited_at,
+            reactions: to_public_reactions(m.reactions),
         })
         .collect();
 
@@ -115,10 +147,11 @@ pub async fn list_messages(
 }
 
 pub async fn delete_message(
+    server_repo: &ServerRepository,
     message_repo: &MessageRepository,
     message_id: Uuid,
     user_id: Uuid,
-) -> Result<()> {
+) -> Result<Uuid> {
     let message = message_repo
         .find_by_id(message_id)
         .await
@@ -127,8 +160,16 @@ pub async fn delete_message(
         })?
         .ok_or(Error::MessageNotFound)?;
 
+    servers::get_member(server_repo, message.server_id, user_id)
+        .await?
+        .ok_or(Error::MessageForbidden)?;
+
     if message.author_id != user_id {
         return Err(Error::MessageForbidden);
+    }
+
+    if message.deleted_at.is_some() {
+        return Err(Error::MessageNotFound);
     }
 
     message_repo
@@ -138,10 +179,11 @@ pub async fn delete_message(
             message: format!("MongoDB update failed: {}", e),
         })?;
 
-    Ok(())
+    Ok(message.channel_id)
 }
 
 pub async fn update_message(
+    server_repo: &ServerRepository,
     message_repo: &MessageRepository,
     message_id: Uuid,
     user_id: Uuid,
@@ -154,6 +196,10 @@ pub async fn update_message(
             message: format!("MongoDB query failed: {}", e),
         })?
         .ok_or(Error::MessageNotFound)?;
+
+    servers::get_member(server_repo, message.server_id, user_id)
+        .await?
+        .ok_or(Error::MessageForbidden)?;
 
     if message.author_id != user_id {
         return Err(Error::MessageForbidden);
@@ -179,5 +225,112 @@ pub async fn update_message(
         content: payload.content,
         created_at: message.created_at,
         edited_at: Some(Utc::now()),
+        reactions: to_public_reactions(message.reactions),
+    })
+}
+
+pub async fn add_reaction(
+    server_repo: &ServerRepository,
+    message_repo: &MessageRepository,
+    message_id: Uuid,
+    user_id: Uuid,
+    payload: MessageReactionPayload,
+) -> Result<MessageWithUser> {
+    validate_reaction_emoji(&payload.emoji)?;
+
+    let message = message_repo
+        .find_by_id(message_id)
+        .await
+        .map_err(|e| Error::DatabaseError {
+            message: format!("MongoDB query failed: {}", e),
+        })?
+        .ok_or(Error::MessageNotFound)?;
+
+    servers::get_member(server_repo, message.server_id, user_id)
+        .await?
+        .ok_or(Error::MessageForbidden)?;
+
+    if message.deleted_at.is_some() {
+        return Err(Error::MessageNotFound);
+    }
+
+    message_repo
+        .add_reaction(message_id, user_id, payload.emoji.trim())
+        .await
+        .map_err(|e| Error::DatabaseError {
+            message: format!("MongoDB update failed: {}", e),
+        })?;
+
+    let updated = message_repo
+        .find_by_id(message_id)
+        .await
+        .map_err(|e| Error::DatabaseError {
+            message: format!("MongoDB query failed: {}", e),
+        })?
+        .ok_or(Error::MessageNotFound)?;
+
+    Ok(MessageWithUser {
+        id: updated.message_id,
+        server_id: updated.server_id,
+        channel_id: updated.channel_id,
+        author_id: updated.author_id,
+        username: String::new(),
+        content: updated.content,
+        created_at: updated.created_at,
+        edited_at: updated.edited_at,
+        reactions: to_public_reactions(updated.reactions),
+    })
+}
+
+pub async fn remove_reaction(
+    server_repo: &ServerRepository,
+    message_repo: &MessageRepository,
+    message_id: Uuid,
+    user_id: Uuid,
+    payload: MessageReactionPayload,
+) -> Result<MessageWithUser> {
+    validate_reaction_emoji(&payload.emoji)?;
+
+    let message = message_repo
+        .find_by_id(message_id)
+        .await
+        .map_err(|e| Error::DatabaseError {
+            message: format!("MongoDB query failed: {}", e),
+        })?
+        .ok_or(Error::MessageNotFound)?;
+
+    servers::get_member(server_repo, message.server_id, user_id)
+        .await?
+        .ok_or(Error::MessageForbidden)?;
+
+    if message.deleted_at.is_some() {
+        return Err(Error::MessageNotFound);
+    }
+
+    message_repo
+        .remove_reaction(message_id, user_id, payload.emoji.trim())
+        .await
+        .map_err(|e| Error::DatabaseError {
+            message: format!("MongoDB update failed: {}", e),
+        })?;
+
+    let updated = message_repo
+        .find_by_id(message_id)
+        .await
+        .map_err(|e| Error::DatabaseError {
+            message: format!("MongoDB query failed: {}", e),
+        })?
+        .ok_or(Error::MessageNotFound)?;
+
+    Ok(MessageWithUser {
+        id: updated.message_id,
+        server_id: updated.server_id,
+        channel_id: updated.channel_id,
+        author_id: updated.author_id,
+        username: String::new(),
+        content: updated.content,
+        created_at: updated.created_at,
+        edited_at: updated.edited_at,
+        reactions: to_public_reactions(updated.reactions),
     })
 }

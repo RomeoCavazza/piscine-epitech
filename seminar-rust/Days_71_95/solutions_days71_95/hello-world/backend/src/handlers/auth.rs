@@ -9,23 +9,31 @@ use crate::AppState;
 /// Convertit AuthError en réponse HTTP
 impl IntoResponse for AuthError {
     fn into_response(self) -> axum::response::Response {
-        let (status, message) = match &self {
-            AuthError::EmailExists => (StatusCode::CONFLICT, "Email already exists"),
-            AuthError::InvalidCredentials => {
-                (StatusCode::UNAUTHORIZED, "Invalid email or password")
+        let (status, message) = match self {
+            AuthError::EmailExists => (StatusCode::CONFLICT, "Email already exists".to_string()),
+            AuthError::UsernameExists => {
+                (StatusCode::CONFLICT, "Username already exists".to_string())
             }
-            AuthError::Database(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Database error"),
-            AuthError::PasswordHash(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Password error"),
-            AuthError::Jwt(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Token error"),
+            AuthError::InvalidCredentials => (
+                StatusCode::UNAUTHORIZED,
+                "Invalid email or password".to_string(),
+            ),
+            AuthError::Validation(msg) => (StatusCode::BAD_REQUEST, msg),
+            AuthError::Database(err) => {
+                tracing::error!("Database error during auth: {}", err);
+                (
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    "Database error".to_string(),
+                )
+            }
+            AuthError::PasswordHash(_) => (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                "Password error".to_string(),
+            ),
+            AuthError::Jwt(_) => (StatusCode::INTERNAL_SERVER_ERROR, "Token error".to_string()),
         };
 
-        let mut body = serde_json::json!({ "error": message });
-
-        // Ajouter les détails pour les erreurs de base de données
-        if let AuthError::Database(err) = &self {
-            body["details"] = serde_json::json!(err.to_string());
-        }
-
+        let body = serde_json::json!({ "error": message });
         (status, Json(body)).into_response()
     }
 }
@@ -57,5 +65,6 @@ pub async fn logout(
         verify_token(auth.token(), &state.jwt_secret).map_err(|_| AuthError::InvalidCredentials)?;
 
     services::logout(&state.db, claims.sub).await?;
+    crate::services::realtime::handle_user_offline(&state, claims.sub).await;
     Ok(StatusCode::NO_CONTENT)
 }

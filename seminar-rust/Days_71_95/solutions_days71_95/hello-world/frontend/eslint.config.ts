@@ -1,15 +1,15 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import type { Linter } from "eslint";
+import nextConfig from "eslint-config-next";
 
-const compat = new FlatCompat();
-
-export default [
+const eslintConfig: Linter.Config[] = [
+  ...(nextConfig as Linter.Config[]),
   {
-    ignores: ["node_modules/**", ".next/**", "out/**", "public/**"],
-  },
-  ...compat.config({
-    extends: ["next"],
     rules: {
       "@next/next/no-html-link-for-pages": "off",
+      "react-hooks/preserve-manual-memoization": "off",
+      "react-hooks/set-state-in-effect": "off",
     },
-  }),
+  },
 ];
+
+export default eslintConfig;

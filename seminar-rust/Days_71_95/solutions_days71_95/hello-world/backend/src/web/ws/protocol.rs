@@ -5,6 +5,9 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
+use crate::models::MessageReactionPublic;
+use crate::models::UserStatus;
+
 /// Événements envoyés par le client
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "op", content = "d")]
@@ -39,7 +42,7 @@ pub enum ClientEvent {
 
     /// Mise à jour de présence
     #[serde(rename = "PRESENCE_UPDATE")]
-    PresenceUpdate { status: String },
+    PresenceUpdate { status: UserStatus },
 }
 
 /// Événements envoyés par le serveur
@@ -71,6 +74,7 @@ pub enum ServerEvent {
         content: String,
         created_at: DateTime<Utc>,
         edited_at: Option<DateTime<Utc>>,
+        reactions: Vec<MessageReactionPublic>,
     },
 
     /// Message modifié
@@ -85,6 +89,48 @@ pub enum ServerEvent {
     /// Message supprimé
     #[serde(rename = "MESSAGE_DELETE")]
     MessageDelete { id: Uuid, channel_id: Uuid },
+
+    /// Réactions du message mises à jour
+    #[serde(rename = "MESSAGE_REACTION_UPDATE")]
+    MessageReactionUpdate {
+        id: Uuid,
+        channel_id: Uuid,
+        reactions: Vec<MessageReactionPublic>,
+    },
+
+    /// Nouveau message privé reçu
+    #[serde(rename = "DIRECT_MESSAGE_CREATE")]
+    DirectMessageCreate {
+        id: Uuid,
+        dm_id: Uuid,
+        author_id: Uuid,
+        username: String,
+        content: String,
+        created_at: DateTime<Utc>,
+        edited_at: Option<DateTime<Utc>>,
+        reactions: Vec<MessageReactionPublic>,
+    },
+
+    /// Message privé modifié
+    #[serde(rename = "DIRECT_MESSAGE_UPDATE")]
+    DirectMessageUpdate {
+        id: Uuid,
+        dm_id: Uuid,
+        content: String,
+        edited_at: DateTime<Utc>,
+    },
+
+    /// Message privé supprimé
+    #[serde(rename = "DIRECT_MESSAGE_DELETE")]
+    DirectMessageDelete { id: Uuid, dm_id: Uuid },
+
+    /// Réactions d'un message privé mises à jour
+    #[serde(rename = "DIRECT_MESSAGE_REACTION_UPDATE")]
+    DirectMessageReactionUpdate {
+        id: Uuid,
+        dm_id: Uuid,
+        reactions: Vec<MessageReactionPublic>,
+    },
 
     /// Quelqu'un commence à taper
     #[serde(rename = "TYPING_START")]
@@ -112,10 +158,7 @@ pub enum ServerEvent {
 
     /// Mise à jour de présence utilisateur
     #[serde(rename = "PRESENCE_UPDATE")]
-    PresenceUpdate {
-        user_id: Uuid,
-        status: String, // "online" | "offline" | "dnd" | "invisible"
-    },
+    PresenceUpdate { user_id: Uuid, status: UserStatus },
 }
 
 impl ClientEvent {

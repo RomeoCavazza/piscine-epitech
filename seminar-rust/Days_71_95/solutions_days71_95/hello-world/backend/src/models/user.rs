@@ -4,25 +4,20 @@ use sqlx::FromRow;
 use uuid::Uuid;
 
 /// Statut de présence utilisateur
-/// Statut de présence utilisateur
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, sqlx::Type, PartialEq, Eq, Default)]
-// Suppression de rename_all = "lowercase" car il entre en conflit avec tes renames manuels
 #[sqlx(type_name = "user_status")]
+#[serde(rename_all = "lowercase")]
 pub enum UserStatus {
-    #[serde(rename = "En ligne")]
-    #[sqlx(rename = "En ligne")]
+    #[sqlx(rename = "Online")]
     Online,
 
-    #[serde(rename = "Hors ligne")]
-    #[sqlx(rename = "Hors ligne")]
-    #[default] // Définit "Hors ligne" comme valeur par défaut en Rust
+    #[sqlx(rename = "Offline")]
+    #[default]
     Offline,
 
-    #[serde(rename = "Ne pas déranger")]
-    #[sqlx(rename = "Ne pas déranger")]
+    #[sqlx(rename = "Dnd")]
     Dnd,
 
-    #[serde(rename = "Invisible")]
     #[sqlx(rename = "Invisible")]
     Invisible,
 }
@@ -61,6 +56,34 @@ impl From<User> for UserResponse {
             created_at: user.created_at,
         }
     }
+}
+
+#[derive(Debug, Clone, Serialize, FromRow)]
+pub struct UserSearchResponse {
+    pub id: Uuid,
+    pub username: String,
+    pub avatar_url: Option<String>,
+    pub status: UserStatus,
+}
+
+#[derive(Debug, Clone, Serialize, FromRow)]
+pub struct FriendSummary {
+    pub id: Uuid,
+    pub username: String,
+    pub avatar_url: Option<String>,
+    pub status: UserStatus,
+    pub created_at: DateTime<Utc>,
+}
+
+#[derive(Debug, Clone, Serialize, FromRow)]
+pub struct PublicUserProfileResponse {
+    pub id: Uuid,
+    pub username: String,
+    pub avatar_url: Option<String>,
+    pub status: UserStatus,
+    pub created_at: DateTime<Utc>,
+    pub is_self: bool,
+    pub is_friend: bool,
 }
 
 #[derive(Debug, Deserialize)]

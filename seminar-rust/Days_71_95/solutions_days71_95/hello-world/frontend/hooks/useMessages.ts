@@ -1,17 +1,33 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { listMessages, updateMessage as apiUpdateMessage, deleteMessage as apiDeleteMessage, Message } from "@/lib/api-server";
+import {
+  addMessageReaction as apiAddMessageReaction,
+  deleteMessage as apiDeleteMessage,
+  listMessages,
+  Message,
+  MessageReaction,
+  removeMessageReaction as apiRemoveMessageReaction,
+  updateMessage as apiUpdateMessage,
+} from "@/lib/api-client";
 import { handleAuthError, isAuthError, getErrorMessage } from "@/lib/auth/utils";
 import { useWebSocket } from "./useWebSocket";
 import { ServerEvent } from "@/lib/gateway";
+import { useTranslation } from "@/lib/i18n";
+import { isTauriWindow } from "@/lib/runtime";
+import { 
+  isPermissionGranted, 
+  requestPermission, 
+  sendNotification 
+} from "@tauri-apps/plugin-notification";
 
 /**
  * Hook pour gérer les messages d'un channel
  * Utilise WebSocket pour les nouveaux messages en temps réel
  * et REST pour charger l'historique initial
  */
-export function useMessages(channelId: string | null) {
+export function useMessages(channelId: string | null, viewerId: string | null) {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
@@ -20,6 +36,14 @@ export function useMessages(channelId: string | null) {
   const { onEvent, subscribe, unsubscribe, sendMessage: wsSendMessage, typingStart, typingStop, isConnected } = useWebSocket();
   const subscribedRef = useRef(false);
   const typingTimeoutRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
+
+  const toUiError = useCallback((err: unknown, fallbackKey: string): string => {
+    const message = getErrorMessage(err, t(fallbackKey));
+    if (message.startsWith("error.")) {
+      return t(message);
+    }
+    return message;
+  }, [t]);
 
   // Charger l'historique initial via REST
   const loadMessages = useCallback(async (id: string, showLoading = false) => {
@@ -33,9 +57,9 @@ export function useMessages(channelId: string | null) {
       setError(null);
       const data = await listMessages(id);
       const messagesArray = Array.isArray(data) ? data : [];
-      setMessages(messagesArray);
+      setMessages(messagesArray.map((message) => ({ ...message, reactions: message.reactions ?? [] })));
     } catch (err) {
-      const errorMessage = getErrorMessage(err, "Failed to load messages");
+      const errorMessage = toUiError(err, "error.hooks.messages.load");
       setError(errorMessage);
       if (isAuthError(errorMessage)) {
         handleAuthError();
@@ -45,7 +69,7 @@ export function useMessages(channelId: string | null) {
     } finally {
       if (showLoading) setLoading(false);
     }
-  }, []);
+  }, [toUiError]);
 
   // Charger l'historique quand le channel change
   useEffect(() => {
@@ -85,8 +109,25 @@ export function useMessages(channelId: string | null) {
               if (prev.some((m) => m.id === event.d.id)) {
                 return prev;
               }
-              return [...prev, event.d];
+              return [...prev, { ...event.d, reactions: event.d.reactions ?? [] }];
             });
+
+            // Desktop notification
+            if (isTauriWindow() && event.d.author_id !== viewerId) {
+              (async () => {
+                let permission = await isPermissionGranted();
+                if (!permission) {
+                  const permissionResult = await requestPermission();
+                  permission = permissionResult === "granted";
+                }
+                if (permission) {
+                  sendNotification({ 
+                    title: `${event.d.username} (#${channelId})`, 
+                    body: event.d.content.length > 50 ? `${event.d.content.substring(0, 50)}...` : event.d.content,
+                  });
+                }
+              })();
+            }
           }
           break;
 
@@ -107,6 +148,14 @@ export function useMessages(channelId: string | null) {
           // Message supprimé
           if (event.d.channel_id === channelId) {
             setMessages((prev) => prev.filter((m) => m.id !== event.d.id));
+          }
+          break;
+
+        case "MESSAGE_REACTION_UPDATE":
+          if (event.d.channel_id === channelId) {
+            setMessages((prev) =>
+              prev.map((m) => (m.id === event.d.id ? { ...m, reactions: event.d.reactions ?? [] } : m))
+            );
           }
           break;
 
@@ -157,6 +206,23 @@ export function useMessages(channelId: string | null) {
           }
           break;
 
+        case "PRESENCE_UPDATE":
+          if (event.d.status === "offline") {
+            setTypingUsers((prev) => {
+              if (!prev.has(event.d.user_id)) return prev;
+              const next = new Map(prev);
+              next.delete(event.d.user_id);
+              return next;
+            });
+
+            const timeout = typingTimeoutRef.current.get(event.d.user_id);
+            if (timeout) {
+              clearTimeout(timeout);
+              typingTimeoutRef.current.delete(event.d.user_id);
+            }
+          }
+          break;
+
         case "ERROR":
           // Erreur serveur
           if (event.d.code === "MESSAGE_ERROR") {
@@ -175,7 +241,7 @@ export function useMessages(channelId: string | null) {
 
     // Vérifier que WebSocket est connecté
     if (!isConnected()) {
-      setError("Not connected to server. Please refresh the page.");
+      setError(t("error.hooks.messages.notConnected"));
       return false;
     }
 
@@ -190,13 +256,13 @@ export function useMessages(channelId: string | null) {
       // Pas besoin de recharger
       return true;
     } catch (err) {
-      const errorMessage = getErrorMessage(err, "Failed to send message");
+      const errorMessage = toUiError(err, "error.hooks.messages.send");
       setError(errorMessage);
       return false;
     } finally {
       setSending(false);
     }
-  }, [channelId, wsSendMessage, isConnected]);
+  }, [channelId, wsSendMessage, isConnected, t, toUiError]);
 
   // Éditer un message (via REST API, WebSocket broadcast automatique)
   const updateMessage = useCallback(async (id: string, content: string): Promise<boolean> => {
@@ -228,7 +294,7 @@ export function useMessages(channelId: string | null) {
         setMessages(previousMessages);
       }
       
-      const errorMessage = getErrorMessage(err, "Failed to update message");
+      const errorMessage = toUiError(err, "error.hooks.messages.update");
       if (isAuthError(errorMessage)) {
         handleAuthError();
         return false;
@@ -236,7 +302,7 @@ export function useMessages(channelId: string | null) {
       setError(errorMessage);
       return false;
     }
-  }, [channelId]);
+  }, [channelId, toUiError]);
 
   // Supprimer un message (via REST API, WebSocket broadcast automatique)
   const deleteMessage = useCallback(async (id: string): Promise<boolean> => {
@@ -264,7 +330,7 @@ export function useMessages(channelId: string | null) {
         setMessages(previousMessages);
       }
       
-      const errorMessage = getErrorMessage(err, "Failed to delete message");
+      const errorMessage = toUiError(err, "error.hooks.messages.delete");
       if (isAuthError(errorMessage)) {
         handleAuthError();
         return false;
@@ -272,7 +338,86 @@ export function useMessages(channelId: string | null) {
       setError(errorMessage);
       return false;
     }
-  }, [channelId]);
+  }, [channelId, toUiError]);
+
+  const toggleReaction = useCallback(async (messageId: string, emoji: string): Promise<boolean> => {
+    if (!channelId || !viewerId || !emoji.trim()) return false;
+
+    const normalizedEmoji = emoji.trim();
+    const normalizedViewerId = viewerId.toLowerCase();
+    const currentMessage = messages.find((message) => message.id === messageId);
+    if (!currentMessage) return false;
+
+    const currentReactions = currentMessage.reactions ?? [];
+    const hasReaction = currentReactions.some(
+      (reaction) => reaction.user_id.toLowerCase() === normalizedViewerId && reaction.emoji === normalizedEmoji
+    );
+
+    const previousMessages = messages;
+
+    try {
+      setError(null);
+
+      setMessages((prev) =>
+        prev.map((message) => {
+          if (message.id !== messageId) return message;
+
+          const reactions = message.reactions ?? [];
+
+          if (hasReaction) {
+            return {
+              ...message,
+              reactions: reactions.filter(
+                (reaction) =>
+                  !(reaction.user_id.toLowerCase() === normalizedViewerId && reaction.emoji === normalizedEmoji)
+              ),
+            };
+          }
+
+          const optimisticReaction: MessageReaction = {
+            user_id: viewerId,
+            emoji: normalizedEmoji,
+            created_at: new Date().toISOString(),
+          };
+
+          return {
+            ...message,
+            reactions: [
+              ...reactions.filter(
+                (reaction) => reaction.user_id.toLowerCase() !== normalizedViewerId
+              ),
+              optimisticReaction,
+            ],
+          };
+        })
+      );
+
+      if (hasReaction) {
+        await apiRemoveMessageReaction(messageId, normalizedEmoji);
+      } else {
+        await apiAddMessageReaction(messageId, normalizedEmoji);
+      }
+
+      return true;
+    } catch (err) {
+      setMessages(previousMessages);
+
+      const rawMessage = getErrorMessage(err, "");
+      if (rawMessage.includes("HTTP 404")) {
+        setError(null);
+        return false;
+      }
+
+      const errorMessage = toUiError(err, "error.hooks.messages.reaction");
+      if (isAuthError(errorMessage)) {
+        handleAuthError();
+        return false;
+      }
+
+      setError(errorMessage);
+      return false;
+    }
+  }, [channelId, viewerId, messages, toUiError]);
 
   // Rafraîchir l'historique (utile pour resync après reconnexion)
   const refresh = useCallback(() => {
@@ -290,10 +435,10 @@ export function useMessages(channelId: string | null) {
     sendMessage,
     updateMessage,
     deleteMessage,
+    toggleReaction,
     refresh,
     isConnected: isConnected(),
     typingStart,
     typingStop,
   };
 }
-

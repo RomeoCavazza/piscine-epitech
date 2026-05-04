@@ -1,27 +1,18 @@
 "use client";
 
-/**
- * Récupère le token depuis les cookies (côté client)
- */
-export function getToken(): string | null {
-  if (typeof document === "undefined") return null;
-  
-  const cookies = document.cookie.split(";");
-  for (const cookie of cookies) {
-    const [name, value] = cookie.trim().split("=");
-    if (name === "token") {
-      return value || null;
-    }
-  }
-  return null;
-}
+import { clearToken } from "./client";
 
 /**
  * Redirige vers la page de login en supprimant le token
  */
-export function handleAuthError() {
-  document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-  window.location.href = "/login";
+export async function handleAuthError() {
+  await clearToken();
+  // Éviter la boucle de redirection si on est déjà sur une page d'auth
+  if (typeof window !== "undefined" && 
+      !window.location.pathname.includes("/login") && 
+      !window.location.pathname.includes("/register")) {
+    window.location.href = "/login";
+  }
 }
 
 /**
@@ -29,6 +20,7 @@ export function handleAuthError() {
  */
 export function isAuthError(errorMessage: string): boolean {
   return (
+    errorMessage.includes("error.authRequired") ||
     errorMessage.includes("Authentication") ||
     errorMessage.includes("Invalid token") ||
     errorMessage.includes("Missing authorization")
@@ -41,4 +33,3 @@ export function isAuthError(errorMessage: string): boolean {
 export function getErrorMessage(err: unknown, fallback: string): string {
   return err instanceof Error ? err.message : fallback;
 }
-
