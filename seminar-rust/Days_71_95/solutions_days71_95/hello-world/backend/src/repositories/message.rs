@@ -29,6 +29,16 @@ impl MessageRepository {
         }
     }
 
+    /// Filtre qui matche un UUID stocké en Binary Generic OU en string (rétrocompat)
+    fn uuid_filter(field: &str, uuid: Uuid) -> bson::Document {
+        doc! {
+            "$or": [
+                { field: Self::uuid_to_binary(uuid) },
+                { field: uuid.to_string() },
+            ]
+        }
+    }
+
     pub async fn create(&self, message: &ChannelMessage) -> mongodb::error::Result<()> {
         self.collection().insert_one(message).await?;
         Ok(())
@@ -39,7 +49,7 @@ impl MessageRepository {
         message_id: Uuid,
     ) -> mongodb::error::Result<Option<ChannelMessage>> {
         self.collection()
-            .find_one(doc! { "message_id": Self::uuid_to_binary(message_id) })
+            .find_one(Self::uuid_filter("message_id", message_id))
             .await
     }
 
@@ -52,13 +62,15 @@ impl MessageRepository {
         let collection = self.collection();
 
         let mut filter = doc! {
-            "channel_id": Self::uuid_to_binary(channel_id),
-            "deleted_at": null,
+            "$and": [
+                Self::uuid_filter("channel_id", channel_id),
+                { "deleted_at": null },
+            ]
         };
 
         if let Some(before_id) = before {
             if let Some(before_msg) = collection
-                .find_one(doc! { "message_id": Self::uuid_to_binary(before_id) })
+                .find_one(Self::uuid_filter("message_id", before_id))
                 .await?
             {
                 filter.insert("created_at", doc! { "$lt": before_msg.created_at });
@@ -81,7 +93,7 @@ impl MessageRepository {
     ) -> mongodb::error::Result<()> {
         self.collection()
             .update_one(
-                doc! { "message_id": Self::uuid_to_binary(message_id) },
+                Self::uuid_filter("message_id", message_id),
                 doc! {
                     "$set": {
                         "content": content,
@@ -100,7 +112,7 @@ impl MessageRepository {
     ) -> mongodb::error::Result<()> {
         self.collection()
             .update_one(
-                doc! { "message_id": Self::uuid_to_binary(message_id) },
+                Self::uuid_filter("message_id", message_id),
                 doc! {
                     "$set": {
                         "deleted_at": Utc::now(),
@@ -109,6 +121,78 @@ impl MessageRepository {
                 },
             )
             .await?;
+        Ok(())
+    }
+
+    pub async fn add_reaction(
+        &self,
+        message_id: Uuid,
+        user_id: Uuid,
+        emoji: &str,
+    ) -> mongodb::error::Result<()> {
+        let filter = doc! {
+            "$and": [
+                Self::uuid_filter("message_id", message_id),
+                { "deleted_at": null },
+            ]
+        };
+
+        self.collection()
+            .update_one(
+                filter.clone(),
+                doc! {
+                    "$pull": {
+                        "reactions": {
+                            "user_id": Self::uuid_to_binary(user_id),
+                        }
+                    }
+                },
+            )
+            .await?;
+
+        self.collection()
+            .update_one(
+                filter,
+                doc! {
+                    "$push": {
+                        "reactions": {
+                            "user_id": Self::uuid_to_binary(user_id),
+                            "emoji": emoji,
+                            "created_at": bson::DateTime::now(),
+                        }
+                    }
+                },
+            )
+            .await?;
+
+        Ok(())
+    }
+
+    pub async fn remove_reaction(
+        &self,
+        message_id: Uuid,
+        user_id: Uuid,
+        emoji: &str,
+    ) -> mongodb::error::Result<()> {
+        self.collection()
+            .update_one(
+                doc! {
+                    "$and": [
+                        Self::uuid_filter("message_id", message_id),
+                        { "deleted_at": null },
+                    ]
+                },
+                doc! {
+                    "$pull": {
+                        "reactions": {
+                            "user_id": Self::uuid_to_binary(user_id),
+                            "emoji": emoji,
+                        }
+                    }
+                },
+            )
+            .await?;
+
         Ok(())
     }
 }

@@ -3,6 +3,8 @@
 import { useEffect, useRef, useCallback } from "react";
 import { getGateway, ServerEvent } from "@/lib/gateway";
 import { API_URL } from "@/lib/config";
+import { getTokenForWs } from "@/lib/auth/client";
+import { subscribeToTokenChanges } from "@/lib/token-storage";
 
 /**
  * Hook pour gérer la connexion WebSocket globale
@@ -12,40 +14,31 @@ export function useWebSocket() {
   const handlersRef = useRef<Set<(event: ServerEvent) => void>>(new Set());
 
   useEffect(() => {
-    // CORRECTION : Transformation dynamique de l'URL pour le WebSocket
-    // http:// -> ws://  |  https:// -> wss://
-    const socketUrl = API_URL.replace(/^http/, 'ws'); 
-    
-    console.log("[useWebSocket] Initializing gateway with:", socketUrl);
-    
-    const gateway = getGateway(socketUrl);
+    const gateway = getGateway(API_URL);
     gatewayRef.current = gateway;
 
-    const connect = () => {
-      if (typeof document === "undefined") return;
-      
-      const cookies = document.cookie.split(";");
-      let token: string | null = null;
-      for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split("=");
-        if (name === "token") {
-          token = value || null;
-          break;
+    const syncConnection = async () => {
+      try {
+        const token = await getTokenForWs();
+
+        if (token) {
+          gateway.connect(token);
+        } else {
+          gateway.disconnect();
         }
-      }
-      
-      if (token) {
-        console.log("[useWebSocket] Token found, connecting...");
-        gateway.connect(token);
-      } else {
-        console.warn("[useWebSocket] No token found in cookies");
+      } catch (error) {
+        console.error("[useWebSocket] Failed to initialize gateway token", error);
       }
     };
 
-    connect();
+    void syncConnection();
+
+    const unsubscribeToken = subscribeToTokenChanges(() => {
+      void syncConnection();
+    });
 
     return () => {
-      // Singleton partagé, pas de déconnexion ici
+      unsubscribeToken();
     };
   }, []);
 

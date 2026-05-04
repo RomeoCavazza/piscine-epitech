@@ -4,12 +4,16 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { signup } from "@/lib/auth/actions";
+import { signup } from "@/lib/auth/client";
+import { useRouteGuard } from "@/lib/auth/guards";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import { useTranslation } from "@/lib/i18n";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { t } = useTranslation();
+  const { ready } = useRouteGuard("guest");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -19,35 +23,39 @@ export default function RegisterPage() {
     confirmPassword: "",
   });
 
+  if (!ready) {
+    return <main className="min-h-screen" />;
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Les mots de passe ne correspondent pas");
+      setError(t("auth.register.passwordMismatch"));
       setIsLoading(false);
       return;
     }
 
     if (formData.password.length < 8) {
-      setError("Le mot de passe doit contenir au moins 8 caracteres");
+      setError(t("auth.register.passwordTooShort"));
       setIsLoading(false);
       return;
     }
 
     try {
-      const result = await signup(formData.username, formData.email, formData.password);
+      const result = await signup(formData.username.trim(), formData.email, formData.password);
 
       if (result.error) {
         setError(result.error);
         return;
       }
 
-      router.push("/");
-      router.refresh();
+      router.replace("/");
+      return;
     } catch {
-      setError("Erreur lors de l'inscription");
+      setError(t("auth.register.error"));
     } finally {
       setIsLoading(false);
     }
@@ -55,35 +63,27 @@ export default function RegisterPage() {
 
   return (
     <main className="relative w-screen h-screen overflow-hidden">
-      {/* BACKGROUND */}
       <div className="fixed inset-0 bg-[url('/background.png')] bg-cover bg-center bg-no-repeat brightness-[0.7] contrast-[1.1] z-0" />
 
-      {/* MAIN LAYOUT */}
       <div className="relative z-10 flex w-full h-full items-center justify-center">
-        
-        {/* CENTER CONTENT */}
         <div className="flex flex-col items-center justify-center p-6">
-          
-          {/* Logo */}
           <Image
             src="/logo.png"
-            alt="Hello World logo"
+            alt={t("auth.logoAlt")}
             width={120}
             height={120}
             className="mb-6"
           />
 
-          {/* Header Message */}
           <header className="mb-8 text-center">
             <h1 className="text-white text-xl font-bold">
-              Welcome to <span className="text-[#ff3333]">HELLO WORLD</span> messaging platform
+              {t("auth.welcomeMessage")}
             </h1>
           </header>
 
-          {/* AUTH FORM */}
           <section className="w-[380px] p-10 bg-[rgba(20,20,20,0.85)] backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] border-2 border-[#4fdfff] animate-[fadeIn_0.5s_ease]">
             <div className="text-center mb-8">
-              <h3 className="text-white font-bold tracking-widest text-lg">INSCRIPTION</h3>
+              <h3 className="text-white font-bold tracking-widest text-lg">{t("auth.register.title")}</h3>
             </div>
 
             {error && (
@@ -95,32 +95,32 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <Input
                 type="text"
-                placeholder="Pseudo"
+                placeholder={t("auth.register.usernamePlaceholder")}
                 required
-                minLength={3}
+                minLength={1}
                 maxLength={32}
                 value={formData.username}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
               />
               <Input
                 type="email"
-                placeholder="Email"
+                placeholder={t("auth.register.emailPlaceholder")}
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
               <Input
                 type="password"
-                placeholder="Mot de passe"
+                placeholder={t("auth.register.passwordPlaceholder")}
                 required
                 minLength={8}
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                helperText="Minimum 8 caracteres"
+                helperText={t("auth.register.passwordHelper")}
               />
               <Input
                 type="password"
-                placeholder="Confirmer le mot de passe"
+                placeholder={t("auth.register.confirmPasswordPlaceholder")}
                 required
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
@@ -133,17 +133,16 @@ export default function RegisterPage() {
                 fullWidth
                 className="mt-4"
               >
-                S&apos;INSCRIRE
+                {t("auth.register.submit")}
               </Button>
             </form>
 
             <div className="mt-6 text-center text-sm">
               <Link href="/login" className="text-[#4fdfff] hover:underline transition-colors">
-                Deja un compte ? Se connecter
+                {t("auth.register.hasAccount")}
               </Link>
             </div>
           </section>
-
         </div>
       </div>
     </main>

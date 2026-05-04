@@ -25,6 +25,7 @@ piscine/
 ├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
 ├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
 ├── seminar-rust/            # Days 71-95 : Rust, memory safety, ownership, full-stack
+├── seminar-organisation/    # Days 96-110 : Organizational theory & strategy
 ├── seminar-project-management/ # T-CEN-500 : Project management
 └── competition/                # 5G antenna optimization competition
 ```
@@ -48,14 +49,15 @@ Line-by-line breakdown of the multi-stack ecosystem (code only, excluding blank/
 
 | Language     | Files | Lines (code) | Weight |
 |--------------|-------|--------------|--------|
-| **Java**     | 205   | ~9,300       | 16%   |
-| **HTML/CSS** | 207   | ~33,100      | 58%   |
-| **Python**   | 106   | ~1,400       | 2%    |
-| **Rust**     | 68    | ~3,700       | 7%    |
-| **JS/TS**    | 73    | ~9,100       | 16%   |
-| **PHP**      | 27    | ~510         | 1%    |
-| **System/YML** | 10   | ~540         | 1%    |
-| **Total**    | **~706** | **~56,700** | **100%** |
+| **Java**     | 205   | ~9,300       | 17%    |
+| **JS/TS**    | 112   | ~11,700      | 21%    |
+| **Rust**     | 85    | ~6,100       | 11%    |
+| **HTML/CSS** | 60    | ~4,200       | 8%     |
+| **Python**   | 106   | ~1,400       | 2%     |
+| **JSON**     | 13    | ~13,700      | 24%    |
+| **Markdown** | 113   | ~4,200       | 8%     |
+| **Others**   | 69    | ~5,200       | 9%     |
+| **Total**    | **~763** | **~55,800** | **100%** |
 
 ---
 
@@ -106,6 +108,11 @@ Memory-safe systems programming and Discord-like real-time messaging.
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tauri/tauri-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/railway/railway-original.svg" height="25" />
 
+### [Organisation Seminar — Days 96-110](seminar-organisation/README.md)
+Organizational theory, workflow optimization, and strategic agency management.
+
+<img src="https://img.shields.io/badge/Method-Agile_/_Sprint-6366f1?style=flat-square" height="25" /> <img src="https://img.shields.io/badge/Analysis-SWOT-ff4757?style=flat-square" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" height="25" />
+
 ### [Project Management Seminar — SmartFridge (T‑CEN‑500)](seminar-project-management/README.md)
 Holistic project management around the SmartFridge product: Gantt planning, budget, resources, and risk communication.
 
@@ -142,8 +149,11 @@ graph TD
         S9[Rust Seminar: Memory Safety]
         S10[5G Competition: CUDA Algorithms]
     end
+    subgraph Management[Phase 5: Strategy]
+        S11[Organisation Seminar: Workflows]
+    end
     
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 --> S10
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 --> S10 --> S11
 ```
 
 ---

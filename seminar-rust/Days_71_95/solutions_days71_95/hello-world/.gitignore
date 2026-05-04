@@ -16,12 +16,17 @@
 # next.js
 /.next/
 /out/
+frontend/out/
 
 # production
 /build
 
 # misc
 .DS_Store
+dist/
+*.deb
+*.tar.gz
+*.exe
 *.pem
 
 # Windows Zone.Identifier files (created automatically by Windows)
@@ -58,3 +63,12 @@ node_modules/
 backend/.env
 frontend/.env
 frontend/.env.local
+.env.local
+
+# Uploads
+backend/uploads/
+uploads/
+
+# OS Junk
+.DS_Store
+Thumbs.db

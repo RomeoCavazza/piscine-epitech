@@ -19,12 +19,18 @@ pub enum Error {
     InvalidCredentials,
     #[error("Email already exists")]
     EmailAlreadyExists,
+    #[error("Username already exists")]
+    UsernameAlreadyExists,
     #[error("User not found")]
     UserNotFound,
     #[error("Server not found")]
     ServerNotFound,
+    #[error("Server name already exists for this owner")]
+    ServerAlreadyExists,
     #[error("Server access forbidden")]
     ServerForbidden,
+    #[error("You are banned from this server")]
+    ServerBanned,
     #[error("Owner cannot leave server")]
     ServerOwnerCannotLeave,
     #[error("Already a member")]
@@ -37,6 +43,8 @@ pub enum Error {
     MessageNotFound,
     #[error("Message access forbidden")]
     MessageForbidden,
+    #[error("Bad request: {message}")]
+    BadRequest { message: String },
     #[error("Database error: {message}")]
     DatabaseError { message: String },
     #[error("Internal error: {message}")]
@@ -78,6 +86,9 @@ impl IntoResponse for Error {
 
         // Ajouter le message détaillé pour DatabaseError et InternalError
         match &self {
+            Self::BadRequest { message } => {
+                body["details"] = serde_json::json!(message);
+            }
             Self::DatabaseError { message } => {
                 body["details"] = serde_json::json!(message);
             }
@@ -101,15 +112,22 @@ impl Error {
             Self::AuthFailTokenExpired => (StatusCode::UNAUTHORIZED, "Token expired"),
             Self::InvalidCredentials => (StatusCode::UNAUTHORIZED, "Invalid email or password"),
             Self::EmailAlreadyExists => (StatusCode::CONFLICT, "Email already exists"),
+            Self::UsernameAlreadyExists => (StatusCode::CONFLICT, "Username already exists"),
             Self::UserNotFound => (StatusCode::NOT_FOUND, "User not found"),
             Self::ServerNotFound => (StatusCode::NOT_FOUND, "Server not found"),
+            Self::ServerAlreadyExists => (
+                StatusCode::CONFLICT,
+                "Server name already exists for this owner",
+            ),
             Self::ServerForbidden => (StatusCode::FORBIDDEN, "Server access forbidden"),
+            Self::ServerBanned => (StatusCode::FORBIDDEN, "You are banned from this server"),
             Self::ServerOwnerCannotLeave => (StatusCode::BAD_REQUEST, "Owner cannot leave server"),
             Self::ServerAlreadyMember => (StatusCode::CONFLICT, "Already a member"),
             Self::ChannelNotFound => (StatusCode::NOT_FOUND, "Channel not found"),
             Self::ChannelForbidden => (StatusCode::FORBIDDEN, "Channel access forbidden"),
             Self::MessageNotFound => (StatusCode::NOT_FOUND, "Message not found"),
             Self::MessageForbidden => (StatusCode::FORBIDDEN, "Message access forbidden"),
+            Self::BadRequest { .. } => (StatusCode::BAD_REQUEST, "Bad request"),
             Self::DatabaseError { .. } => (StatusCode::INTERNAL_SERVER_ERROR, "Database error"),
             Self::InternalError { .. } => (StatusCode::INTERNAL_SERVER_ERROR, "Internal error"),
         }

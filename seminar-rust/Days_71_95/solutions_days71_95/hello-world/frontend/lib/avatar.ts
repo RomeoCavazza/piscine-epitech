@@ -1,4 +1,4 @@
-import { User } from "@/lib/api-server";
+import { User } from "@/lib/api-client";
 
 /**
  * Normalise le chemin d'avatar (ancien format → nouveau format)
@@ -17,8 +17,10 @@ export function normalizeAvatarUrl(url: string | null | undefined): string | nul
  * Génère une URL d'avatar déterministe basée sur un UUID
  */
 export function getAvatarFromId(id: string): string {
+  if (!id) return "/avatars/avatar_001.png";
   const hex = id.replace(/-/g, "").slice(0, 2);
   const num = parseInt(hex, 16);
+  if (isNaN(num)) return "/avatars/avatar_001.png";
   const avatarNum = (num % 100) + 1;
   return `/avatars/avatar_${String(avatarNum).padStart(3, "0")}.png`;
 }

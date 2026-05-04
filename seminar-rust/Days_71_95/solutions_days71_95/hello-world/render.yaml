@@ -7,34 +7,14 @@ services:
     startCommand: cd backend && ./target/release/hello-world-backend
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: hello-world-db
-          property: connectionString
+        sync: false # Set manually (NeonDB PostgreSQL)
       - key: MONGODB_URL
-        sync: false # Set manually (e.g. MongoDB Atlas)
+        sync: false # Set manually (MongoDB Atlas)
       - key: JWT_SECRET
         generateValue: true
+      - key: ALLOWED_ORIGINS
+        sync: false # Set manually (Vercel frontend URLs, comma-separated)
       - key: PORT
         value: 3001
-
-  # Frontend (Next.js)
-  - type: web
-    name: hello-world-frontend
-    env: node
-    buildCommand: cd frontend && npm ci && npm run build
-    startCommand: cd frontend && npm start
-    envVars:
-      - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: hello-world-backend
-          property: host
-      - key: NODE_VERSION
-        value: 20
-
-databases:
-  # Managed PostgreSQL
-  - name: hello-world-db
-    plan: free
-    databaseName: helloworld
-    user: postgres
+      - key: RUST_LOG
+        value: info

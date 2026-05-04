@@ -13,7 +13,7 @@
  *    Hooks (useServers, useChannels, etc.)
  *       │
  *       ▼
- *  Server Actions (lib/api-server.ts)
+ *  Browser API Client (lib/api-client.ts)
  *       │
  *       ▼
  *   Backend API
@@ -38,5 +38,5 @@ export { useChannels } from "./useChannels";
 export { useMessages } from "./useMessages";
 export { useMembers } from "./useMembers";
 export { useAuth } from "./useAuth";
+export { useFriends } from "./useFriends";
 export { useWebSocket } from "./useWebSocket";
-

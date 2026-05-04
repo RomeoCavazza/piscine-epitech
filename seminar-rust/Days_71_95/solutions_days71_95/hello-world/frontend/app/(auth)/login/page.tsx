@@ -4,18 +4,26 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { login } from "@/lib/auth/actions";
+import { login } from "@/lib/auth/client";
+import { useRouteGuard } from "@/lib/auth/guards";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import { useTranslation } from "@/lib/i18n";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useTranslation();
+  const { ready } = useRouteGuard("guest");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  if (!ready) {
+    return <main className="min-h-screen" />;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,10 +38,12 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/");
-      router.refresh();
+      const params = new URLSearchParams(window.location.search);
+      const redirectTarget = params.get("redirect") || params.get("next") || "/";
+      router.replace(redirectTarget);
+      return;
     } catch {
-      setError("Erreur de connexion");
+      setError(t("auth.login.error"));
     } finally {
       setIsLoading(false);
     }
@@ -41,35 +51,27 @@ export default function LoginPage() {
 
   return (
     <main className="relative w-screen h-screen overflow-hidden">
-      {/* BACKGROUND */}
       <div className="fixed inset-0 bg-[url('/background.png')] bg-cover bg-center bg-no-repeat brightness-[0.7] contrast-[1.1] z-0" />
 
-      {/* MAIN LAYOUT */}
       <div className="relative z-10 flex w-full h-full items-center justify-center">
-        
-        {/* CENTER CONTENT */}
         <div className="flex flex-col items-center justify-center p-6">
-          
-          {/* Logo */}
           <Image
             src="/logo.png"
-            alt="Hello World logo"
+            alt={t("auth.logoAlt")}
             width={120}
             height={120}
             className="mb-6"
           />
 
-          {/* Header Message */}
           <header className="mb-8 text-center">
             <h1 className="text-white text-xl font-bold">
-              Welcome to <span className="text-[#ff3333]">HELLO WORLD</span> messaging platform
+              {t("auth.welcomeMessage")}
             </h1>
           </header>
 
-          {/* AUTH FORM */}
           <section className="w-[380px] p-10 bg-[rgba(20,20,20,0.85)] backdrop-blur-xl rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] border-2 border-[#4fdfff] animate-[fadeIn_0.5s_ease]">
             <div className="text-center mb-8">
-              <h3 className="text-white font-bold tracking-widest text-lg">CONNEXION</h3>
+              <h3 className="text-white font-bold tracking-widest text-lg">{t("auth.login.title")}</h3>
             </div>
 
             {error && (
@@ -81,14 +83,14 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <Input
                 type="email"
-                placeholder="Email"
+                placeholder={t("auth.login.emailPlaceholder")}
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
               <Input
                 type="password"
-                placeholder="Mot de passe"
+                placeholder={t("auth.login.passwordPlaceholder")}
                 required
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -101,17 +103,16 @@ export default function LoginPage() {
                 fullWidth
                 className="mt-4"
               >
-                SE CONNECTER
+                {t("auth.login.submit")}
               </Button>
             </form>
 
             <div className="mt-6 text-center text-sm">
               <Link href="/register" className="text-[#4fdfff] hover:underline transition-colors">
-                Pas encore de compte ? Inscrivez-vous
+                {t("auth.login.noAccount")}
               </Link>
             </div>
           </section>
-
         </div>
       </div>
     </main>
