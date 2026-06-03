@@ -16,7 +16,7 @@
 
 <br /><br />
 
-<img src="docs/architecture.png" alt="Bernstein Architecture" width="700" />
+<img src="docs/architecture.png" alt="Bernstein Architecture" width="100%" />
 
 </div>
 
