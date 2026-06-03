@@ -107,102 +107,102 @@ graph LR
 ## Seminars Detail
 
 ### [Preparation Seminar - Days 01-10](seminar-preparation/)
-Linux fundamentals, Python scripting, and introductory graphics development with **Turtle** and **Pygame**.
-
-[Repo](seminar-preparation/) | [README](seminar-preparation/README.md)
+Linux fundamentals, Python scripting, and introductory graphics development with Turtle and Pygame.
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vim/vim-original.svg" height="25" />
+
+[Repo](seminar-preparation/) | [README](seminar-preparation/README.md)
 
 ### [Web Seminar - Days 11-20](seminar-web/)
 Semantic HTML5/CSS, client-side JavaScript, and PHP integration.
 
-[Repo](seminar-web/) | [README](seminar-web/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materializecss/materializecss-original.svg" height="25" />
+
+[Repo](seminar-web/) | [README](seminar-web/README.md)
 
 ### [Job Board Seminar - Days 21-30](seminar-job-board/)
 Full-stack recruitment platform with REST API and database integration.
 
-[Repo](seminar-job-board/) | [README](seminar-job-board/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" /> <img src="assets/rest-api.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" />
+
+[Repo](seminar-job-board/) | [README](seminar-job-board/README.md)
 
 ### [Java Seminar - Days 31-40](seminar-java/)
 Object-oriented mastery: generics, reflection, and fundamental design patterns.
 
-[Repo](seminar-java/) | [README](seminar-java/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" />
+
+[Repo](seminar-java/) | [README](seminar-java/README.md)
 
 ### [My First Game Seminar - Days 41-55](seminar-my-first-game/)
 2D game development using libGDX, adhering to SOLID principles and modular architecture.
 
-[Repo](seminar-my-first-game/) | [README](seminar-my-first-game/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" /> <img src="assets/jacoco.png" height="25" />
+
+[Repo](seminar-my-first-game/) | [README](seminar-my-first-game/README.md)
 
 ### [DevOps Seminar - Days 56-60](seminar-devops/)
 Linux administration, advanced networking, system security, and Ansible automation.
 
-[Repo](seminar-devops/) | [README](seminar-devops/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" height="25" /> <img src="assets/virtualbox.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg" height="25" />
+
+[Repo](seminar-devops/) | [README](seminar-devops/README.md)
 
 ### [Docker Seminar - Days 61-65](seminar-docker/)
 Containerization and microservices orchestration with Docker Compose.
 
-[Repo](seminar-docker/) | [README](seminar-docker/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" />
+
+[Repo](seminar-docker/) | [README](seminar-docker/README.md)
 
 ### [Jenkins Seminar - Days 66-70](seminar-jenkins/)
 Continuous Integration with Jenkins and Configuration as Code pipelines.
 
-[Repo](seminar-jenkins/) | [README](seminar-jenkins/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg" height="25" />
+
+[Repo](seminar-jenkins/) | [README](seminar-jenkins/README.md)
 
 ### [Rust Seminar - Days 71-95](seminar-rust/)
 Memory-safe systems programming and Discord-like real-time messaging.
 
-[Repo](seminar-rust/) | [README](seminar-rust/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tauri/tauri-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/railway/railway-original.svg" height="25" />
+
+[Repo](seminar-rust/) | [README](seminar-rust/README.md)
 
 ### [Organisation Seminar - Days 96-120](seminar-organisation/)
 Organizational theory, workflow optimization, and strategic agency management.
 
-[Repo](seminar-organisation/) | [README](seminar-organisation/README.md)
-
 <img src="assets/scrum-agile.png" height="25" /> <img src="assets/swot.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" height="25" />
+
+[Repo](seminar-organisation/) | [README](seminar-organisation/README.md)
 
 ### [Project Management Seminar - SmartFridge (T-CEN-500)](seminar-project-management/)
 Holistic project management around the SmartFridge product: Gantt planning, budget, resources, and risk communication.
 
-[Repo](seminar-project-management/) | [README](seminar-project-management/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-plain.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" height="25" />
+
+[Repo](seminar-project-management/) | [README](seminar-project-management/README.md)
 
 ### [DOP Seminar - Days 121-135](seminar-dop/)
 Distributed voting application orchestrated on a multi-node Kubernetes cluster: Flask front-end, Redis queue, Java worker, PostgreSQL store and a Node.js dashboard, fronted by Traefik. Infrastructure provisioned on DigitalOcean (DOKS) via Terraform, reproducible dev environment with Nix.
 
-[Repo](seminar-dop/) | [README](seminar-dop/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/traefikproxy/traefikproxy-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nixos/nixos-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" />
+
+[Repo](seminar-dop/) | [README](seminar-dop/README.md)
 
 ### [AI Seminar - Days 121-135](seminar-ai/)
 Advanced NLP pipeline for book analysis: lexical diversity, topic extraction, entity detection, summarization and similarity, built on a reusable bootstrap foundation with a canonical CLI entrypoint.
 
-[Repo](seminar-ai/) | [README](seminar-ai/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="assets/nltk.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="https://img.shields.io/badge/NLP-ff4757?style=flat-square" height="25" />
+
+[Repo](seminar-ai/) | [README](seminar-ai/README.md)
 
 ### [Code Competition - 5G or not 5G?](competition/README.md)
 Algorithmic optimization for 5G antenna network deployment using CUDA.
 
-[Repo](competition/) | [README](competition/README.md)
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" height="25" /> <img src="assets/nvidia.png" height="25" />
+
+[Repo](competition/) | [README](competition/README.md)
 
 ---
 
