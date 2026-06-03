@@ -80,24 +80,26 @@ Extract and classify:
 
 ## Implementation Structure
 
-### Core Components
+### Phase 1: Bootstrap (Days 121-122)
+Fast setup of reusable utilities:
+- [bootstrap/calculator.py](solutions_day121_135/bootstrap/calculator.py) — Statistical helpers
+- [bootstrap/tools.py](solutions_day121_135/bootstrap/tools.py) — Common NLP utilities
+- Text preprocessing foundation
 
-**bootstrap/** — Reusable utilities (frozen base)
-- [calculator.py](solutions_day121_135/bootstrap/calculator.py) — Statistical helpers
-- [tools.py](solutions_day121_135/bootstrap/tools.py) — Common NLP utilities
-- [instructions.pdf](solutions_day121_135/bootstrap/instructions.pdf) — Bootstrap spec
-- [catalog.csv](solutions_day121_135/bootstrap/catalog.csv) — Reference book metadata
-
-**Main Pipeline** — Bookworm implementation
+### Phase 2: Bookworm Pipeline (Days 123-134)
+**Main Implementation** — Bookworm core features
 - [bookworm.py](solutions_day121_135/bookworm.py) — Canonical CLI entrypoint
-- [new_bookworm.py](solutions_day121_135/new_bookworm.py) — Draft/experimental features
 - [helper.py](solutions_day121_135/helper.py) — Internal utilities and pipeline logic
+- All 5 pillars: lexical diversity, entities, topics, summarization, similarity
 
-**Data**
-- [corpus/](solutions_day121_135/corpus/) — Book text files (≈29 GB gitignored)
-- [diagrams/](solutions_day121_135/diagrams/) — Mermaid visualizations (lexdiv, topics, entities, etc.)
+### Phase 3: Polish & Finalization (Days 135)
+- CLI hardening and edge cases
+- Testing and error handling
+- Documentation finalization
 
-**Documentation**
+---
+
+## Feature Specifications
 - [docs/instructions.pdf](solutions_day121_135/docs/instructions.pdf) — Project specification
 - [docs/kickoff.pdf](solutions_day121_135/docs/kickoff.pdf) — Project kickoff notes
 - [docs/choices_explained.md](solutions_day121_135/docs/choices_explained.md) — Design decisions
