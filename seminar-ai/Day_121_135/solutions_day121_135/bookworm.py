@@ -89,17 +89,41 @@ def topics(book_id):
     text = text.read((string) (book_id))
     chapter_content = ""
     Result = {}
+
     for word in text.split():
-        if word.contains.toLowerCase("chapter"):
-            tokens = chapter_content.split()
-            lemmatizer = WordNetLemmatizer()
-            tagged = pos_tag(tokens)
-            Result.append("i: " +  [lemmatizer.lemmatize(word, get_wordnet_pos(tag)) for word, tag in tagged] )
+        if "chapter" in word.lower():
+            if chapter_content.strip():
+                chapters.append(chapter_content.strip())
             chapter_content = ""
         else:
             chapter_content += word + " "
 
-    return Result
+    if chapter_content.strip():
+        chapters.append(chapter_content.strip())
+
+    results = {}
+
+    for i, chapter in enumerate(chapters, start=1):
+        tokens = chapter.split()
+
+        tokens = [
+            t.strip(string.punctuation).lower()
+            for t in tokens
+            if t.strip(string.punctuation)
+        ]
+
+        tagged = pos_tag(tokens)
+        lemmas = [
+            lemmatizer.lemmatize(word, get_wordnet_pos(tag))
+            for word, tag in tagged
+            if word not in stop_words
+        ]
+
+        freq = Counter(lemmas).most_common(10)
+        results[f"chapter_{i}"] = freq
+
+    return results
+
 
 def entities(book_id):
     # character maps and timeline of locations with
