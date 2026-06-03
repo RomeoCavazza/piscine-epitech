@@ -3,7 +3,7 @@
 - Consignes Bootstrap : [OBJECTIVES.md](OBJECTIVES.md)  
 - Consignes Projet : [OBJECTIVES.md](OBJECTIVES.md)  
 - Consignes Présentation : [OBJECTIVES.md](OBJECTIVES.md)  
-- Solutions : [solutions_day_66_70/](solutions_day_66_70/)
+- Solutions : [solutions_day66_70/](solutions_day66_70/)
 
 ## Objectifs
 
