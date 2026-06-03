@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD033 -->
 <div align="center">
-  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <img src="../assets/epitech.png" alt="Epitech Logo" width="400" />
   <br />
   <img src="https://img.shields.io/badge/Seminar-Docker_&_Orchestration-6366f1?style=for-the-badge" alt="Seminar Badge" />
   <img src="https://img.shields.io/badge/Days-60--67-00f2a6?style=for-the-badge" alt="Days Badge" />
@@ -58,4 +58,3 @@ graph TD
 - **Distributed Thinking**: Understanding communication protocols between isolated services.
 - **Optimized Builds**: Implementing multi-stage builds to minimize image size.
 - **Infrastructure as Logic**: Defining complex stack dependencies in YAML.
-

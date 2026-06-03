@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD033 -->
 <div align="center">
-  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <img src="../assets/epitech.png" alt="Epitech Logo" width="400" />
   <br />
   <img src="https://img.shields.io/badge/Seminar-5G_Algorithms-6366f1?style=for-the-badge" alt="Seminar Badge" />
   <img src="https://img.shields.io/badge/Final-Competition-00f2a6?style=for-the-badge" alt="Days Badge" />
