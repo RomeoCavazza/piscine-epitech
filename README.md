@@ -22,11 +22,13 @@ piscine/
 ├── seminar-java/            # Days 31-40 : OOP, generics, design patterns
 ├── seminar-my-first-game/   # Days 41-55 : 2D game development (libGDX)
 ├── seminar-devops/          # Days 56-60 : Administration, virtualization, automation
-├── seminar-docker/          # Days 60-67 : Containerization, orchestration, microservices
+├── seminar-docker/          # Days 61-65 : Containerization, orchestration, microservices
 ├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
 ├── seminar-rust/            # Days 71-95 : Rust, memory safety, ownership, full-stack
 ├── seminar-organisation/    # Days 96-110 : Organizational theory & strategy
 ├── seminar-project-management/ # T-CEN-500 : Project management
+├── seminar-dop/             # Kubernetes : multi-service orchestration (Bernstein)
+├── seminar-ai/              # NLP : book analysis pipeline (Bookworm)
 └── competition/                # 5G antenna optimization competition
 ```
 
@@ -93,7 +95,7 @@ Linux administration, advanced networking, system security, and Ansible automati
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" height="25" /> <img src="assets/virtualbox.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg" height="25" />
 
-### [Docker Seminar — Days 60-67](seminar-docker/README.md)
+### [Docker Seminar — Days 61-65](seminar-docker/README.md)
 Containerization and microservices orchestration with Docker Compose.
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" />
@@ -117,6 +119,16 @@ Organizational theory, workflow optimization, and strategic agency management.
 Holistic project management around the SmartFridge product: Gantt planning, budget, resources, and risk communication.
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-plain.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" height="25" />
+
+### [DOP — Bernstein : Kubernetes Orchestration](seminar-dop/README.md)
+Distributed voting application orchestrated on a multi-node Kubernetes cluster: Flask front-end, Redis queue, Java worker, PostgreSQL store and a Node.js dashboard, fronted by Traefik. Infrastructure provisioned on DigitalOcean (DOKS) via Terraform, reproducible dev environment with Nix.
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/traefikproxy/traefikproxy-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nixos/nixos-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" />
+
+### [AI — Bookworm : NLP Pipeline](seminar-ai/README.md)
+Advanced NLP pipeline for book analysis: lexical diversity, topic extraction, entity detection, summarization and similarity, built on a reusable bootstrap foundation with a canonical CLI entrypoint.
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://img.shields.io/badge/NLTK-154f5b?style=flat-square" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="https://img.shields.io/badge/NLP-ff4757?style=flat-square" height="25" />
 
 ### [Code Competition — 5G or not 5G?](competition/README.md)
 Algorithmic optimization for 5G antenna network deployment using CUDA.
@@ -144,16 +156,18 @@ graph TD
         S6[DevOps: Admin & Ansible]
         S7[Docker: Containerization]
         S8[Jenkins: CI/CD Pipelines]
+        S12[DOP: Kubernetes Orchestration]
     end
-    subgraph System[Phase 4: High Performance]
+    subgraph System[Phase 4: High Performance & Data]
         S9[Rust Seminar: Memory Safety]
         S10[5G Competition: CUDA Algorithms]
+        S13[Bookworm: NLP Pipeline]
     end
     subgraph Management[Phase 5: Strategy]
         S11[Organisation Seminar: Workflows]
     end
     
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S9 --> S10 --> S11
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S12 --> S9 --> S10 --> S13 --> S11
 ```
 
 ---
