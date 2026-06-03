@@ -111,98 +111,112 @@ graph LR
 
 Foundation seminar covering the Linux command line, shell habits, Python scripting and first graphical exercises, with a progression from system basics to small interactive programs built with Turtle and Pygame.
 
-- [Repo](seminar-preparation/) | [README](seminar-preparation/README.md)
+- [Repo](seminar-preparation/)
+- [README](seminar-preparation/README.md)
 
 ### [Web Seminar - Days 11-20](seminar-web/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materializecss/materializecss-original.svg" height="25" />
 
 Front-end and web integration seminar focused on semantic HTML5, responsive CSS, client-side JavaScript and first PHP back-end bridges, with forms, DOM interactions and structured data flowing into a classic web stack.
 
-- [Repo](seminar-web/) | [README](seminar-web/README.md)
+- [Repo](seminar-web/)
+- [README](seminar-web/README.md)
 
 ### [Job Board Seminar - Days 21-30](seminar-job-board/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" height="25" /> <img src="assets/rest-api.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" height="25" />
 
 Full-stack recruitment platform combining PHP back-end logic, relational data modeling, REST-style exchanges and browser-side interactions, built to connect job listings, candidates and administration workflows in one coherent product.
 
-- [Repo](seminar-job-board/) | [README](seminar-job-board/README.md)
+- [Repo](seminar-job-board/)
+- [README](seminar-job-board/README.md)
 
 ### [Java Seminar - Days 31-40](seminar-java/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/maven/maven-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" />
 
 Object-oriented Java seminar centered on clean architecture, generics, reflection and core design patterns, with a strong emphasis on reusable abstractions, testing discipline and tooling through Maven and JUnit.
 
-- [Repo](seminar-java/) | [README](seminar-java/README.md)
+- [Repo](seminar-java/)
+- [README](seminar-java/README.md)
 
 ### [My First Game Seminar - Days 41-55](seminar-my-first-game/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/libgdx/libgdx-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/gradle/gradle-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/junit/junit-original.svg" height="25" /> <img src="assets/jacoco.png" height="25" />
 
 2D game development track built with libGDX, where gameplay systems, rendering, input handling and asset management are organized through SOLID principles, modular architecture and test-aware engineering practices.
 
-- [Repo](seminar-my-first-game/) | [README](seminar-my-first-game/README.md)
+- [Repo](seminar-my-first-game/)
+- [README](seminar-my-first-game/README.md)
 
 ### [DevOps Seminar - Days 56-60](seminar-devops/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" height="25" /> <img src="assets/virtualbox.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ssh/ssh-original.svg" height="25" />
 
 Systems administration seminar covering Debian server setup, virtual machines, networking services, security hardening and operational automation, with Ansible used to turn repeated infrastructure tasks into reproducible configuration.
 
-- [Repo](seminar-devops/) | [README](seminar-devops/README.md)
+- [Repo](seminar-devops/)
+- [README](seminar-devops/README.md)
 
 ### [Docker Seminar - Days 61-65](seminar-docker/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" />
 
 Containerization seminar focused on Docker images, service isolation and multi-container orchestration with Docker Compose, culminating in a distributed microservices application wired through databases, queues and network tiers.
 
-- [Repo](seminar-docker/) | [README](seminar-docker/README.md)
+- [Repo](seminar-docker/)
+- [README](seminar-docker/README.md)
 
 ### [Jenkins Seminar - Days 66-70](seminar-jenkins/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/yaml/yaml-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/groovy/groovy-original.svg" height="25" />
 
 Continuous integration seminar centered on Jenkins, pipeline design and configuration as code, with automated build flows, repository hooks and repeatable CI behavior treated as part of the delivery architecture.
 
-- [Repo](seminar-jenkins/) | [README](seminar-jenkins/README.md)
+- [Repo](seminar-jenkins/)
+- [README](seminar-jenkins/README.md)
 
 ### [Rust Seminar - Days 71-95](seminar-rust/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tauri/tauri-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/railway/railway-original.svg" height="25" />
 
 Systems programming seminar exploring Rust ownership, memory safety and zero-cost abstractions through increasingly ambitious projects, ending in a real-time messaging platform backed by modern web, desktop and database tooling.
 
-- [Repo](seminar-rust/) | [README](seminar-rust/README.md)
+- [Repo](seminar-rust/)
+- [README](seminar-rust/README.md)
 
 ### [Organisation Seminar - Days 96-120](seminar-organisation/)
 <img src="assets/scrum-agile.png" height="25" /> <img src="assets/swot.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" height="25" />
 
 Organization and strategy seminar dedicated to team structures, workflow analysis and target operating models, with sprint reasoning, comparative diagnostics and management artifacts used to formalize how work should flow inside an agency.
 
-- [Repo](seminar-organisation/) | [README](seminar-organisation/README.md)
+- [Repo](seminar-organisation/)
+- [README](seminar-organisation/README.md)
 
 ### [Project Management Seminar - SmartFridge (T-CEN-500)](seminar-project-management/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-plain.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" height="25" />
 
 Holistic project management track built around the SmartFridge case study, combining planning, budgeting, staffing, scheduling and risk communication into a full delivery narrative supported by roadmap and governance artifacts.
 
-- [Repo](seminar-project-management/) | [README](seminar-project-management/README.md)
+- [Repo](seminar-project-management/)
+- [README](seminar-project-management/README.md)
 
 ### [DOP Seminar - Days 121-135](seminar-dop/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/traefikproxy/traefikproxy-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nixos/nixos-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" />
 
 Distributed voting application orchestrated on a multi-node Kubernetes cluster: Flask front-end, Redis queue, Java worker, PostgreSQL store and a Node.js dashboard, fronted by Traefik. Infrastructure provisioned on DigitalOcean (DOKS) via Terraform, reproducible dev environment with Nix.
 
-- [Repo](seminar-dop/) | [README](seminar-dop/README.md)
+- [Repo](seminar-dop/)
+- [README](seminar-dop/README.md)
 
 ### [AI Seminar - Days 121-135](seminar-ai/)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="assets/nltk.png" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="https://img.shields.io/badge/NLP-ff4757?style=flat-square" height="25" />
 
 Advanced NLP pipeline for book analysis: lexical diversity, topic extraction, entity detection, summarization and similarity, built on a reusable bootstrap foundation with a canonical CLI entrypoint.
 
-- [Repo](seminar-ai/) | [README](seminar-ai/README.md)
+- [Repo](seminar-ai/)
+- [README](seminar-ai/README.md)
 
 ### [Code Competition - 5G or not 5G?](competition/README.md)
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" height="25" /> <img src="assets/nvidia.png" height="25" />
 
 Optimization competition focused on large-scale 5G antenna placement, combining numerical experimentation, spatial reasoning and CUDA-accelerated computation to improve coverage quality under algorithmic and performance constraints.
 
-- [Repo](competition/) | [README](competition/README.md)
+- [Repo](competition/)
+- [README](competition/README.md)
 
 ---
 
