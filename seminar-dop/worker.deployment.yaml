@@ -20,7 +20,7 @@ spec:
           image: epitechcontent/t-dop-600-worker:k8s
           resources:
             limits:
-              memory: "256Mi"
+              memory: "256M"
           env:
             - name: REDIS_HOST
               valueFrom:
