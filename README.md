@@ -34,14 +34,38 @@ piscine/
 
 ---
 
-## Technical Core
+## Curriculum Roadmap
 
-| Domain | Implementation |
-|---|---|
-| **System & Logic** | ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![Java](https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white) ![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white) |
-| **Web & API** | ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white) ![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) |
-| **Infra & DevOps** | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) ![Ansible](https://img.shields.io/badge/Ansible-EE0000?style=flat-square&logo=ansible&logoColor=white) ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=flat-square&logo=jenkins&logoColor=white) |
-| **Data & Storage** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white) ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white) |
+```mermaid
+graph LR
+    subgraph Prepare[Phase 0: Foundation]
+        S1[Preparation Seminar: Linux & Python]
+    end
+    subgraph Web[Phase 1: Web Ecosystem]
+        S2[Web Seminar: LAMP & JS]
+        S3[Job Board: Full-Stack Integration]
+    end
+    subgraph Java[Phase 2: Object Oriented]
+        S4[Java Seminar: Patterns & OOP]
+        S5[My First Game: libGDX Engine]
+    end
+    subgraph Ops[Phase 3: Infrastructure]
+        S6[DevOps: Admin & Ansible]
+        S7[Docker: Containerization]
+        S8[Jenkins: CI/CD Pipelines]
+        S12[DOP: Kubernetes Orchestration]
+    end
+    subgraph System[Phase 4: High Performance & Data]
+        S9[Rust Seminar: Memory Safety]
+        S10[5G Competition: CUDA Algorithms]
+        S13[Bookworm: NLP Pipeline]
+    end
+    subgraph Management[Phase 5: Strategy]
+        S11[Organisation Seminar: Workflows]
+    end
+    
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S12 --> S9 --> S10 --> S13 --> S11
+```
 
 ---
 
@@ -140,41 +164,6 @@ Advanced NLP pipeline for book analysis: lexical diversity, topic extraction, en
 Algorithmic optimization for 5G antenna network deployment using CUDA.
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" height="25" /> <img src="assets/nvidia.png" height="25" />
-
----
-
-## Curriculum Roadmap
-
-```mermaid
-graph LR
-    subgraph Prepare[Phase 0: Foundation]
-        S1[Preparation Seminar: Linux & Python]
-    end
-    subgraph Web[Phase 1: Web Ecosystem]
-        S2[Web Seminar: LAMP & JS]
-        S3[Job Board: Full-Stack Integration]
-    end
-    subgraph Java[Phase 2: Object Oriented]
-        S4[Java Seminar: Patterns & OOP]
-        S5[My First Game: libGDX Engine]
-    end
-    subgraph Ops[Phase 3: Infrastructure]
-        S6[DevOps: Admin & Ansible]
-        S7[Docker: Containerization]
-        S8[Jenkins: CI/CD Pipelines]
-        S12[DOP: Kubernetes Orchestration]
-    end
-    subgraph System[Phase 4: High Performance & Data]
-        S9[Rust Seminar: Memory Safety]
-        S10[5G Competition: CUDA Algorithms]
-        S13[Bookworm: NLP Pipeline]
-    end
-    subgraph Management[Phase 5: Strategy]
-        S11[Organisation Seminar: Workflows]
-    end
-    
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8 --> S12 --> S9 --> S10 --> S13 --> S11
-```
 
 ---
 
