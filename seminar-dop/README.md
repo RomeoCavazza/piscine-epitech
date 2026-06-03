@@ -35,9 +35,9 @@ Mastering container orchestration at scale: deploying distributed voting applica
 
 ## Chronological Journey
 
-- **Days 121-125**: Bootstrap — Local Minikube setup, basic pod and service concepts.
-- **Days 126-130**: **Bernstein Project** — Full distributed voting app on managed Kubernetes (DOKS).
-- **Days 131-135**: **Infrastructure & Automation** — Terraform provisioning, monitoring with cAdvisor, and final hardening.
+- **Days 121-122**: Bootstrap — Local Minikube essentials (pods, services, ConfigMaps).
+- **Days 123-132**: **Bernstein Project** — Full distributed voting app on managed Kubernetes (DOKS).
+- **Days 133-135**: **Infrastructure & Automation** — Terraform provisioning, monitoring with cAdvisor, and hardening.
 
 ---
 

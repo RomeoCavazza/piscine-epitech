@@ -36,9 +36,9 @@ Building production-grade NLP pipelines for comprehensive book analysis: lexical
 
 ## Chronological Journey
 
-- **Days 121-125**: Bootstrap — Text preprocessing foundations, tokenization, stopwords, and basic vectorization.
-- **Days 126-130**: **Bookworm Core** — Lexical diversity analysis, entity extraction, topic modeling, and summarization.
-- **Days 131-135**: **Recommendation Engine** — Similarity metrics, book recommendations, and final CLI polish.
+- **Days 121-122**: Bootstrap — Text preprocessing, tokenization, stopwords setup.
+- **Days 123-133**: **Bookworm Core** — Lexical diversity, entities, topics, summarization, similarity.
+- **Days 134-135**: **Polish & Finalization** — CLI hardening, testing, and documentation.
 
 ---
 

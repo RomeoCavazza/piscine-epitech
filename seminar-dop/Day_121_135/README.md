@@ -29,17 +29,15 @@ User casts a vote through a **Flask web interface** → vote pushed to **Redis q
 
 ## Deployment Phases
 
-### Phase 1: Bootstrap (Days 121-125)
-Local Minikube exercises:
+### Phase 1: Bootstrap (Days 121-122)
+Local Minikube essentials:
 - Basic pod creation and lifecycle
 - Service discovery and ClusterIP
-- Persistent volumes with storage classes
 - ConfigMap and Secret management
-- Deployment and ReplicaSet patterns
 
 See: [bootstrap/](solutions_day121_135/bootstrap/)
 
-### Phase 2: Bernstein Project (Days 126-130)
+### Phase 2: Bernstein Project (Days 123-132)
 Production-grade DOKS cluster:
 - Multi-node Kubernetes cluster on DigitalOcean
 - Manifest-based microservices deployment
@@ -51,7 +49,7 @@ Production-grade DOKS cluster:
 
 See: [Kubernetes manifests](solutions_day121_135/) (root level)
 
-### Phase 3: Infrastructure & Automation (Days 131-135)
+### Phase 3: Infrastructure & Automation (Days 133-135)
 Terraform and monitoring:
 - Infrastructure as Code on DigitalOcean
 - Cluster provisioning and lifecycle

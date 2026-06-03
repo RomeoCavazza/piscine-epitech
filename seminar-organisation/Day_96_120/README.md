@@ -11,7 +11,13 @@
 
 ## Core Topics
 
-### Sprint 1 (Days 96–110)
+### Bootstrap (Days 96–97)
+**Preparation & Company Selection**
+- Framework methodology review
+- Company identification and stakeholder contact
+- Survey design and data collection planning
+
+### Sprint 1 (Days 98–110)
 **Company Organizational Audits**
 
 Three organizations analyzed in parallel:

@@ -33,8 +33,8 @@ Mastering the mechanisms of professional structures: from traditional hierarchie
 
 ## Chronological Journey
 
-- **Days 96-99**: Bootstrap, company selection, data gathering phase.
-- **Days 100-110**: Sprint 1 — Organizational analysis across 3 companies.
+- **Days 96-97**: Bootstrap — Methodology, company selection, stakeholder outreach.
+- **Days 98-110**: Sprint 1 — Organizational analysis across 3 companies.
 - **Days 111-115**: Sprint 2 — Comparative analysis and cross-audit.
 - **Days 116-120**: Sprint 3 — Blueprint design, strategic models, and final presentations.
 
