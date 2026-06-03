@@ -102,50 +102,109 @@ Shared configuration (hosts, ports, database name) lives in Kubernetes **ConfigM
 
 ### File Index
 
-Every manifest and configuration file, with a one-line description. All links are clickable.
+Every manifest and configuration file, grouped by role. All links are clickable.
 
-#### Kubernetes Manifests
+### Monitoring
 
-| File | Kind | Description |
-|------|------|-------------|
-| [cadvisor.daemonset.yaml](cadvisor.daemonset.yaml) | DaemonSet | cAdvisor monitoring agent on every node (`kube-system`) |
-| [redis.configmap.yaml](redis.configmap.yaml) | ConfigMap | `REDIS_HOST` shared configuration |
-| [redis.deployment.yaml](redis.deployment.yaml) | Deployment | Redis 5.0 in-memory vote queue |
-| [redis.service.yaml](redis.service.yaml) | Service | ClusterIP exposing Redis on `6379` |
-| [postgres.secret.yaml](postgres.secret.yaml) | Secret | `POSTGRES_USER` / `POSTGRES_PASSWORD` credentials |
-| [postgres.configmap.yaml](postgres.configmap.yaml) | ConfigMap | `POSTGRES_HOST` / `PORT` / `DB` shared config |
-| [postgres.volume.yaml](postgres.volume.yaml) | PV + PVC | Persistent storage for `/var/lib/postgresql/data` |
-| [postgres.deployment.yaml](postgres.deployment.yaml) | Deployment | PostgreSQL 13 durable vote storage |
-| [postgres.service.yaml](postgres.service.yaml) | Service | ClusterIP exposing Postgres on `5432` |
-| [poll.deployment.yaml](poll.deployment.yaml) | Deployment | Flask voting front-end (2 replicas, anti-affinity) |
-| [poll.service.yaml](poll.service.yaml) | Service | ClusterIP exposing Poll on `80` |
-| [poll.ingress.yaml](poll.ingress.yaml) | Ingress | Traefik route for `poll.dop.io` |
-| [worker.deployment.yaml](worker.deployment.yaml) | Deployment | Java queue consumer (Redis → Postgres) |
-| [result.deployment.yaml](result.deployment.yaml) | Deployment | Node.js results dashboard (2 replicas, anti-affinity) |
-| [result.service.yaml](result.service.yaml) | Service | ClusterIP exposing Result on `80` |
-| [result.ingress.yaml](result.ingress.yaml) | Ingress | Traefik route for `result.dop.io` |
-| [traefik.rbac.yaml](traefik.rbac.yaml) | RBAC | ServiceAccount + ClusterRole for the Kubernetes API |
-| [traefik.deployment.yaml](traefik.deployment.yaml) | Deployment | Traefik 2.7 reverse proxy / LB (2 replicas, `kube-public`) |
-| [traefik.service.yaml](traefik.service.yaml) | Service | NodePort `30021` (proxy) + `30042` (dashboard) |
+- [cadvisor.daemonset.yaml](cadvisor.daemonset.yaml) — `DaemonSet` — cAdvisor monitoring agent on every node (`kube-system`)
 
-#### Bootstrap (local Minikube)
+### Databases
 
-| File | Description |
-|------|-------------|
-| [bootstrap/hello-world.pod.yaml](bootstrap/hello-world.pod.yaml) | Single pod with `PORT=8080` env + exposed port |
-| [bootstrap/hello-world.service.yaml](bootstrap/hello-world.service.yaml) | ClusterIP service for internal DNS |
-| [bootstrap/hello-world.volume.yaml](bootstrap/hello-world.volume.yaml) | 512Mi PersistentVolume + PVC |
-| [bootstrap/hello-world.deployment.yaml](bootstrap/hello-world.deployment.yaml) | Pod converted into a Deployment |
+- **Redis** — in-memory vote queue
+  - [redis.configmap.yaml](redis.configmap.yaml) — `ConfigMap` — `REDIS_HOST` shared configuration
+  - [redis.deployment.yaml](redis.deployment.yaml) — `Deployment` — Redis 5.0
+  - [redis.service.yaml](redis.service.yaml) — `Service` — ClusterIP exposing Redis on `6379`
+- **PostgreSQL** — durable vote storage
+  - [postgres.secret.yaml](postgres.secret.yaml) — `Secret` — `POSTGRES_USER` / `POSTGRES_PASSWORD` credentials
+  - [postgres.configmap.yaml](postgres.configmap.yaml) — `ConfigMap` — `POSTGRES_HOST` / `PORT` / `DB` shared config
+  - [postgres.volume.yaml](postgres.volume.yaml) — `PVC` — persistent storage on `do-block-storage`
+  - [postgres.deployment.yaml](postgres.deployment.yaml) — `Deployment` — PostgreSQL 13
+  - [postgres.service.yaml](postgres.service.yaml) — `Service` — ClusterIP exposing Postgres on `5432`
 
-#### Infrastructure & Tooling
+### Application Services
 
-| File | Description |
-|------|-------------|
-| [terraform/main.tf](terraform/main.tf) | DOKS cluster (2 worker nodes) |
-| [terraform/providers.tf](terraform/providers.tf) | DigitalOcean + local providers |
-| [terraform/variables.tf](terraform/variables.tf) | Region & cluster name variables |
-| [terraform/outputs.tf](terraform/outputs.tf) | Kubeconfig output + local file generation |
-| [flake.nix](flake.nix) | Nix dev shell (kubectl, terraform, doctl…) |
+- **Poll** — Flask voting front-end
+  - [poll.deployment.yaml](poll.deployment.yaml) — `Deployment` — 2 replicas, pod anti-affinity
+  - [poll.service.yaml](poll.service.yaml) — `Service` — ClusterIP on `80`
+  - [poll.ingress.yaml](poll.ingress.yaml) — `Ingress` — Traefik route for `poll.dop.io`
+- **Worker** — Java queue consumer
+  - [worker.deployment.yaml](worker.deployment.yaml) — `Deployment` — consumes Redis → writes Postgres
+- **Result** — Node.js results dashboard
+  - [result.deployment.yaml](result.deployment.yaml) — `Deployment` — 2 replicas, pod anti-affinity
+  - [result.service.yaml](result.service.yaml) — `Service` — ClusterIP on `80`
+  - [result.ingress.yaml](result.ingress.yaml) — `Ingress` — Traefik route for `result.dop.io`
+
+### Load Balancer
+
+- **Traefik** — reverse proxy & ingress controller (`kube-public`)
+  - [traefik.rbac.yaml](traefik.rbac.yaml) — `RBAC` — ServiceAccount + ClusterRole for the Kubernetes API
+  - [traefik.deployment.yaml](traefik.deployment.yaml) — `Deployment` — Traefik 2.7, 2 replicas, anti-affinity
+  - [traefik.service.yaml](traefik.service.yaml) — `Service` — NodePort `30021` (proxy) + `30042` (dashboard)
+
+### Bootstrap (local Minikube)
+
+- [bootstrap/hello-world.pod.yaml](bootstrap/hello-world.pod.yaml) — single pod with `PORT=8080` + exposed port
+- [bootstrap/hello-world.service.yaml](bootstrap/hello-world.service.yaml) — ClusterIP service for internal DNS
+- [bootstrap/hello-world.volume.yaml](bootstrap/hello-world.volume.yaml) — 512Mi PersistentVolume + PVC
+- [bootstrap/hello-world.deployment.yaml](bootstrap/hello-world.deployment.yaml) — pod converted into a Deployment
+
+### Infrastructure & Tooling
+
+- [terraform/main.tf](terraform/main.tf) — DOKS cluster (2 worker nodes)
+- [terraform/providers.tf](terraform/providers.tf) — DigitalOcean + local providers
+- [terraform/variables.tf](terraform/variables.tf) — region & cluster name variables
+- [terraform/outputs.tf](terraform/outputs.tf) — kubeconfig output + local file generation
+- [flake.nix](flake.nix) — Nix dev shell (kubectl, terraform, doctl…)
+
+---
+
+## Live Deployment
+
+The stack runs on **DigitalOcean Kubernetes (DOKS)** — a 2-node pool (`s-2vcpu-4gb`, 2 vCPU / 4 GB each) provisioned end-to-end by Terraform, running Kubernetes `1.36.0-do.0` in the `fra1` region.
+
+<div align="center">
+
+**Node pool — 2 / 2 nodes running**
+
+<img src="docs/cluster-overview.png" alt="DOKS node pool status — 2/2 running" width="100%" />
+
+<br /><br />
+
+**Worker pool detail — provisioned & tagged by Terraform**
+
+<img src="docs/cluster-resources.png" alt="Worker pool nodes running on DigitalOcean" width="100%" />
+
+<br /><br />
+
+**Cluster insights — CPU, load, memory, disk & I/O**
+
+<img src="docs/insights.png" alt="DigitalOcean cluster insights graphs" width="100%" />
+
+</div>
+
+---
+
+## The Application in Action
+
+With the cluster live, the whole event-driven flow can be followed end-to-end straight from the browser.
+
+A voter lands on the **Poll** page and picks their favorite DevOps tool. The footer is the interesting part — `Processed by container ID poll-c47f67fb-pfslb` — proof the request was served by *one of the two* load-balanced Flask pods, not a single static server.
+
+<div align="center">
+<img src="docs/poll.png" alt="Poll voting page — What's your favorite DevOps tool?" width="100%" />
+</div>
+
+That request never reached a pod directly: it entered through **Traefik**, which had discovered the `poll.dop.io` and `result.dop.io` routes on its own via the `KubernetesIngress` provider. Its dashboard shows every HTTP router and service healthy — 100% success, zero errors — on the `:80` (web) and `:8080` (dashboard) entrypoints.
+
+<div align="center">
+<img src="docs/traefik.png" alt="Traefik dashboard — routers and services healthy" width="100%" />
+</div>
+
+From there the vote travelled the full pipeline — Flask → Redis queue → Java worker → PostgreSQL — and the **Result** dashboard, reading live from the database, reflects it instantly: **ANSIBLE at 100%**. The symphony plays in tune.
+
+<div align="center">
+<img src="docs/result.png" alt="Result dashboard — ANSIBLE 100%" width="100%" />
+</div>
 
 ---
 
