@@ -1,107 +1,50 @@
-# Bookworm: Advanced NLP Pipeline for Book Analysis
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+  <img src="../assets/epitech_logo.png" alt="Epitech Logo" width="400" />
+  <br />
+  <img src="https://img.shields.io/badge/Seminar-NLP_Pipeline-6366f1?style=for-the-badge" alt="Seminar Badge" />
+  <img src="https://img.shields.io/badge/Days-121--135-00f2a6?style=for-the-badge" alt="Days Badge" />
+  <img src="https://img.shields.io/badge/Focus-Text_Analysis-ff4757?style=for-the-badge" alt="Focus Badge" />
+</div>
+<!-- markdownlint-enable MD033 -->
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)](https://www.python.org/)
-[![NLTK](https://img.shields.io/badge/NLTK-3.8+-orange?style=flat-square&logo=python)](https://www.nltk.org/)
-[![Requests](https://img.shields.io/badge/Requests-2.28+-blue?style=flat-square&logo=python)](https://requests.readthedocs.io/)
-[![Argparse](https://img.shields.io/badge/Argparse-stdlib-lightgrey?style=flat-square&logo=python)](https://docs.python.org/3/library/argparse.html)
+# Seminar: AI — Bookworm (Advanced NLP Pipeline)
 
-## Project Overview
+Building production-grade NLP pipelines for comprehensive book analysis: lexical diversity, entity recognition, topic extraction, automatic summarization, and content-based similarity detection using NLTK, spaCy, and scikit-learn.
 
-Bookworm is an NLP project in active construction. At this stage, the repository focuses on a stable project layout, a reusable bootstrap foundation, a canonical CLI entrypoint for the final deliverable, and a visible draft target kept alongside it for discussion.
+---
 
-Current roles:
-- `bookworm.py`: canonical CLI entrypoint for the final subject
-- `new_bookworm.py`: visible draft target and discussion artifact, not the stable base
-- `helper.py`: internal reusable helpers built from bootstrap utilities
-- `bootstrap/`: frozen bootstrap deliverables kept as a stable base
+> [!IMPORTANT]
+> **Core Objectives**: 
+> - **Text Preprocessing**: Cleaning, tokenization, normalization, and vectorization.
+> - **Linguistic Analysis**: Lexical diversity measures across multiple dimensions.
+> - **Information Extraction**: Named entity recognition for characters and locations.
+> - **Topic Modeling**: Latent semantic analysis and topic clustering.
+> - **Automatic Summarization**: Abstractive and extractive summarization techniques.
+> - **Recommendation System**: Content-based book similarity and suggestions.
 
-## Project Structure
+## Technical Core
 
-```text
-bookworm/
-|-- .gitignore
-|-- README.md
-|-- bookworm.py
-|-- helper.py
-|-- new_bookworm.py
-|-- bootstrap/
-|   |-- __init__.py
-|   |-- calculator.py
-|   |-- tools.py
-|   |-- instructions.pdf
-|   `-- catalog.csv
-|-- diagrams/
-|   |-- entities.mermaid
-|   |-- lexdiv.mermaid
-|   |-- topics.mermaid
-|   |-- summarize.mermaid
-|   `-- similar.mermaid
-|-- docs/
-|   |-- instructions.pdf
-|   |-- kickoff.pdf
-|   `-- choices_explained.md
-`-- corpus/
-```
+| Layer | Implementation |
+|---|---|
+| **NLP Framework** | ![NLTK](https://img.shields.io/badge/NLTK-3.8+-orange?style=flat-square&logo=python&logoColor=white) ![spaCy](https://img.shields.io/badge/spaCy-Linguistic-blue?style=flat-square&logo=python&logoColor=white) |
+| **ML Libraries** | ![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-orange?style=flat-square&logo=python&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-Linear-blue?style=flat-square&logo=python&logoColor=white) |
+| **Language** | ![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python&logoColor=white) |
+| **CLI Framework** | ![argparse](https://img.shields.io/badge/argparse-Canonical-lightgrey?style=flat-square) ![Python CLI](https://img.shields.io/badge/CLI-Entrypoint-000000?style=flat-square) |
 
-## Installation
+---
 
-### Clone the Repository
+## Chronological Journey
 
-Clone the project using one of the following methods:
+- **Days 121-125**: Bootstrap — Text preprocessing foundations, tokenization, stopwords, and basic vectorization.
+- **Days 126-130**: **Bookworm Core** — Lexical diversity analysis, entity extraction, topic modeling, and summarization.
+- **Days 131-135**: **Recommendation Engine** — Similarity metrics, book recommendations, and final CLI polish.
 
-**HTTPS:**
-```bash
-git clone https://github.com/EpitechMscProPromo2028/T-AIA-600-PAR_14.git
-cd T-AIA-600-PAR_14
-```
+---
 
-**SSH:**
-```bash
-git clone git@github.com:EpitechMscProPromo2028/T-AIA-600-PAR_14.git
-cd T-AIA-600-PAR_14
-```
+## Project Deliverables
 
-### Python Environment Initialization
-
-Initialize and activate the virtual environment, then install the dependencies:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install networkx spacy nltk scikit-learn requests
-```
-
-## Grading Criteria
-
-| Rubric | Description |
-|--------|-------------|
-| **Text Preprocessing** | |
-| clean | Students apply relevant cleaning steps to book text files before any other operation |
-| tokenization | Students apply proper tokenization techniques to decompose text into tokens |
-| stopwords | Students can explain what stopwords are and their role in preprocessing |
-| normalization | Students can name 2 main normalization techniques and explain differences, pros/cons |
-| vectorization | Students can name at least 2 methods of token vectorization and explain how they work |
-| collision | Program behavior is NOT altered with inappropriate or non-existing flags |
-| **Analysis Features** | |
-| lexdiv | Program returns dictionary with at least 5 lexical diversity measures |
-| topics | Program can extract main topics for each section of a book |
-| topics-doc | Students deliver diagram illustrating topics modeling pipeline |
-| entities | Program can extract locations and characters from a book |
-| entities_doc | Students deliver diagram illustrating NER pipeline |
-| summarize | Program can summarize a book in a few sentences |
-| summarize_doc | Students deliver diagram illustrating text summarization pipeline |
-| similar | Program suggests list of books similar to provided book |
-| similar_doc | Students deliver diagram illustrating book recommendation pipeline |
-| bookcard | Program returns dictionary compiling various information about a book |
-| **Code Quality** | |
-| nomenclature | Program complies with CLI nomenclature specified in subject |
-| maintainability | Code is easily maintainable (readable names, atomic functions, clear structure) |
-| robustness | Program handles errors gracefully with clear messages |
-| portability | Delivery is functional on evaluators' machine, not only students' machine |
-| **Professional Standards** | |
-| versioning_basics | Uses versioning tool with proper workflow: branching strategy, regular commits, descriptive messages, clean gitignore |
-| clean_repo | Repository is clean and well-organized; no unnecessary or large files/folders |
-| doc_basic | Students deliver README with project abstraction, requirements, setup, and usage examples |
-| tools_justification | Students justify package choices professionally |
-| presentation | Project presented professionally with relevant support (slides and/or demo) |
-| argumentation | Students support reflections and defend choices with well-developed, illustrated arguments |
+See [Day 121-135](Day_121_135/) for:
+- **[README.md](Day_121_135/README.md)** — Project architecture and feature documentation
+- **[OBJECTIVES.md](Day_121_135/OBJECTIVES.md)** — Core learning outcomes
+- **[solutions_day121_135/](Day_121_135/solutions_day121_135/)** — Bookworm implementation, bootstrap utilities, and corpus data
