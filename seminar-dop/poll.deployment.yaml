@@ -32,7 +32,7 @@ spec:
             - containerPort: 80
           resources:
             limits:
-              memory: "128Mi"
+              memory: "128M"
           env:
             - name: REDIS_HOST
               valueFrom:
