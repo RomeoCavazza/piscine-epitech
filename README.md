@@ -25,7 +25,7 @@ piscine/
 ├── seminar-docker/          # Days 61-65 : Containerization, orchestration, microservices
 ├── seminar-jenkins/         # Days 66-70 : Jenkins, CI/CD, Configuration as Code
 ├── seminar-rust/            # Days 71-95 : Rust, memory safety, ownership, full-stack
-├── seminar-organisation/    # Days 96-110 : Organizational theory & strategy
+├── seminar-organisation/    # Days 96-120 : Organizational theory & strategy
 ├── seminar-project-management/ # T-CEN-500 : Project management
 ├── seminar-dop/             # Kubernetes : multi-service orchestration (Bernstein)
 ├── seminar-ai/              # NLP : book analysis pipeline (Bookworm)
@@ -47,19 +47,25 @@ piscine/
 
 ## Repository Pulse
 
-Line-by-line breakdown of the multi-stack ecosystem (code only, excluding blank/comment lines and external dependencies). Generated with [cloc](https://github.com/AlDanial/cloc):
+Line-by-line breakdown of the multi-stack ecosystem (code only, excluding blank/comment lines and external dependencies). Generated with [cloc](https://github.com/AlDanial/cloc) via **nix-shell** (June 2026):
 
 | Language     | Files | Lines (code) | Weight |
 |--------------|-------|--------------|--------|
-| **Java**     | 205   | ~9,300       | 17%    |
-| **JS/TS**    | 112   | ~11,700      | 21%    |
-| **Rust**     | 85    | ~6,100       | 11%    |
-| **HTML/CSS** | 60    | ~4,200       | 8%     |
-| **Python**   | 106   | ~1,400       | 2%     |
-| **JSON**     | 13    | ~13,700      | 24%    |
-| **Markdown** | 113   | ~4,200       | 8%     |
-| **Others**   | 69    | ~5,200       | 9%     |
-| **Total**    | **~763** | **~55,800** | **100%** |
+| **JavaScript** | 249  | 295,862      | 32%    |
+| **Java**     | 205   | 9,291        | 1%     |
+| **Rust**     | 85    | 6,105        | 1%     |
+| **HTML**     | 194   | 30,861       | 3%     |
+| **CSS**      | 22    | 4,657        | 1%     |
+| **Python**   | 112   | 1,833        | <1%    |
+| **JSON**     | 61    | 14,944       | 2%     |
+| **Markdown** | 118   | 5,309        | <1%    |
+| **YAML**     | 33    | 1,108        | <1%    |
+| **PHP**      | 27    | 507          | <1%    |
+| **XML**      | 6     | 587          | <1%    |
+| **Groovy**   | 2     | 74           | <1%    |
+| **Total**    | **1,119** | **913,503** | **100%** |
+
+> **Note**: SQL data (542K lines in 5 files) excluded from table — primarily corpus/reference data. Total includes all tracked files.
 
 ---
 
@@ -110,7 +116,7 @@ Memory-safe systems programming and Discord-like real-time messaging.
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tauri/tauri-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/railway/railway-original.svg" height="25" />
 
-### [Organisation Seminar — Days 96-110](seminar-organisation/README.md)
+### [Organisation Seminar — Days 96-120](seminar-organisation/README.md)
 Organizational theory, workflow optimization, and strategic agency management.
 
 <img src="https://img.shields.io/badge/Method-Agile_/_Sprint-6366f1?style=flat-square" height="25" /> <img src="https://img.shields.io/badge/Analysis-SWOT-ff4757?style=flat-square" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" height="25" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" height="25" />
@@ -172,33 +178,50 @@ graph TD
 
 ---
 
-## Technologies Covered
+## Chronological Roadmap
 
-### Backend
-- **Python**: Scripts, algorithms, console applications
-- **Java**: OOP, generics, design patterns, libGDX
-- **PHP**: Web backend, REST API, database integration
-- **Rust**: Memory safety, zero-cost abstractions, Axum, Tauri
+```
+PHASE 0: Foundation (Days 1-10)
+├─ Preparation: Linux & Python
+│
+PHASE 1: Web Ecosystem (Days 11-30)
+├─ Web: HTML, CSS, JavaScript, PHP
+├─ Job Board: Full-stack integration
+│
+PHASE 2: Object-Oriented (Days 31-55)
+├─ Java: Patterns & OOP
+├─ My First Game: libGDX Engine
+│
+PHASE 3: Infrastructure & Automation (Days 56-70)
+├─ DevOps: Linux admin, Ansible, virtualization
+├─ Docker: Containerization & microservices
+├─ Jenkins: CI/CD & Configuration as Code
+│
+PHASE 4: High-Performance & Advanced (Days 71-135)
+├─ Rust: Memory safety & full-stack (Days 71-95, **25 days**) ─────────┐
+├─ Organisation: Strategic planning (Days 96-120, **25 days**) ────────┤ Sequential
+│  ├─ Sprint 1: Company audits                                         │
+│  ├─ Sprint 2: Comparative analysis                                   │
+│  └─ Sprint 3: Target modeling                                        │
+├─ DOP: Kubernetes orchestration (Days 121-135, **15 days**) ─────────┘
+│  └─ Concurrent │
+│  │             ├─ Bernstein: Distributed voting on K8s
+├─ AI: NLP pipeline (Days 121-135, **15 days**) ──────────────────────┘
+│  ├─ Bookworm: Book analysis engine
+│
+SPECIAL TRACKS:
+├─ Project Management: SmartFridge (T-CEN-500, parallel)
+├─ 5G Competition: CUDA algorithm optimization
+```
 
-### Frontend
-- **HTML5/CSS3**: Semantic, responsive, Materialize
-- **JavaScript ES6+**: DOM, events, fetch API, validation
-- **Modern UI**: Next.js, WASM, Tauri
+### Timeline Summary
 
-### Databases
-- **MySQL / MariaDB**: Relational schemas, SQL queries, PDO
-- **PostgreSQL**: Relational database, advanced queries, Docker integration
-- **NoSQL**: MongoDB, Redis
-
-### System & DevOps
-- **Linux/Debian**: System administration, service management
-- **Virtualization**: VirtualBox, virtual machines, snapshots
-- **Network**: DHCP (kea-dhcp4-server), DNS (bind9), routing, nftables
-- **Security**: SSH, fail2ban, firewall, authentication
-- **Automation**: Ansible (Infrastructure as Code), bash scripts, cron
-- **CI/CD**: Jenkins pipelines, GitHub Actions, Docker Compose
-
-### Algorithms & Optimization
-- **Greedy algorithms**: Local optimization strategies
-- **Clustering**: Spatial grouping for shared antenna coverage
-- **GPU Acceleration**: NVIDIA CUDA, Numba JIT, vectorized computations
+| Phase | Days | Duration | Focus |
+|-------|------|----------|-------|
+| **Foundation** | 1–10 | 2 wks | Linux, Python, algorithms |
+| **Web** | 11–30 | 3 wks | Web stack (LAMP + JS) |
+| **Java/Game** | 31–55 | 5 wks | OOP, design patterns |
+| **DevOps** | 56–70 | 3 wks | Sys admin, Docker, Jenkins |
+| **Rust** | 71–95 | 5 wks | Memory safety, full-stack |
+| **Organisation** | 96–120 | 5 wks | Strategic management |
+| **DOP + AI** | 121–135 | 3 wks | (Concurrent) K8s + NLP |
