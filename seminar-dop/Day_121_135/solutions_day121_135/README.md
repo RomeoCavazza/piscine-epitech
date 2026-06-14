@@ -117,7 +117,7 @@ Every manifest and configuration file, grouped by role. All links are clickable.
 - **PostgreSQL** — durable vote storage
   - [postgres.secret.yaml](postgres.secret.yaml) — `Secret` — `POSTGRES_USER` / `POSTGRES_PASSWORD` credentials
   - [postgres.configmap.yaml](postgres.configmap.yaml) — `ConfigMap` — `POSTGRES_HOST` / `PORT` / `DB` shared config
-  - [postgres.volume.yaml](postgres.volume.yaml) — `PVC` — persistent storage on `do-block-storage`
+  - [postgres.volume.yaml](postgres.volume.yaml) — `PVC` — persistent storage on the cluster's default StorageClass (`do-block-storage` on DOKS)
   - [postgres.deployment.yaml](postgres.deployment.yaml) — `Deployment` — PostgreSQL 13
   - [postgres.service.yaml](postgres.service.yaml) — `Service` — ClusterIP exposing Postgres on `5432`
 
@@ -210,6 +210,23 @@ From there the vote travelled the full pipeline — Flask → Redis queue → Ja
 
 ## Installation & Configuration
 
+> **One-command path (recommended).** Everything below is automated by the
+> [`Makefile`](Makefile). From a clean state:
+>
+> ```bash
+> cp .env.example .env          # set DIGITALOCEAN_TOKEN
+> export $(grep -v '^#' .env | xargs)
+> make all                      # infra (Terraform) + deploy + init-db
+> make hosts && make smoke      # local DNS + end-to-end check
+> ```
+>
+> Run `make help` for every target. The manual steps below are the same flow,
+> spelled out.
+>
+> **No cloud account?** Run the exact same manifests for free on a local
+> 2-node minikube: `make minikube`, then `make minikube-smoke` to verify
+> end-to-end (uses `curl --resolve`, so no `/etc/hosts` needed — handy on NixOS).
+
 ### Prerequisites
 
 - [Nix](https://nixos.org/download.html) package manager
@@ -292,8 +309,20 @@ echo "$NODES poll.dop.io result.dop.io" | sudo tee -a /etc/hosts
 ### Teardown
 
 ```bash
-cd terraform && terraform destroy
+make destroy      # or: cd terraform && terraform destroy
 ```
+
+---
+
+## Production hardening
+
+Baked into the manifests, applied with `make harden`:
+
+- **Health** — readiness/liveness probes on every service (`pg_isready`, `redis-cli ping`, HTTP `/`, Traefik `/ping`).
+- **Zero-downtime** — `maxUnavailable: 0` rolling updates + `minReadySeconds`.
+- **Strict HA** — *required* pod anti-affinity (one replica per node). Assumes a node pool with headroom; for clusters where `nodes < replicas`, [`scripts/soft-affinity.sh`](scripts/soft-affinity.sh) (`make soft-affinity`) relaxes it to *preferred*.
+- **Autoscaling** — [`poll.hpa.yaml`](poll.hpa.yaml) / [`result.hpa.yaml`](result.hpa.yaml) (CPU-based, `make hpa` + `make load`), enabled by `requests.cpu`.
+- **Disruption budgets** — [`pdb.yaml`](pdb.yaml) keeps ≥1 replica during node drain.
 
 ---
 

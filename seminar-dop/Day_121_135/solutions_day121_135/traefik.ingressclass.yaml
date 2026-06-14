@@ -1,0 +1,9 @@
+# Modern replacement for the deprecated `kubernetes.io/ingress.class` annotation.
+# The poll/result Ingresses reference this via `spec.ingressClassName: traefik`.
+# Cluster-scoped; the traefik ClusterRole already grants read on `ingressclasses`.
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: traefik
+spec:
+  controller: traefik.io/ingress-controller

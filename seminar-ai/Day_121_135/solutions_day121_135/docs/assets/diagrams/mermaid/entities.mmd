@@ -1,0 +1,14 @@
+graph LR
+    A["--entities ID"] --> B["Book(id)"]
+    B --> C["book.sentences"]
+    C --> D["Chunks <= 100k chars, split on sentence boundaries"]
+    D --> E["spaCy NER (modèle selon langue, nlp.pipe)"]
+    E --> F["Extract doc.ents"]
+    F --> G{"Entity label?"}
+    G -->|PERSON / PER| H["Group as character"]
+    G -->|GPE / LOC| I["Group as location"]
+    G -->|other| J["Discard"]
+    H --> K["Count frequency"]
+    I --> K
+    K --> L["Keep top entities with min occurrence threshold"]
+    L --> M["Output: {characters, locations}"]

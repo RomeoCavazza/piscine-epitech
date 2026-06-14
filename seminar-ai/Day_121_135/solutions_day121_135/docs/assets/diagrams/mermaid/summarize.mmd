@@ -1,0 +1,11 @@
+graph LR
+    A["--summarize ID"] --> B["Book(id)"]
+    B --> C["book.sentences"]
+    C --> D["Filter short / low-signal sentences"]
+    D --> E["TF-IDF sentence vectors (sparse)"]
+    E --> E2["LSA: TruncatedSVD rang <= 100 + L2"]
+    E2 --> F["K-Means: NUM_SENTENCES clusters"]
+    E2 --> J["silhouette_profile: score k=2..8"]
+    F --> G["Closest sentence to each centroid"]
+    G --> H["Restore original order"]
+    H --> I["Output: short summary string"]

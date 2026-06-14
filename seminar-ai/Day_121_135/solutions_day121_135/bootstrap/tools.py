@@ -85,7 +85,7 @@ def tokenizer(text, sent=False, stop=False, punct=False):
     return tokens
 
 def postag(text):
-    tokens = text.split()
+    tokens = word_tokenize(text)
     return pos_tag(tokens)
 
 def get_wordnet_pos(treebank_tag):
@@ -96,7 +96,7 @@ def get_wordnet_pos(treebank_tag):
     else: return wordnet.NOUN
 
 def normalize(text, stem=False):
-    tokens = text.split()
+    tokens = word_tokenize(text)
     if stem:
         return [PorterStemmer().stem(word) for word in tokens]
     

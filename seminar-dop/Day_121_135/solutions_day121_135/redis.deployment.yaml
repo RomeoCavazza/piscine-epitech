@@ -20,4 +20,23 @@ spec:
           image: redis:5.0
           ports:
             - containerPort: 6379
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+          # readiness applicative (le serveur répond vraiment) via redis-cli ping.
+          readinessProbe:
+            exec:
+              command: ["redis-cli", "ping"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          # liveness réseau : le port accepte les connexions.
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 15
+            periodSeconds: 15
       restartPolicy: Always

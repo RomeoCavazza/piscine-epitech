@@ -1,0 +1,16 @@
+graph LR
+    A["--lexdiv / --lexdiv-plus"] --> B["Book(id)"]
+    B --> C["book.words"]
+    C --> D["Counter(words)"]
+    D --> E["tok / typ / hap"]
+    C --> F["Word lengths"]
+    E --> G["ttr = typ / tok"]
+    F --> H["mwl = avg word length"]
+    E --> I["mwf = tok / typ"]
+    G --> J["Output std metrics"]
+    H --> J
+    I --> J
+    C --> K["msttr, mattr, mtld (sliding windows)"]
+    E --> L["guiraud, herdan_c, yule_k, maas_a2"]
+    K --> M["Output advanced metrics (--lexdiv-plus)"]
+    L --> M
