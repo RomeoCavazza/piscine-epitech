@@ -87,22 +87,24 @@ Fast setup of reusable utilities:
 - Text preprocessing foundation
 
 ### Phase 2: Bookworm Pipeline (Days 123-134)
-**Main Implementation** — Bookworm core features
+**Main Implementation** — Bookworm modular architecture
 - [bookworm.py](solutions_day121_135/bookworm.py) — Canonical CLI entrypoint
-- [helper.py](solutions_day121_135/helper.py) — Internal utilities and pipeline logic
-- All 5 pillars: lexical diversity, entities, topics, summarization, similarity
+- [app.py](solutions_day121_135/app.py) — Interactive web dashboard
+- [assistant.py](solutions_day121_135/assistant.py) — Q&A assistant chatbot agent
+- [core/](solutions_day121_135/core/) — Core package (Book data-model, tools, downloads, caching)
+- [pipeline/](solutions_day121_135/pipeline/) — Pipeline steps (lexdiv, entities, topics, summarization, similarity, HTML report)
 
-### Phase 3: Polish & Finalization (Days 135)
-- CLI hardening and edge cases
-- Testing and error handling
-- Documentation finalization
+### Phase 3: Polish & Finalization (Day 135)
+- CLI hardening, exception handling, and edge cases
+- Pyinstrument runtime profiling
+- Automated tests and coverage verification
 
 ---
 
 ## Feature Specifications
 - [docs/instructions.pdf](solutions_day121_135/docs/instructions.pdf) — Project specification
 - [docs/kickoff.pdf](solutions_day121_135/docs/kickoff.pdf) — Project kickoff notes
-- [docs/choices_explained.md](solutions_day121_135/docs/choices_explained.md) — Design decisions
+- [docs/support.pdf](solutions_day121_135/docs/support.pdf) — Presentation support and design decisions
 
 ---
 

@@ -18,9 +18,16 @@ spec:
       containers:
         - name: worker
           image: epitechcontent/t-dop-600-worker:k8s
+          # Pas de probe HTTP : le worker est un consommateur de queue headless
+          # (aucun port exposé). Son auto-réparation repose sur restartPolicy:
+          # Always + le crash du process si Redis/Postgres deviennent injoignables.
           resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
             limits:
-              memory: "256M"
+              cpu: "500m"
+              memory: "256Mi"
           env:
             - name: REDIS_HOST
               valueFrom:

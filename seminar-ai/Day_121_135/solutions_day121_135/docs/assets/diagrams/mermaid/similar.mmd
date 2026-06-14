@@ -1,0 +1,11 @@
+graph TD
+    A["--similar ID / Galaxy Map"] --> B{"fulltext_lsa__v1.joblib?"}
+    B -->|no| C["Fallback: 21-book catalog index"]
+    B -->|yes| D["Load full corpus index (LSA 300 dims, normalized)"]
+    C --> E["Vectorize target (TF-IDF + LSA + normalize)"]
+    D --> E
+    E --> F["Cosine similarity vs corpus matrix"]
+    F --> G["Sort scores descending, drop self"]
+    G --> H["--similar: Top 5 IDs -> titles"]
+    G --> I["Galaxy Map: Top 400 neighbors"]
+    I --> J["Project 2D + local K-Means clustering"]

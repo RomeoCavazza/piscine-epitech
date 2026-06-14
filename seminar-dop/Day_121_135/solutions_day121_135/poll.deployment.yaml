@@ -7,11 +7,13 @@ metadata:
     app: poll
 spec:
   replicas: 2
+  # Rolling update zero-downtime : on crée un pod neuf AVANT de tuer l'ancien.
+  minReadySeconds: 5
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: poll
@@ -22,6 +24,11 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
+          # "required" : HA stricte, chaque replica sur un node distinct.
+          # Suppose un node pool avec de la marge (nodes > replicas) pour le surge
+          # en rolling update et le scale HPA. Sur un cluster <=2 nodes ou local
+          # (minikube), lancer `scripts/soft-affinity.sh on` pour relâcher en
+          # "preferred", sinon les pods en trop restent Pending.
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchExpressions:
@@ -36,8 +43,26 @@ spec:
           ports:
             - containerPort: 80
           resources:
+            # requests.cpu est OBLIGATOIRE pour que le HPA puisse calculer
+            # un pourcentage d'utilisation CPU.
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
             limits:
-              memory: "128M"
+              cpu: "250m"
+              memory: "128Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 15
           env:
             - name: REDIS_HOST
               valueFrom:

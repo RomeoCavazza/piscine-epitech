@@ -75,9 +75,12 @@ See: [terraform/](solutions_day121_135/terraform/), [flake.nix](solutions_day121
 
 ### Configuration
 - [poll.ingress.yaml](solutions_day121_135/poll.ingress.yaml) & [result.ingress.yaml](solutions_day121_135/result.ingress.yaml) — HTTP routing rules
+- [traefik.ingressclass.yaml](solutions_day121_135/traefik.ingressclass.yaml) — Traefik IngressClass resource
 - [postgres.configmap.yaml](solutions_day121_135/postgres.configmap.yaml) & [redis.configmap.yaml](solutions_day121_135/redis.configmap.yaml) — ConfigMap data
 - [postgres.secret.yaml](solutions_day121_135/postgres.secret.yaml) — Secret credentials
 - [postgres.volume.yaml](solutions_day121_135/postgres.volume.yaml) — PersistentVolumeClaim
+- [poll.hpa.yaml](solutions_day121_135/poll.hpa.yaml) & [result.hpa.yaml](solutions_day121_135/result.hpa.yaml) — Autoscaling (HPA)
+- [pdb.yaml](solutions_day121_135/pdb.yaml) — Pod Disruption Budget (PDB)
 
 ### Bootstrap Exercises
 - [bootstrap/hello-world.pod.yaml](solutions_day121_135/bootstrap/hello-world.pod.yaml) — Basic pod creation

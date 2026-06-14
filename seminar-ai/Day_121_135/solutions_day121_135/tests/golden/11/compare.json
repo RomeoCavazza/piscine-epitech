@@ -1,0 +1,315 @@
+{
+  "sections": 12,
+  "n_topics": 8,
+  "vocabulary": 771,
+  "algorithms": {
+    "nmf": {
+      "topics": {
+        "1": [
+          "cat",
+          "cheshire",
+          "duchess",
+          "queen",
+          "croquet",
+          "grin",
+          "appear",
+          "baby",
+          "cook",
+          "ear"
+        ],
+        "2": [
+          "bottle",
+          "drink",
+          "rabbit",
+          "fan",
+          "door",
+          "fall",
+          "cake",
+          "small",
+          "glass",
+          "hall"
+        ],
+        "3": [
+          "turtle",
+          "mock",
+          "gryphon",
+          "soup",
+          "beautiful",
+          "join",
+          "sea",
+          "sing",
+          "song",
+          "boot"
+        ],
+        "4": [
+          "dodo",
+          "mouse",
+          "lory",
+          "cause",
+          "dry",
+          "beg",
+          "bird",
+          "party",
+          "eaglet",
+          "english"
+        ],
+        "5": [
+          "dormouse",
+          "hatter",
+          "hare",
+          "twinkle",
+          "march",
+          "tea",
+          "asleep",
+          "treacle",
+          "draw",
+          "pinch"
+        ],
+        "6": [
+          "king",
+          "court",
+          "jury",
+          "slate",
+          "write",
+          "queen",
+          "tart",
+          "evidence",
+          "majesty",
+          "teacup"
+        ],
+        "7": [
+          "caterpillar",
+          "father",
+          "hookah",
+          "size",
+          "green",
+          "mushroom",
+          "height",
+          "neck",
+          "sir",
+          "old"
+        ],
+        "8": [
+          "turtle",
+          "mock",
+          "gryphon",
+          "duchess",
+          "school",
+          "queen",
+          "execution",
+          "otherwise",
+          "chin",
+          "sigh"
+        ]
+      },
+      "coherence_umass": -0.0809,
+      "diversity": 0.925
+    },
+    "lsa": {
+      "topics": {
+        "1": [
+          "queen",
+          "rabbit",
+          "king",
+          "cat",
+          "door",
+          "duchess",
+          "hatter",
+          "gryphon",
+          "mouse",
+          "course"
+        ],
+        "2": [
+          "king",
+          "queen",
+          "dormouse",
+          "hatter",
+          "court",
+          "slate",
+          "majesty",
+          "gryphon",
+          "march",
+          "hare"
+        ],
+        "3": [
+          "turtle",
+          "mock",
+          "soup",
+          "gryphon",
+          "sea",
+          "beautiful",
+          "sigh",
+          "different",
+          "join",
+          "old"
+        ],
+        "4": [
+          "mouse",
+          "dodo",
+          "jury",
+          "lory",
+          "beg",
+          "cause",
+          "dry",
+          "cry",
+          "trial",
+          "bird"
+        ],
+        "5": [
+          "dormouse",
+          "hatter",
+          "twinkle",
+          "draw",
+          "hare",
+          "tea",
+          "caterpillar",
+          "treacle",
+          "sleep",
+          "march"
+        ],
+        "6": [
+          "cat",
+          "hatter",
+          "dodo",
+          "dormouse",
+          "march",
+          "party",
+          "hare",
+          "lory",
+          "grin",
+          "english"
+        ],
+        "7": [
+          "turtle",
+          "mock",
+          "gryphon",
+          "sing",
+          "soup",
+          "hatter",
+          "dormouse",
+          "key",
+          "table",
+          "golden"
+        ],
+        "8": [
+          "learn",
+          "sharp",
+          "master",
+          "dig",
+          "teach",
+          "execution",
+          "lady",
+          "music",
+          "fun",
+          "together"
+        ]
+      },
+      "coherence_umass": -0.2294,
+      "diversity": 0.7125
+    },
+    "lda": {
+      "topics": {
+        "1": [
+          "turtle",
+          "mock",
+          "gryphon",
+          "duchess",
+          "soup",
+          "queen",
+          "beautiful",
+          "course",
+          "sea",
+          "join"
+        ],
+        "2": [
+          "cat",
+          "door",
+          "duchess",
+          "eat",
+          "size",
+          "baby",
+          "mad",
+          "suddenly",
+          "grin",
+          "house"
+        ],
+        "3": [
+          "hatter",
+          "dormouse",
+          "caterpillar",
+          "march",
+          "hare",
+          "remark",
+          "twinkle",
+          "draw",
+          "three",
+          "tea"
+        ],
+        "4": [
+          "queen",
+          "mouse",
+          "king",
+          "cat",
+          "dodo",
+          "three",
+          "rabbit",
+          "soldier",
+          "dry",
+          "five"
+        ],
+        "5": [
+          "king",
+          "hatter",
+          "court",
+          "write",
+          "dormouse",
+          "rabbit",
+          "jury",
+          "queen",
+          "read",
+          "slate"
+        ],
+        "6": [
+          "mouse",
+          "rabbit",
+          "fan",
+          "cry",
+          "bill",
+          "glove",
+          "house",
+          "pool",
+          "small",
+          "room"
+        ],
+        "7": [
+          "full",
+          "share",
+          "number",
+          "care",
+          "trouble",
+          "order",
+          "alone",
+          "far",
+          "mouth",
+          "usual"
+        ],
+        "8": [
+          "full",
+          "share",
+          "number",
+          "care",
+          "trouble",
+          "order",
+          "alone",
+          "far",
+          "mouth",
+          "usual"
+        ]
+      },
+      "coherence_umass": -0.3155,
+      "diversity": 0.725
+    }
+  },
+  "best": "nmf",
+  "criteria": "highest UMass coherence, topic diversity as tiebreaker"
+}

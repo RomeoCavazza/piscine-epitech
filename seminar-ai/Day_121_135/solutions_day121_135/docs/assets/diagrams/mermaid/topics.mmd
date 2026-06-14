@@ -1,0 +1,13 @@
+graph LR
+    A["--topics ID"] --> B["Book(id)"]
+    B --> C["book.clean"]
+    C --> D["Split into sections (heading-pattern cascade)"]
+    D --> E["Per section: tokens -> POS tag (full context) -> lemmas -> stopwords removed"]
+    E --> F["TF-IDF over sections (max_df / min_df pruning)"]
+    F --> G{"enough sections?"}
+    G -->|"< 4"| H["Fallback: top TF-IDF terms per section"]
+    G -->|">= 4"| I["NMF: factorize into latent topics"]
+    I --> J["Assign each section its dominant topic"]
+    J --> K["Rank topic terms by weight in the section (blend)"]
+    H --> L["Output: {section: [top 10 words]}"]
+    K --> L

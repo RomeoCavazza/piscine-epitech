@@ -1,8 +1,36 @@
-corpus/
+# Caches
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+*.egg-info/
+
+# Venv
 .venv/
 venv/
+
+# Build
+build/
+dist/
+Output/
+
+# Rapports
+profile_audit.html
+
+# Binaires
+*.exe
+*.dll
+*.zip
+*.7z
+*.mp4
+*.wav
+
+# Modèles locaux (Ollama, spaCy, etc.)
+models/
+
+# Données Gutenberg
+data/output/
+data/input/texts/
+# Références ROUGE
+data/input/references/*.txt
